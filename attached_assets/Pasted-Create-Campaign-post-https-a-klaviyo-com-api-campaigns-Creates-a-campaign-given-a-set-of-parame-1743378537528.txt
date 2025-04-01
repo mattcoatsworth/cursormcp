@@ -1,0 +1,172 @@
+Create Campaign
+post
+https://a.klaviyo.com/api/campaigns
+Creates a campaign given a set of parameters, then returns it.
+
+Rate limits:
+Burst: 10/s
+Steady: 150/m
+
+Scopes:
+campaigns:write
+
+Body Params
+Creates a campaign from parameters
+
+data
+object
+required
+
+data object
+type
+string
+required
+
+campaign
+attributes
+object
+required
+
+attributes object
+name
+string
+required
+The campaign name
+
+audiences
+object
+required
+The audiences to be included and/or excluded from the campaign
+
+
+audiences object
+included
+array of strings
+required
+A list of included audiences
+
+
+string
+
+
+ADD string
+excluded
+array of strings
+An optional list of excluded audiences
+
+
+string
+
+
+ADD string
+send_strategy
+The send strategy the campaign will send with. Defaults to 'Immediate' send strategy.
+
+
+StaticSendStrategy
+
+ThrottledSendStrategy
+
+ImmediateSendStrategy
+
+SmartSendTimeStrategy
+method
+string
+required
+
+smart_send_time
+date
+date
+required
+The day to send on
+
+send_options
+Options to use when sending a campaign
+
+
+EmailSendOptions
+
+SMSSendOptions
+
+PushSendOptions
+use_smart_sending
+boolean
+Defaults to true
+Use smart sending.
+
+
+true
+tracking_options
+The tracking options associated with the campaign
+
+
+CampaignsEmailTrackingOptions
+
+CampaignsSMSTrackingOptions
+add_tracking_params
+boolean
+Whether the campaign needs custom tracking parameters. If set to False, tracking params will not be used.
+
+
+custom_tracking_params
+array
+A list of custom tracking parameters. If an empty list is given and add_tracking_params is True, uses company defaults.
+
+
+
+
+DynamicTrackingParam
+
+StaticTrackingParam
+
+ADD
+campaign-messages
+object
+required
+The message(s) associated with the campaign
+
+
+campaign-messages object
+data
+array of objects
+required
+
+object
+
+type
+string
+required
+
+campaign-message
+attributes
+object
+required
+
+attributes object
+relationships
+object
+
+relationships object
+
+ADD object
+Headers
+revision
+string
+required
+Defaults to 2025-01-15
+API endpoint revision (format: YYYY-MM-DD[.suffix])
+
+2025-01-15
+Responses
+
+201
+Success
+
+
+4XX
+Client Error
+
+
+5XX
+Server Error
+

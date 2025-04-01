@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Can you generate an advanced analytics dashboard that combines data from Triple Whale, Northbeam, and external sources using OpenAI for predictive analytics?",
+    "response": "To create an advanced analytics dashboard that integrates data from Triple Whale, Northbeam, and external sources using OpenAI for predictive analytics, we will utilize Notion as the central hub for data aggregation and visualization. First, we will extract relevant data from Triple Whale and Northbeam and combine it in a format suitable for analysis. Next, we will leverage OpenAI for predictive analytics to generate insights based on the combined dataset. Finally, we will use Notion to create visualizations and interactive dashboards that showcase the analytics results.",
+    "complexity": "high",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Triple Whale",
+        "Northbeam",
+        "Notion",
+        "OpenAI"
+      ],
+      "scenario": "Advanced Analytics Dashboard",
+      "description": "Create comprehensive analytics dashboards",
+      "complexity": "high",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:22:41.278837"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "id": "ms-20250401032241-f7ec9f7a",
+    "createdAt": "2025-04-01T03:22:41.278905",
+    "updatedAt": "2025-04-01T03:22:41.278905"
+  }
+]

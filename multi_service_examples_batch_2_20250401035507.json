@@ -1,0 +1,25 @@
+[
+  {
+    "query": "Schedule a team meeting for next week at 3 PM and create an agenda",
+    "response": "Sure! I will create a meeting event on Google Calendar for next week at 3 PM. I will also notify the team on Slack with the meeting details and share the agenda link on Notion for collaboration.",
+    "complexity": "low",
+    "id": "ms-20250401035507-5d241f49",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Slack",
+        "Google Calendar",
+        "Notion"
+      ],
+      "scenario": "Team Coordination",
+      "description": "Coordinate team activities across multiple tools",
+      "complexity": "low",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:55:07.815761"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035507",
+    "updatedAt": "20250401035507"
+  }
+]

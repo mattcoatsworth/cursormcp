@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Can you help me set up an automated marketing campaign that integrates SMS, email, and customer support interactions?",
+    "response": "To set up such a comprehensive automated marketing campaign, we would utilize Elevar for marketing automation, Postscript for SMS marketing, Recharm for email marketing, and Gorgias for customer support integration. Firstly, Elevar will be used to create the automated workflows and triggers based on customer behaviors. Postscript will handle the SMS marketing aspect, sending targeted messages to customers. Recharm will take care of the email marketing, ensuring that the email campaigns align with the overall marketing strategy. Gorgias will be integrated to ensure that customer support interactions are seamlessly tracked and managed throughout the campaign.",
+    "complexity": "high",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Elevar",
+        "Postscript",
+        "Recharm",
+        "Gorgias"
+      ],
+      "scenario": "Custom Scenario 0-1bb79a",
+      "description": "Custom scenario involving Elevar, Postscript, Recharm, Gorgias",
+      "complexity": "high",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:22:57.643331"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "id": "ms-20250401032257-30845f21",
+    "createdAt": "2025-04-01T03:22:57.643370",
+    "updatedAt": "2025-04-01T03:22:57.643370"
+  }
+]

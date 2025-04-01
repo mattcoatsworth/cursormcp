@@ -1,0 +1,25 @@
+[
+  {
+    "query": "Schedule a team meeting for next week and create a task list for the agenda.",
+    "response": "To schedule a team meeting for next week, you can create an event in Google Calendar and invite all team members. In the event description, you can add a link to a Notion page where you've created a task list for the agenda. Additionally, you can share the Notion page link in the team's Slack channel for easy access.",
+    "complexity": "low",
+    "id": "ms-20250401035614-179aa04f",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Slack",
+        "Google Calendar",
+        "Notion"
+      ],
+      "scenario": "Team Coordination",
+      "description": "Coordinate team activities across multiple tools",
+      "complexity": "low",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:56:14.734146"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035614",
+    "updatedAt": "20250401035614"
+  }
+]

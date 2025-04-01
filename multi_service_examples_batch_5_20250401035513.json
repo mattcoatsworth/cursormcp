@@ -1,0 +1,25 @@
+[
+  {
+    "query": "Can you help me track the progress of our latest product development sprint and ensure that tasks are being completed on time?",
+    "response": "Sure! We can set up a system using GitHub for managing the tasks and code repositories, Notion for documenting the sprint details and progress, and Slack for real-time communication. We can create GitHub issues for each task, use Notion to track the overall sprint progress, and set up Slack notifications for important updates and deadlines.",
+    "complexity": "medium",
+    "id": "ms-20250401035513-37b5051e",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "GitHub",
+        "Notion",
+        "Slack"
+      ],
+      "scenario": "Product Development Workflow",
+      "description": "Coordinate product development across multiple tools",
+      "complexity": "medium",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:55:13.563977"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035513",
+    "updatedAt": "20250401035513"
+  }
+]

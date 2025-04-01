@@ -1,0 +1,25 @@
+[
+  {
+    "query": "Can you help me schedule a team meeting and create a task list for the upcoming project?",
+    "response": "Sure! We can use Slack for communication, Google Calendar for scheduling the meeting, and Notion for creating the task list. First, we will create an event in Google Calendar for the team meeting and invite all team members. Then, we can share the meeting details in a Slack channel to coordinate availability. Once the meeting is scheduled, we will create a new project board in Notion and list out all the tasks that need to be done, assigning them to team members as needed.",
+    "complexity": "low",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Slack",
+        "Google Calendar",
+        "Notion"
+      ],
+      "scenario": "Team Coordination",
+      "description": "Coordinate team activities across multiple tools",
+      "complexity": "low",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:21:11.104440"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "id": "ms-20250401032111-f47c86dd",
+    "createdAt": "2025-04-01T03:21:11.104483",
+    "updatedAt": "2025-04-01T03:21:11.104483"
+  }
+]

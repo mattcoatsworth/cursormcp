@@ -1,0 +1,72 @@
+[
+  {
+    "query": "Generate and schedule a series of marketing emails using AI, and notify the marketing team when done",
+    "response": "To meet your request, we will utilize OpenAI to generate compelling marketing content, integrate with Klaviyo to schedule the email series, and send notifications to the marketing team via Slack once the emails are scheduled.",
+    "complexity": "medium",
+    "id": "ms-20250401035654-3d865942",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "OpenAI",
+        "Klaviyo",
+        "Slack"
+      ],
+      "scenario": "AI-Enhanced Marketing",
+      "description": "Generate and schedule marketing content using AI",
+      "complexity": "medium",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:56:54.857943"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035654",
+    "updatedAt": "20250401035654"
+  },
+  {
+    "query": "Can you provide insights on how customers are interacting with our brand across different channels?",
+    "response": "To track and optimize the customer journey across channels, we can use a combination of services. First, Shopify can provide data on customer interactions on our e-commerce platform. Klaviyo can track email interactions and customer segmentation. Gorgias can give insights into customer support interactions. Finally, Triple Whale can analyze the overall customer journey, combining data from all channels to provide a holistic view.",
+    "complexity": "high",
+    "id": "ms-20250401035656-1386eb8f",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Shopify",
+        "Klaviyo",
+        "Gorgias",
+        "Triple Whale"
+      ],
+      "scenario": "Customer Journey Tracking",
+      "description": "Track and optimize customer journey across channels",
+      "complexity": "high",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:56:56.462642"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035656",
+    "updatedAt": "20250401035656"
+  },
+  {
+    "query": "Can you provide an update on my support ticket regarding order #12345?",
+    "response": "Hello! Your support ticket regarding order #12345 is currently in progress. Our team is actively working on resolving the issue. We will provide you with an update as soon as possible.",
+    "complexity": "high",
+    "id": "ms-20250401035657-8cbda643",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Gorgias",
+        "OpenAI",
+        "Slack"
+      ],
+      "scenario": "Customer Support Automation",
+      "description": "Generate AI responses to customer queries and update support tickets",
+      "complexity": "high",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:56:57.745744"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035657",
+    "updatedAt": "20250401035657"
+  }
+]

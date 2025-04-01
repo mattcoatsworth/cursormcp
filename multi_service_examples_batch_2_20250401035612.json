@@ -1,0 +1,25 @@
+[
+  {
+    "query": "Can you update the product roadmap based on the latest sprint progress and share it with the team?",
+    "response": "Sure! We can use GitHub to track the latest sprint progress and update the product roadmap, then use Notion to create an organized layout of the roadmap, and finally share it with the team on Slack for visibility.",
+    "complexity": "medium",
+    "id": "ms-20250401035612-8742cb79",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "GitHub",
+        "Notion",
+        "Slack"
+      ],
+      "scenario": "Product Development Workflow",
+      "description": "Coordinate product development across multiple tools",
+      "complexity": "medium",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:56:12.980602"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035612",
+    "updatedAt": "20250401035612"
+  }
+]

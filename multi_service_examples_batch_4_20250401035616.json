@@ -1,0 +1,24 @@
+[
+  {
+    "query": "Generate a detailed report on market trends in the technology sector for the past year.",
+    "response": "To generate a detailed report on market trends in the technology sector for the past year, we can use OpenAI to gather and analyze relevant data and insights from various sources. Once we have the raw data processed, we can utilize Triple Whale's visualization tools to create interactive graphs and charts that will help present the information effectively in the report.",
+    "complexity": "high",
+    "id": "ms-20250401035616-ad235b3f",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "OpenAI",
+        "Triple Whale"
+      ],
+      "scenario": "Custom Scenario 0-8d11fa",
+      "description": "Custom scenario involving OpenAI, Triple Whale",
+      "complexity": "high",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:56:16.637582"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035616",
+    "updatedAt": "20250401035616"
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "query": "I want to automate customer support ticket creation based on issues reported on GitHub for our project.",
+    "response": "To achieve this, you can use Gorgias to manage customer support tickets and integrate it with GitHub using a webhook. Whenever a new issue is reported on GitHub, the webhook can trigger Gorgias to create a support ticket automatically.",
+    "complexity": "high",
+    "id": "ms-20250401035506-c19339ea",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Gorgias",
+        "GitHub"
+      ],
+      "scenario": "Custom Scenario 0-3c334d",
+      "description": "Custom scenario involving Gorgias, GitHub, Triple Whale, Recharm",
+      "complexity": "high",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:55:06.133059"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035506",
+    "updatedAt": "20250401035506"
+  }
+]

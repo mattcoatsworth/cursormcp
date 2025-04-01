@@ -1,0 +1,24 @@
+[
+  {
+    "query": "Can you update the inventory on Shopify and notify the team on Slack when a new order is received?",
+    "response": "Certainly! We can set up an automation where whenever a new order is received on Shopify, the inventory is automatically updated. Additionally, a notification can be sent to the team on Slack to keep them informed.",
+    "complexity": "medium",
+    "id": "ms-20250401035609-f5d3c755",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Shopify",
+        "Slack"
+      ],
+      "scenario": "Order and Inventory Management",
+      "description": "Manage orders and update inventory across systems",
+      "complexity": "medium",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:56:09.888039"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035609",
+    "updatedAt": "20250401035609"
+  }
+]

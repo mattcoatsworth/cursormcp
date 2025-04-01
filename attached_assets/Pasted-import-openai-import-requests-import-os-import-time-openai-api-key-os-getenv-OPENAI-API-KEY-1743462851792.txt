@@ -1,0 +1,79 @@
+import openai
+import requests
+import os
+import time
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
+
+# Define your tools and sample intents per tool
+tool_intents = {
+    "Shopify": ["Check Order Status", "Update Inventory", "Get Daily Sales", "View Abandoned Carts"],
+    "Klaviyo": ["Create Email Flow", "Get Open Rates", "Check Deliverability", "Segment Customers"],
+    "Postscript": ["Send SMS Campaign", "Check Replies", "Schedule SMS"],
+    "Gorgias": ["Create Ticket", "Check Response Time", "Auto-Close Ticket"],
+    "Northbeam": ["Attribution Report", "Traffic Sources", "Compare Channels"],
+    "Triple Whale": ["Track Revenue", "Analyze Spend", "View Metrics"],
+    "Elevar": ["Debug Tracking", "Tag Health Report", "Data Layer Test"],
+    "Notion": ["Create Page", "Find Database", "Summarize Notes"],
+    "Google Calendar": ["Add Event", "List Events", "Reschedule Meeting"],
+    "Asana": ["Create Task", "Move to Project", "Assign Due Date"],
+    "Google Drive": ["Search File", "Create Folder", "Check Access"],
+    "Figma": ["Open Design", "Comment on Frame", "List Pages"],
+    "Slack": ["Send Message", "Create Channel", "List Unread"]
+}
+
+HEADERS = {
+    "apikey": SUPABASE_KEY,
+    "Authorization": f"Bearer {SUPABASE_KEY}",
+    "Content-Type": "application/json"
+}
+
+def generate_queries(tool, intent, count):
+    prompt = f"""
+    Generate {count} unique, realistic user queries for the intent "{intent}" using the tool "{tool}".
+    Also create a relevant system response for each. Return as JSON like:
+    [{{"query": "...", "response": "..."}}]
+    """
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return eval(response['choices'][0]['message']['content'])
+    except Exception as e:
+        print(f"Error generating for {tool} - {intent}: {str(e)}")
+        return []
+
+def insert_to_supabase(tool, intent, items):
+    success = 0
+    for item in items:
+        payload = {
+            "tool": tool,
+            "intent": intent,
+            "query": item["query"],
+            "response": item["response"],
+            "metadata": {}
+        }
+        r = requests.post(f"{SUPABASE_URL}/rest/v1/training_data", headers=HEADERS, json=payload)
+        if r.status_code in [200, 201]:
+            success += 1
+    return success
+
+# Main runner
+def run_bulk(count_per_intent=25, sleep_time=2):
+    total_inserted = 0
+    for tool, intents in tool_intents.items():
+        for intent in intents:
+            print(f"Generating: {tool} - {intent}")
+            items = generate_queries(tool, intent, count_per_intent)
+            if items:
+                inserted = insert_to_supabase(tool, intent, items)
+                total_inserted += inserted
+                print(f"Inserted {inserted} records")
+            time.sleep(sleep_time)  # Respect rate limits
+    print(f"\n✅ Done. Total inserted: {total_inserted}")
+
+if __name__ == "__main__":
+    run_bulk(count_per_intent=25)  # Adjust to 10 or 50 as needed

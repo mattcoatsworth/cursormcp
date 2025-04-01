@@ -1,0 +1,80 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { CalendarDays, ChevronDown, Eye } from "lucide-react";
+
+const data = [
+  { time: "12 AM", Apr1: 85, Mar31: 60 },
+  { time: "2 AM", Apr1: 50, Mar31: 45 },
+  { time: "4 AM", Apr1: 20, Mar31: 25 },
+  { time: "6 AM", Apr1: 10, Mar31: 30 },
+  { time: "8 AM", Apr1: 0, Mar31: 50 },
+  { time: "10 AM", Apr1: null, Mar31: 80 },
+  { time: "12 PM", Apr1: null, Mar31: 100 },
+  { time: "2 PM", Apr1: null, Mar31: 120 },
+  { time: "4 PM", Apr1: null, Mar31: 140 },
+  { time: "6 PM", Apr1: null, Mar31: 160 },
+  { time: "8 PM", Apr1: null, Mar31: 150 },
+  { time: "10 PM", Apr1: null, Mar31: 110 }
+];
+
+export default function EcommerceDashboard() {
+  return (
+    <div className="p-4 space-y-4">
+      <div className="flex items-center justify-between">
+        <Button variant="outline" className="flex items-center space-x-2">
+          <CalendarDays className="w-4 h-4" />
+          <span>Today</span>
+        </Button>
+        <div className="flex items-center space-x-2">
+          <Button variant="outline">All channels <ChevronDown className="w-4 h-4 ml-1" /></Button>
+          <div className="flex items-center text-green-500 font-medium">
+            <span className="w-2 h-2 rounded-full bg-green-500 mr-2"></span>2 live visitors
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Card>
+          <CardContent className="p-4">
+            <p className="text-sm">Sessions</p>
+            <p className="text-xl font-semibold">242 <span className="text-green-500 text-sm">▲ 54%</span></p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4">
+            <p className="text-sm">Total sales</p>
+            <p className="text-xl font-semibold">$216.46 <span className="text-green-500 text-sm">▲ 35%</span></p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4">
+            <p className="text-sm">Orders</p>
+            <p className="text-xl font-semibold">5 <span className="text-green-500 text-sm">▲ 25%</span></p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4">
+            <p className="text-sm">Conversion rate</p>
+            <p className="text-xl font-semibold">2.07% <span className="text-green-500 text-sm">▲ 8%</span></p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="bg-white rounded-xl shadow p-4">
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="time" />
+            <YAxis />
+            <Tooltip />
+            <Line type="monotone" dataKey="Apr1" stroke="#0ea5e9" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="Mar31" stroke="#60a5fa" strokeWidth={2} strokeDasharray="4 4" dot={false} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="text-right text-sm text-muted-foreground">Next payout: $1,022.75</div>
+    </div>
+  );
+}

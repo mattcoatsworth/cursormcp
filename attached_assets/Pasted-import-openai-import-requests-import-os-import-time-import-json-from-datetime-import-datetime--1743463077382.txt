@@ -1,0 +1,98 @@
+import openai
+import requests
+import os
+import time
+import json
+from datetime import datetime
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
+
+tool_intents = {
+    "Shopify": ["Check Order Status", "Update Inventory"],
+    "Klaviyo": ["Create Email Flow", "Get Open Rates"],
+    "Postscript": ["Send SMS Campaign"],
+    "Gorgias": ["Create Ticket"],
+    "Northbeam": ["Attribution Report"],
+    "Triple Whale": ["Track Revenue"],
+    "Elevar": ["Debug Tracking"],
+    "Notion": ["Create Page"],
+    "Google Calendar": ["Add Event"],
+    "Asana": ["Create Task"],
+    "Google Drive": ["Search File"],
+    "Figma": ["Open Design"],
+    "Slack": ["Send Message"]
+}
+
+HEADERS = {
+    "apikey": SUPABASE_KEY,
+    "Authorization": f"Bearer {SUPABASE_KEY}",
+    "Content-Type": "application/json"
+}
+
+def generate_queries(tool, intent, count):
+    prompt = f"""
+    Generate {count} unique, realistic user queries for the intent "{intent}" using the tool "{tool}".
+    Also create a relevant system response for each. Return as JSON like:
+    [{{"query": "...", "response": "..."}}]
+    """
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return eval(response['choices'][0]['message']['content'])
+    except Exception as e:
+        print(f"⚠️ Error generating for {tool} - {intent}: {str(e)}")
+        return []
+
+def insert_to_supabase(tool, intent, items):
+    success = 0
+    for item in items:
+        payload = {
+            "tool": tool,
+            "intent": intent,
+            "query": item["query"],
+            "response": item["response"],
+            "metadata": {}
+        }
+        r = requests.post(f"{SUPABASE_URL}/rest/v1/training_data", headers=HEADERS, json=payload)
+        if r.status_code in [200, 201]:
+            success += 1
+    return success
+
+def save_to_json(all_data):
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    filename = f"training_data_{timestamp}.json"
+    with open(filename, "w") as f:
+        json.dump(all_data, f, indent=2)
+    print(f"\n📝 Saved backup to {filename}")
+
+# Main runner
+def run_bulk(count_per_intent=25, sleep_time=2, dry_run=False):
+    total_inserted = 0
+    all_data = []
+    for tool, intents in tool_intents.items():
+        for intent in intents:
+            print(f"🔄 Generating: {tool} - {intent}")
+            items = generate_queries(tool, intent, count_per_intent)
+            if items:
+                for item in items:
+                    all_data.append({
+                        "tool": tool,
+                        "intent": intent,
+                        "query": item["query"],
+                        "response": item["response"]
+                    })
+                if not dry_run:
+                    inserted = insert_to_supabase(tool, intent, items)
+                    total_inserted += inserted
+                    print(f"✅ Inserted {inserted} records")
+                time.sleep(sleep_time)
+    save_to_json(all_data)
+    print(f"\n🎉 Done. Total inserted: {total_inserted}")
+
+if __name__ == "__main__":
+    # Set dry_run=True if you want to preview data without inserting to Supabase
+    run_bulk(count_per_intent=25, dry_run=False)

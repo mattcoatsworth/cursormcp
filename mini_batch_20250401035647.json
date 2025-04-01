@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Can you provide a detailed report on customer interactions across different channels for the past month?",
+    "response": "To generate a detailed report on customer interactions across different channels for the past month, we will need to integrate data from Shopify for purchase history, Klaviyo for email marketing interactions, Gorgias for customer service interactions, and Triple Whale for advertising data. By combining data from these sources, we can analyze the entire customer journey and provide insights for optimization.",
+    "complexity": "high",
+    "id": "ms-20250401035644-33b9eb0f",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Shopify",
+        "Klaviyo",
+        "Gorgias",
+        "Triple Whale"
+      ],
+      "scenario": "Customer Journey Tracking",
+      "description": "Track and optimize customer journey across channels",
+      "complexity": "high",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:56:44.457401"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035644",
+    "updatedAt": "20250401035644"
+  }
+]

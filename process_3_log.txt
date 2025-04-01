@@ -1,0 +1,7 @@
+STDOUT:
+
+
+STDERR:
+usage: generate_and_insert.py [-h] [--target TARGET] [--batch-size BATCH_SIZE]
+                              [--sleep-time SLEEP_TIME] [--dry-run]
+generate_and_insert.py: error: argument --sleep-time: invalid int value: '0.1'

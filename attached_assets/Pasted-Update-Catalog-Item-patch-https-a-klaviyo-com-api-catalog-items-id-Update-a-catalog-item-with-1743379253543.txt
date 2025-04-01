@@ -1,0 +1,134 @@
+Update Catalog Item
+patch
+https://a.klaviyo.com/api/catalog-items/{id}
+Update a catalog item with the given item ID.
+
+Rate limits:
+Burst: 75/s
+Steady: 700/m
+
+Scopes:
+catalogs:write
+
+Path Params
+id
+string
+required
+The catalog item ID is a compound ID (string), with format: {integration}:::{catalog}:::{external_id}. Currently, the only supported integration type is $custom, and the only supported catalog is $default.
+
+Body Params
+data
+object
+required
+
+data object
+type
+string
+required
+
+catalog-item
+id
+string
+required
+The catalog item ID is a compound ID (string), with format: {integration}:::{catalog}:::{external_id}. Currently, the only supported integration type is $custom, and the only supported catalog is $default.
+
+attributes
+object
+required
+
+attributes object
+title
+string
+The title of the catalog item.
+
+price
+number
+This field can be used to set the price on the catalog item, which is what gets displayed for the item when included in emails. For most price-update use cases, you will also want to update the price on any child variants, using the Update Catalog Variant Endpoint.
+
+description
+string
+A description of the catalog item.
+
+url
+string
+URL pointing to the location of the catalog item on your website.
+
+image_full_url
+string
+URL pointing to the location of a full image of the catalog item.
+
+image_thumbnail_url
+string
+URL pointing to the location of an image thumbnail of the catalog item
+
+images
+array of strings
+List of URLs pointing to the locations of images of the catalog item.
+
+
+string
+
+
+ADD string
+custom_metadata
+object
+Flat JSON blob to provide custom metadata about the catalog item. May not exceed 100kb.
+
+
+custom_metadata object
+string
+newKey
+New Value
+
+Add Field
+published
+boolean
+Boolean value indicating whether the catalog item is published.
+
+
+true
+relationships
+object
+
+relationships object
+categories
+object
+
+categories object
+data
+array of objects
+
+object
+
+type
+string
+required
+
+catalog-category
+id
+string
+required
+A list of catalog category IDs representing the categories the item is in
+
+
+ADD object
+Headers
+revision
+string
+required
+Defaults to 2025-01-15
+API endpoint revision (format: YYYY-MM-DD[.suffix])
+
+2025-01-15
+Responses
+
+200
+Success
+
+
+4XX
+Client Error
+
+
+5XX
+Server Error

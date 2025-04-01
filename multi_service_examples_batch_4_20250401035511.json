@@ -1,0 +1,25 @@
+[
+  {
+    "query": "Can you notify the team on Slack when an order is received in Shopify and update the inventory count in Notion?",
+    "response": "Sure! We can set up an automation where whenever a new order is received in Shopify, a notification is sent to the team's Slack channel. Additionally, we can update the inventory count in Notion to reflect the latest changes.",
+    "complexity": "medium",
+    "id": "ms-20250401035511-ea3acf36",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "Shopify",
+        "Slack",
+        "Notion"
+      ],
+      "scenario": "Order and Inventory Management",
+      "description": "Manage orders and update inventory across systems",
+      "complexity": "medium",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:55:11.836265"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "createdAt": "20250401035511",
+    "updatedAt": "20250401035511"
+  }
+]

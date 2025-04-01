@@ -1,0 +1,25 @@
+[
+  {
+    "query": "Can we create a new product development project and initiate a kick-off meeting for the team?",
+    "response": "Sure, we can use GitHub for project management, Notion for project documentation, and Slack for communication. First, create a new repository in GitHub to track the project tasks. Then, set up a related workspace in Notion to document project specifications, goals, and timelines. Lastly, create a new Slack channel for the team to discuss the project and schedule a kick-off meeting to align on the project's scope and objectives.",
+    "complexity": "medium",
+    "metadata": {
+      "is_multi_service": true,
+      "services_required": [
+        "GitHub",
+        "Notion",
+        "Slack"
+      ],
+      "scenario": "Product Development Workflow",
+      "description": "Coordinate product development across multiple tools",
+      "complexity": "medium",
+      "source": "auto-generated",
+      "generated_at": "2025-04-01T03:22:00.833929"
+    },
+    "tool": "Multi-Service",
+    "intent": "Cross-Platform Integration",
+    "id": "ms-20250401032200-1821b30d",
+    "createdAt": "2025-04-01T03:22:00.833979",
+    "updatedAt": "2025-04-01T03:22:00.833979"
+  }
+]

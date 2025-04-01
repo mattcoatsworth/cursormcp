@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queen Bee Behavior</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+    .sidebar {
+      width: 220px;
+      background-color: #ffffff;
+      border-right: 1px solid #ccc;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .sidebar h2 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      margin-bottom: 8px;
+      color: #333;
+      cursor: pointer;
+    }
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+      background-color: #fff;
+    }
+    .main-content h3 {
+      margin-top: 0;
+    }
+    .chat-box {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f0f0f0;
+      border-radius: 8px;
+    }
+    .chat-input {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    .chat-input button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .bold {
+      font-weight: bold;
+    }
+    .blue {
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Projects</h2>
+    <ul>
+      <li><span class="bold blue">New project</span></li>
+    </ul>
+    <h2>Yesterday</h2>
+    <ul>
+      <li>Cap Gains Tax Primary Residen</li>
+    </ul>
+    <h2>Previous 7 Days</h2>
+    <ul>
+      <li>iOS app web sync</li>
+      <li>Future Image Projection</li>
+      <li>Compounding Life Choices Ap</li>
+      <li>iMessage Chat Access Limitati</li>
+      <li>Loan Repayments in P&amp;L</li>
+      <li>Kimchi vs Greek Yogurt</li>
+      <li>State Tax on P&amp;L</li>
+      <li>ByteDance TikTok Ownership</li>
+      <li>Group and Sum Costs</li>
+      <li>iOS App Screen Code</li>
+    </ul>
+  </div>
+  <div class="main-content">
+    <h3>Did queen bees fight each other?</h3>
+    <div class="chat-box">
+      <p><span class="bold">Yes, queen bees do fight each other</span>, especially in certain situations:</p>
+      <ol>
+        <li><span class="bold">Virgin Queens Battling for Dominance</span> &ndash; When a new queen emerges in a hive, she will seek out any other developing queen larvae or pupae and sting them to death before they hatch. If two or more virgin queens emerge at the same time, they will <span class="bold">fight to the death</span> using their stingers, as only one can rule the hive.</li>
+        <li><span class="bold">Supersedure Conflicts</span> &ndash; Sometimes, a colony raises a new queen while the old queen is still alive, usually because she is aging or weak. When the new queen emerges, she may challenge the old queen. In some cases, the workers will let them fight it out, but often they assist in killing the older queen.</li>
+        <li><span class="bold">Swarming Situations</span> &ndash; When a colony swarms, the old queen leaves with part of the hive to start a new colony, while a new queen takes over the original hive. If multiple new queens emerge, they will battle until only one survives.</li>
+      </ol>
+      <p>Unlike worker bees, queens can <span class="bold">sting multiple times without dying</span> since their stingers are smooth. This allows them to engage in lethal combat.</p>
+      <p>Would you like more details on any of these scenarios?</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="Ask anything..." />
+      <button>Send</button>
+    </div>
+  </div>
+</body>
+</html>

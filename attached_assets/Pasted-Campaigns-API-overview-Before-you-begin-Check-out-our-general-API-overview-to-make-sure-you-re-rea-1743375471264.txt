@@ -1,0 +1,588 @@
+Campaigns API overview
+Before you begin
+Check out our general API overview to make sure you’re ready to get started with specific endpoints.
+
+A campaign is a way to send a targeted message to an audience (lists and/or segments). Unlike a flow, which is triggered every time a condition is met, a campaign is a scheduled message (e.g., a holiday sale announcement via SMS). Our Campaigns API supports email, SMS, and push notification campaigns with the following endpoint categories:
+
+Campaigns
+
+Create, retrieve, update, and delete campaigns.
+
+Messages
+
+Retrieve and update campaign messages.
+
+Jobs
+
+Send a campaign using a campaign send job, or fetch an estimated number of recipients using a recipient estimation job.
+
+Relationships
+
+Access data on campaign messages, tags, and templates related to a specific campaign.
+
+Use cases
+The Campaigns API supports a number of use cases. Some of the more common use cases include:
+
+Use smart send time as a send strategy to schedule a campaign and manage the campaign send job’s status.
+Preview content by fetching a template associated with an email campaign’s message.
+Estimate the number of recipients for a given campaign.
+Clone and resend an existing campaign to different audiences.
+📘
+Campaigns will not be sent out to profiles who have not provided consent (implicit for email and explicit for SMS). Learn about best practices for collecting email and SMS consent.
+
+Data model
+Campaigns are similar in structure, but differ in how they are sent and tracked, for example, only email campaigns can track clicks and opens. Check out how to send an email, SMS, or push campaign for more information on request structure and their responses.
+
+Email
+SMS
+Push
+
+{
+    "type": "campaign",
+    "id": "01H5QQV9F57XJHJDMD86RX4QM5",
+    "attributes": {
+        "name": "Holiday Sale: Email Campaign",
+        "status": "Draft",
+        "archived": false,
+        "audiences": {
+            "included": [
+                "WEmgye",
+                "YsMa4H",
+                "YzykDM"
+            ],
+            "excluded": []
+        },
+        "send_options": {
+            "use_smart_sending": true,
+        },
+        "tracking_options": {
+            "is_add_utm": false,
+            "utm_params": [],
+            "is_tracking_clicks": true,
+            "is_tracking_opens": true
+        },
+        "send_strategy": {
+            "method": "immediate",
+        },
+        "created_at": "2023-07-19T18:50:52.779945+00:00",
+        "scheduled_at": null,
+        "updated_at": "2023-07-19T18:53:05.424510+00:00",
+        "send_time": null
+    },
+    "relationships": {
+        "campaign-messages": {
+            "data": [
+                {
+                    "type": "campaign-message",
+                    "id": "01H5QQV9FGJ1H66PGPER6WN9F5"
+                }
+            ],
+            "links": {
+                "self": "https://a.klaviyo.com/api/campaigns/01H5QQV9F57XJHJDMD86RX4QM5/relationships/campaign-messages/",
+                "related": "https://a.klaviyo.com/api/campaigns/01H5QQV9F57XJHJDMD86RX4QM5/campaign-messages/"
+            }
+        },
+        "tags": {
+            "links": {
+                "self": "https://a.klaviyo.com/api/campaigns/01H5QQV9F57XJHJDMD86RX4QM5/relationships/tags/",
+                "related": "https://a.klaviyo.com/api/campaigns/01H5QQV9F57XJHJDMD86RX4QM5/tags/"
+            }
+        }
+    },
+    "links": {
+        "self": "https://a.klaviyo.com/api/campaigns/01H5QQV9F57XJHJDMD86RX4QM5/"
+    }
+}
+A campaign has the following structure:
+
+type (required)
+
+Use campaign for all endpoints in the Campaigns category, campaign-send-job for all endpoints in the Jobs category, and campaign-message for all endpoints in the Messages category.
+
+id (required)
+
+The campaign ID.
+
+attributes (required)
+
+name (required)
+
+The campaign name.
+
+audiences (required)
+
+An object containing fields for included and/or excluded audiences (lists and/or segment IDs) for the campaign.
+
+send_strategy
+
+An object containing one of the following method (string) values and its corresponding options that determines how the campaign will be sent (see API reference):
+
+static
+
+Select this method if you want all recipients to receive the message at the same time. The options field is optional; if not included, the field defaults to "is_local": false.
+
+Static (local)
+Static (non-local)
+
+{
+  "method": "static",
+  "datetime": "2022-11-08T00:00:00+00:00",
+  "options": {
+    "is_local": true,
+    "send_past_recipients_immediately": false
+    }
+}
+throttled
+
+Select this method to send to a specified percentage of recipients.
+
+Throttled
+
+{
+  "method": "throttled",
+  "datetime": "2022-11-08T00:00:00+00:00",
+  "throttle_percentage": 13
+}
+immediate (default)
+
+Select this method if you want to send a campaign immediately.
+
+Immediate
+
+{
+  "method": "immediate"
+}
+smart_send_time
+
+Select this method (available to eligible senders) to determine and set the ideal send time for your audience(s). This send strategy is only supported for email and SMS.
+
+Smart send time
+
+{
+  "method": "smart_send_time",
+  "date" "2022-11-08"
+  }
+send_options
+
+An object containing the following sending option(s) shared by email and SMS campaigns:
+
+use_smart_sending(default)
+
+A boolean option to use smart sending for your campaign (defaults to true). Smart sending skips recipients who have already received an email, SMS, or push notification within a designated time frame.
+
+tracking_options
+
+An object containing the following tracking options shared by email and SMS campaigns:
+
+is_add_utm
+
+Indicates if the campaign needs UTM parameters.
+
+utm_params
+
+An array of objects representing UTM parameters. If is_add_utm is true and the list is empty, company defaults will be used.
+
+Email campaigns have the following additional tracking options:
+
+is_tracking_clicks
+
+Whether the campaign is tracking click events (defaults to true).
+
+is_tracking_opens
+
+Whether the campaign is tracking open events (defaults to true).
+
+campaign-messages
+
+An object containing the message associated with the campaign, with the following attributes:
+
+channel
+
+The channel for the message (email, sms, or mobile_push).
+
+label (Email only)
+
+The optional label or name on the message.
+
+content
+
+For email campaigns, this object contains various fields including, but not limited to, the email’s subject line, sending address, and reply-to address. For SMS campaigns, this object should only include a body object for the message.
+
+render_options (SMS only)
+
+An object containing additional options for rendering the message:
+
+shorten_links
+
+A boolean option that allows you to shorten links in the message.
+
+add_org_prefix
+
+A boolean option that allows you to add an organizational prefix to the beginning of the message to identify your company as the sender.
+
+add_info_link
+
+A boolean option that allows you to add a link to your custom company information page to the message.
+
+add_opt_out_language
+
+A boolean option that allows you to include a phrase at the end of the message with SMS opt out information.
+
+Push notification requirements
+notification_type
+
+Currently supports standard notifications.
+
+title
+
+The push notification message title.
+
+body
+
+The content of the push notification message. Supports dynamic content with {{ }} or {% %}. 512 maximum characters.
+
+dynamic_image
+
+A template string that must resolve to an image url.
+
+Note that a dynamic image and a relationships image cannot be set in the same request.
+
+play_sound (iOS only)
+
+Plays an alert sound when the push notification is delivered.
+
+badge (iOS only)
+
+An object for iOS application badges that has the following attributes:
+
+display
+
+Set to true to add a red dot notification badge to your application when a push notification is delivered.
+
+on_open
+
+Accepted values:
+
+deep_link
+
+Deep links allow you to open to a specific page in your app. Supports a template or a string. Depending on the type of application you have registered with Klaviyo, you may need to use ios_deep_link, android_deep_link, or both. Read more about using deep links in push notifications.
+
+Deep link: string
+Deep link: template
+
+{
+  "on_open": {
+    "type": "deep_link",
+    "ios_deep_link": "apptest://settings",
+    "android_deep_link": "apptest://settings"
+  }
+}
+open_app
+
+Opens the application when a push notification is opened.
+
+Open app
+
+{
+  "on_open": {
+    "type": "open_app"
+  }
+}
+image
+
+Within the relationships object, this is a static image that can be included in your push notification. Requires an image ID retrieved via the Get Images endpoint.
+
+Note that a dynamic image and a relationships image cannot be set in the same request.
+
+Smart send time and smart sending
+Smart send time and smart sending are robust automations that help you build healthy relationships with your target audience. Both tools leverage customer data to achieve customer-first interactions.
+
+Smart send time
+This feature helps you determine the optimal time to email your customers by analyzing trends of when your target audiences are most likely to open your email campaigns.
+
+📘
+Note that you must be able to send campaigns to an audience of 12,000 or greater to be eligible for smart send time.
+
+Smart sending
+This feature prevents you from sending a recipient too many messages at once. Recipients who have recently received a campaign within a set time frame (for example, within 24 hours) will be skipped from receiving the campaign.
+
+🚧
+Recipients who are skipped from campaigns due to smart sending will not automatically receive the campaign at a later date. Learn more about resending email campaigns.
+
+Send an email campaign
+Create an email campaign
+To create an email campaign, your request payload for Create Campaign should be formatted like the example below:
+
+Request payload
+
+{
+  "data": {
+    "type": "campaign",
+    "attributes": {
+      "name": "Holiday Sale",
+      "audiences": {
+     "included": [
+      "YzykDM"
+          ]
+       },
+      "send_strategy": {
+        "method": "static",
+        "options_static": {
+          "datetime": "2024-02-10T00:00:00"
+        }
+      },
+      "campaign-messages": {
+        "data": [
+          {
+            "type": "campaign-message",
+            "attributes": {
+              "definition": {
+                "channel": "email",
+                "label": "Don't miss our holiday sale!",
+                "content": {
+                  "subject": "Don't miss our holiday sale!",
+                  "preview_text": "Our holiday sale ends soon! Shop now for up to 70% off!",
+                  "from_email": "store@mycompany.com",
+                  "from_label": "My Company",
+                  "reply_to_email": "reply-to@mycompany.com"
+                  },
+                }
+              }
+          }
+        ]
+      }
+    }
+  }
+}
+
+Update your campaign
+Once the campaign has been created, it will be in “draft” status until it is scheduled to be sent. While your email campaign is in draft, you can update the following:
+
+Campaign attributes
+
+Retrieve your campaign ID (Get Campaigns) and call Update Campaign to update campaign attributes such as send and tracking options.
+
+Campaign message
+
+Use your campaign ID to fetch the campaign message (Get Campaign Campaign Messages) and call Update Campaign to update your campaign’s message.
+
+Assign a template to an email campaign
+After you create an email campaign, you’ll need to add content by assigning a template to the campaign’s message:
+
+Create a basic HTML template using the Create Template endpoint from our Templates API.
+Assign the template you just created to your campaign’s message using the Assign Campaign Message Template endpoint.
+🚧
+Note that if you do not add a template to your email campaign, you will not be able to schedule a campaign send job.
+
+Schedule a campaign send job
+Once you’ve created your email campaign with an assigned template:
+
+You can estimate the number of campaign recipients with Create Campaign Recipient Estimation Job (see Estimate campaign recipients).
+The campaign is ready to be scheduled in a campaign send job with the Create Campaign Send Job endpoint (see Schedule a campaign send job).
+Send an SMS campaign
+Create an SMS campaign
+To create an SMS campaign, your request payload to Create Campaign should be formatted like the example below:
+
+Request payload
+
+{
+  "data": {
+    "type": "campaign",
+    "attributes": {
+      "name": "Holiday Sale",
+      "audiences": {
+     "included": [
+      "YzykDM"
+          ]
+       },
+      "send_strategy": {
+        "method": "static",
+        "options_static": {
+          "datetime": "2024-02-13T00:00:00"
+        }
+      },
+      "campaign-messages": {
+        "data": [
+          {
+            "type": "campaign-message",
+            "attributes": {
+              "definition": {
+                "channel": "sms",
+                "render_options": {
+                  "shorten_links": false,
+                  "add_org_prefix": false,
+                  "add_info_link": true,
+                  "add_opt_out_language": true
+                },
+                "content": {
+                    "body": "Our holiday sale ends soon! Shop now for up to 70% off!"
+                }
+              }
+             }
+           }
+        ]
+      }
+    }
+  }
+}
+
+Update your campaign
+Once the campaign has been created, it will be in “draft” status until it is scheduled to be sent. While your SMS campaign is in draft, you can update the following:
+
+Campaign attributes
+
+Retrieve your campaign ID (Get Campaigns) and call Update Campaign to update campaign attributes such as send and tracking options.
+
+Campaign message
+
+Use your campaign ID to fetch the campaign message (Get Campaign Campaign Messages) and call Update Campaign to update your campaign’s message.
+
+Schedule a campaign send job
+When your SMS campaign is ready to be scheduled:
+
+Estimate the number of campaign recipients with Create Campaign Recipient Estimation Job (see Estimate campaign recipients).
+Schedule the campaign with the Create Campaign Send Job endpoint (see Schedule a campaign send job).
+Send a push notification campaign
+🚧
+To create push campaigns you must have push enabled in your Klaviyo account for iOS, Android, or both.
+
+Create a push notification campaign
+To create a push campaign, your request payload for Create Campaign should be formatted like the example below:
+
+Request payload
+
+{
+  "data": {
+    "type": "campaign",
+    "attributes": {
+      "name": "Holiday Sale",
+      "audiences": {
+     "included": [
+      "YzykDM"
+          ]
+       },
+      "send_strategy": {
+        "method": "static",
+        "options_static": {
+          "datetime": "2025-02-13T00:00:00"
+        }
+      },
+      "campaign-messages": {
+        "data": [
+          {
+            "type": "campaign-message",
+            "attributes": {
+              "definition": {
+                "channel": "mobile_push",
+                "notification_type": "standard",
+                "content": {
+                  "title": "Don't miss our holiday sale!",
+                  "body": "Our holiday sale ends soon! Shop now for up to 70% off!",
+                },
+                "options": {
+                  "play_sound": true,
+                  "badge": {
+                    "display": true
+                  },
+                  "on_open": {
+                    "type": "deep_link",
+                    "ios_deep_link": "apptest://settings",
+                    "android_deep_link": "apptest://settings"
+                  }
+                }
+              },
+            },
+            "relationships": {
+              "image": {
+                "data": {
+                  "type": "image",
+                  "id": "12345"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+
+Update your campaign
+Once the campaign has been created, it will be in “draft” status until it is scheduled to be sent. While your push campaign is in draft, you can update the following:
+
+Campaign attributes
+
+Retrieve your campaign ID (Get Campaigns) and call Update Campaign to update campaign attributes such as send and tracking options.
+
+Campaign message
+
+Use your campaign ID to fetch the campaign message (Get Campaign Campaign Messages) and call Update Campaign to update your campaign’s message.
+
+Schedule a campaign send job
+When your push campaign is ready to be scheduled:
+
+Estimate the number of campaign recipients with Create Campaign Recipient Estimation Job (see Estimate campaign recipients).
+Schedule the campaign with the Create Campaign Send Job endpoint (see Schedule a campaign send job).
+Estimate campaign recipients
+Our Campaigns API allows you to run an estimation of your expected recipient count before sending your campaign with Create Campaign Recipient Estimation Job. Once scheduled, you can use Get Campaign Recipient Estimation Job to check on the job’s status (“queued,” “processing,” “cancelled,” or “complete”) and retrieve the estimated recipient count.
+
+Schedule a campaign send job
+When your campaign is ready to be sent, you can call Create Campaign Send Job to asynchronously trigger a campaign send. Once scheduled, you can use Get Campaign Send Job to check on the job’s status (“queued,” “processing,” “cancelled,” or “complete”). You can use Update Campaign Send Job to revert the campaign to a draft or cancel the campaign entirely. Note that if you cancel a campaign and would like to resend it, you’ll have to use Create Campaign Clone which will create a clone of the desired campaign in “draft” status, and then schedule a new campaign send job.
+
+Burst API send jobs vs stream send jobs
+How you handle your requests can impact the performance of your campaign send job.
+
+Consider the goal of the campaign:
+
+The campaign is time-sensitive, designed to reach your audience as soon as possible.
+You are sending campaigns based on realtime data and require time between sends to collect and deliver data.
+Here’s how each approach might affect campaign sends, based on your campaign's goals:
+
+Burst API calls in campaign sends
+The burst method is recommended for one-off campaign sends.
+
+Advantages
+Efficiency: Sending a large number of campaign messages in a short period can be efficient for specific scenarios where all messages need to be delivered at once.
+Example: you are offering a promotion to the first 100 customers who purchase XXX item. You want all profiles on the list to receive the campaign as fast as possible to ensure all customers have the same odds of success.
+Simplicity: Implementation is less complex; you can send a batch of messages in one go.
+Predictability: Easier to predict when messages will be sent and received since the send process is concentrated into a single burst.
+Disadvantages
+Rate Limits: API rate limits can be a significant constraint, as sending too many requests in a short period might lead to throttling or blocking. Check the API reference for the endpoint you are using to determine the rate limit.
+Deliverability Issues: Sending a large number of messages at once can increase the likelihood that email and message providers flag your sends as spam.
+Stream API calls in campaign sends
+The stream method is recommended if you are sending long-term or continuous campaigns.
+
+Advantages
+Real-Time Delivery: Messages send as soon as the data becomes available, ensuring timely delivery.
+Rate Management: Continuous, paced delivery helps manage and stay within API rate limits.
+Load Distribution: Distributes the server load over time, reducing the risk of overload and downtime.
+Improved Deliverability: Lower risk of a spam flag, as messages are sent in a steady cadence.
+Disadvantages
+Complexity: Implementing a streaming solution may require persistent connections and more sophisticated error handling.
+Latency: There can be slight delays between data availability and message sending, depending on the stream's implementation.
+Get campaign(s)
+The Get Campaigns endpoint is useful for fetching data about campaigns, such as included audiences. Note that for fetching campaigns, you’ll need to include a channel filter for listing campaign type; otherwise you will receive a 400 error. When making a Get Campaign or Get Campaigns request, here’s an example of how it could look:
+
+Request
+Response
+
+curl --request GET \
+     --url 'https://a.klaviyo.com/api/campaigns/?filter=equals(messages.channel, 'email')' \
+     --header 'Authorization: Klaviyo-API-Key your-private-api-key' \
+     --header 'accept: application/json' \
+     --header 'revision: 2023-12-15'
+Querying campaigns
+Querying campaigns with the Campaigns API is useful for viewing campaign statuses. Check out the supported query parameters below and test them with our latest Postman collection. Note that support for given operators is endpoint-specific. Review the API reference documentation for more information on allowed fields and query operators.
+
+Parameter	Description	Query example
+filter	Retrieve a subset of campaigns, e.g., email campaigns with a name containing “sale.” Learn about the filter query parameter.
+
+Note that for fetching campaigns, you’ll need to include a channel filter for listing campaign type; otherwise you will receive a 400 error.	GET /api/campaigns?filter=equals(messages.channel, ‘email’)
+
+GET /api/campaigns?filter=equals(messages.channel, ‘sms’)
+
+GET /api/campaigns?filter=and(equals(messages.channel,’email’),contains(name, ‘sale’)
+fields	Request for only specified campaign data (e.g., audiences). Learn more about sparse fieldsets.	GET /api/campaigns?filter=equals(messages.channel, ‘email’)&fields[campaign]=audiences.included
+include	Include related resources in the response, e.g., campaign messages. Learn about the include query parameter.	GET /api/campaigns?include=campaign-messages
+
+GET /api/campaign-messages/:id/?include=template

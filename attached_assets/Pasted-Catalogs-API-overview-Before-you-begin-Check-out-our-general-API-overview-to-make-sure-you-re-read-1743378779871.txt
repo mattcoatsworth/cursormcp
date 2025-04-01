@@ -1,0 +1,400 @@
+Catalogs API overview
+Before you begin
+Check out our general API overview to make sure you’re ready to get started with specific endpoints.
+
+Catalogs are used to represent products that can be referenced in message templates. Our Catalogs API populates catalog information via API to power product recommendations, back in stock, and dynamic catalog lookups.
+
+📘
+Note that you can only use either the API or custom catalog feed to import catalog products.
+
+Use cases
+The Catalogs API supports the following use cases:
+
+Get, create, and manage catalog resources (items, variants, and categories), including creating new catalog resources in bulk.
+Fetch bulk creation jobs to monitor status.
+Subscribe a profile to receive back in stock subscriptions.
+Data model
+You can create the following resources with the Catalogs API:
+
+Items
+
+The products that make up your catalog.
+
+Variants
+
+The different options or versions of a catalog item.
+
+Categories
+
+The groupings of catalog items based on shared characteristics.
+
+Back in stock subscriptions
+
+Subscribe a profile to receive back in stock notifications.
+
+In the sections below, learn about each resource type and the data model that defines them.
+
+Items and variants
+Catalog items are the individual products your catalog lists (e.g., a t-shirt). Each item represents a single product in your store.
+
+Variants represent the different options or versions of a catalog item. For example, a single catalog item (a t-shirt) might have multiple variants for size, color, and material.
+
+Catalog items and variants have similar data models that represent their fundamental properties. These shared properties include:
+
+id
+
+The catalog item or variant ID.
+
+attributes
+
+external_id (required)
+
+The ID of the catalog item or variant in an external system.
+
+integration_type
+
+The integration type (e.g., $custom). Currently, only custom integrations are supported.
+
+title (required)
+
+The title of the catalog item or variant.
+
+price
+
+The price of the catalog item or variant. This is displayed when you include an item or variant in an email. Use price to trigger price-drop flows.
+
+catalog_type
+
+The type of catalog (e.g., $default). Currently, default is the only supported catalog type.
+
+description (required)
+
+A description of the catalog item or variant.
+
+url (required)
+
+The URL pointing to the location of the catalog item or variant on your website.
+
+image_full_url
+
+The URL pointing to the location of a full image of the catalog item or variant.
+
+image_thumbnail_url
+
+The URL pointing to the location of an image thumbnail of the catalog item or variant.
+
+images
+
+List of URLs pointing to the locations of images of the catalog item or variant.
+
+custom_metadata
+
+A flat JSON blob to provide custom metadata about the catalog item or variant. May not exceed 100kb.
+
+published
+
+Whether the catalog item or variant is published.
+
+relationships (required)
+
+This object contains related resources. For a catalog item, this object contains the categories object that holds an array of objects representing categories associated with the catalog item (e.g., “Home Decor”). For a catalog variant, this object contains the catalog item for which it is a variant (items object). Learn more about relationships.
+
+🚧
+Note if you update the price for a catalog item (Update Catalog Item), you have to update the price on any child variants using the Update Catalog Variant endpoint and vice versa.
+
+Unique fields for variants
+In addition to the attributes detailed above, variants hold inventory data. This is critical for back in stock or low inventory flows:
+
+sku (required)
+
+The SKU of the catalog item variant.
+
+inventory_policy
+
+A field that controls the visibility of this catalog item variant in product feeds/blocks. Defaults to 0; the product can appear in dynamic product recommendation feeds and blocks regardless of inventory quantity.
+
+inventory_quantity (required)
+
+The quantity of the catalog item variant currently in stock.
+
+Categories
+Categories are used in marketing campaigns to create personalized recommendations based on a customer’s preferences or browsing behavior. A category consists of the following:
+
+id
+
+The category ID.
+
+attributes
+
+external_id (required)
+
+The ID of the catalog category in an external system.
+
+name (required)
+
+The name of the catalog category.
+
+integration_type
+
+The integration type (e.g., $custom). Currently, only custom integrations are supported.
+
+catalog_type
+
+The type of catalog (e.g., $default). Currently, default is the only supported catalog type.
+
+relationships (required)
+
+items
+
+An object that contains an array of objects representing the catalog item IDs that are in a given category.
+
+Back in stock subscriptions
+You can use Create Back In Stock Subscription to subscribe a profile to back in stock notifications. Check out our Back in Stock API guide for more details.
+
+Create catalog resources
+The sections below contain examples on creating catalog items, variants, and categories.
+
+📘
+Make sure that your create payload contains all required fields, otherwise the request will immediately return a 400 error.
+
+Create catalog item
+To create a catalog item, you’ll need an external ID, item title, description, product URL, and the catalog category it belongs to.
+
+You may also include optional information for your item such as image URLs, as shown in this request payload for Create Catalog Item:
+
+Request
+Response
+
+{
+   "data": {
+       "type": "catalog-item",
+       "attributes": {
+           "external_id": "3829918373-TShirt-1",
+           "title": "T-Shirt",
+           "description": "This is the description of the t-shirt.",
+           "url": "https://via.placeholder.com/150",
+           "integration_type": "$custom",
+           "catalog_type": "$default",
+           "image_full_url": "https://via.placeholder.com/300",
+           "image_thumbnail_url": "https://via.placeholder.com/200",
+           "images": [
+               "https://via.placeholder.com/150",
+               "https://via.placeholder.com/150"
+           ],
+           "published": true
+       },
+       "relationships": {
+           "categories": {
+               "data": [
+                   {
+                       "type": "catalog-category",
+                       "id": "$custom:::$default:::SummerApparel"
+                   }
+               ]
+           }
+       }
+   }
+}
+Create catalog variant
+After creating a catalog item, you need to associate a variant with the item using the relationships attribute. To create a catalog variant for a catalog item you’ll need its external ID, variant title, description, product URL, SKU, inventory quantity, and the catalog item it falls under. Typically, the price field is used for catalog variants.
+
+This payload for Create Catalog Variant creates a blue variant of the T-shirt item created in the previous example:
+
+Request
+Response
+
+{
+  "data": {
+      "type": "catalog-variant",
+      "attributes": {
+          "external_id": "3829918373-Blue-TShirt-1",
+          "title": "Blue T-Shirt",
+          "description": "Classic Blue T-Shirt.",
+          "sku": "classic-blue-tee-99970742258",
+          "inventory_quantity": 50,
+          "price": 24.99,
+          "url": "https://via.placeholder.com/150",
+          "published": true
+      },
+      "relationships": {
+          "item": {
+              "data": {
+                  "type": "catalog-item",
+                  "id": "$custom:::$default:::3829918373-TShirt-1"
+              }
+          }
+      }
+  }
+}
+🚧
+Due to how Klaviyo’s catalog lookup tag works, we recommend using different external IDs for the parent item and variants. If there are duplicate external IDs across items and variants, the catalog tag will default to returning the item without the variant.
+
+Create catalog category
+To create a catalog category, you’ll need its external ID, name, and a list of catalog item IDs for items that fit under the category.
+
+❗️
+Special characters in category external IDs
+
+When creating a category, any special characters (including spaces) in the external ID are stripped. For example, an external ID like Winter-Apparel-2025 will be processed internally as WinterApparel2025. Creating another category with an external ID such as Winter_Apparel_2025 will result in the same processed value, causing a 409 error (duplicate_category).
+
+The request payload and response for Create Catalog Category below will create another category "Gym Apparel" that is used to categorize the T-Shirt item that was created earlier:
+
+Request
+Response
+
+{
+   "data": {
+       "type": "catalog-category",
+       "attributes": {
+           "external_id": "GymApparel12345",
+           "name": "Gym Apparel",
+           "integration_type": "$custom",
+           "catalog_type": "$default"
+       },
+       "relationships": {
+           "items": {
+               "data": [
+                   {
+                       "type": "catalog-item",
+                       "id": "$custom:::$default:::3829918373-TShirt-1"
+                   }
+               ]
+           }
+       }
+   }
+}
+When the category IDs are fetched for T-Shirt, the ID for the newly created "Gym Apparel" category is listed:
+
+Request
+Response
+
+curl --request GET \
+     --url https://a.klaviyo.com/api/catalog-items/$custom:::$default:::3829918373-TShirt-1/relationships/categories \
+     --header 'Authorization: Klaviyo-API-Key your-private-api-key' \
+     --header 'accept: application/vnd.api+json' \
+     --header 'revision: 2025-01-15'
+Catalog resource IDs
+As you may have noticed in the examples above, the ID generated for each catalog resource is a compound ID (string) with the following format:
+
+{integration type}:::{catalog type}:::{external_id}
+
+Currently, the only supported integration type is $custom, and the only supported catalog type is $default. An ID for a catalog resource should look something like this:
+
+{$custom}:::{$default}:::{external_id}
+
+Catalog external IDs
+Since the resource ID generated uses the external ID you provide for your catalog resources, adhere to the following rules for special characters:
+
+An external ID must not contain / since it alters the request URL.
+For categories, the external ID must not contain any of the following special characters: !"#$%&\'()*+,-./:;&lt;=>?@[\\]^_`{|}~
+Bulk create and manage catalog resources
+The Catalogs API includes endpoints that support bulk operations (Create, Update, and Delete) for catalog resources (e.g. Bulk Create Catalog Variants). Each operation returns an ID for the respective bulk job in the response. (up to 100 resources per request).
+
+Here is an example request payload and response for Bulk Create Catalog Items:
+
+Request
+Response
+
+{
+   "data": {
+       "type": "catalog-item-bulk-create-job",
+       "attributes": {
+           "items": {
+               "data": [
+                   {
+                       "type": "catalog-item",
+                       "attributes": {
+                           "external_id": "1238479-TShirt-2",
+                           "title": "T-Shirt",
+                           "description": "This is a description of the t-shirt.",
+                           "url": "https://via.placeholder.com/300"
+                       },
+                       "relationships": {
+                           "categories": {
+                               "data": [
+                                   {
+                                       "type": "catalog-category",
+                                       "id": "$custom:::$default:::328402843203SummerWear1"
+                                   }
+                               ]
+                           }
+                       }
+                   },
+                   {
+                       "type": "catalog-item",
+                       "attributes": {
+                           "external_id": "1238478-Baseball-Hat-1",
+                           "title": "Baseball Cap",
+                           "description": "This is a description of the baseball cap.",
+                           "url": "https://via.placeholder.com/534"
+                       },
+                       "relationships": {
+                           "categories": {
+                               "data": [
+                                   {
+                                       "type": "catalog-category",
+                                       "id": "$custom:::$default:::328402843203SummerWear1"
+                                   }
+                               ]
+                           }
+                       }
+                   }
+               ]
+           }
+       }
+   }
+}
+Note that a bulk create catalog item job is returned in the response. Use its ID to fetch job status, which will be needed to check if there are any errors creating any catalog items.
+
+Fetch bulk job status
+The example call to Get Bulk Create Catalog Items Job uses the ID returned in the previous example to check on the bulk create catalog item job:
+
+Request
+Response
+
+curl --request GET \
+     --url https://a.klaviyo.com/api/catalog-item-bulk-create-jobs/01JHGRSSRCD16H6739GQKPPK4F \
+     --header 'Authorization: Klaviyo-API-Key your-private-api-key' \
+     --header 'accept: application/vnd.api+json' \
+     --header 'revision: 2025-01-15'
+We can see that the status of the fetched job is complete with a failed_count of 0, so the job was completed successfully.
+
+To check on multiple bulk create jobs, use the Get Bulk [Operation] Catalog [Resource]s Jobs endpoint (e.g., Get Bulk Create Catalog Items Jobs). You can filter jobs by status, e.g., ?filter=equals(status,complete). A job can have a status of queued, processing, complete, or cancelled.
+
+🚧
+Errors in bulk operations will only be reported in the response of the endpoints for fetching bulk jobs. See the Bulk job errors section below for more information.
+
+Bulk job errors
+If a bulk job contains errors, each resource that failed to be created, updated, or deleted is detailed within the errors array. Details include the erroring field(s) of each failed resource (meta), a detail describing the error, and the source.
+
+The example call to Get Bulk Create Catalog Items Job below indicates that the requested job contains errors due to existing external IDs:
+
+Request
+Response
+
+curl --request GET \
+     --url https://a.klaviyo.com/api/catalog-item-bulk-create-jobs/01JHNA53KHWBVBKEHV2YE0TRWG \
+     --header 'Authorization: Klaviyo-API-Key your-private-api-key' \
+     --header 'accept: application/vnd.api+json' \
+     --header 'revision: 2025-01-15'
+If a job contains errors, the erroring items will not be created. To handle errors:
+
+Retrieve erroring items from the error list. Common errors include:
+Duplicates caused by existing external IDs.
+Invalid or missing details, such as category information.
+Retrieve the data for those items (e.g., re-read from the source database or CSV).
+Correct the data as needed by:
+Updating incorrect or incomplete data.
+Managing duplicates through merging or assigning unique identifiers.
+Applying error-specific fixes in the source to prevent recurrence.
+Resend the previously failed items and monitor the new bulk job for successful completion.
+Querying catalog resources
+Querying catalog resources with the Catalogs API can help you achieve many use cases such as populating a list of catalog items that belong to a specific category.id. Check out the supported query parameters below and test them out with our latest Postman collection. Note that support for given operators and fields is endpoint-specific. Review the API reference documentation for more information on allowed fields and query operators.
+
+Parameter	Description	Query example
+filter	Retrieve a subset of catalog resources, e.g., catalog items for a specific category.id. Learn about the filter query parameter.	GET /api/catalog-items?filter=equals(category.id,"$custom:::$default:::328402843203SummerApparel")
+sort	Sort catalog items, e.g., by date created in ascending order (oldest to newest). Learn about the sort query parameter.	GET /api/profiles?sort=-created
+fields	Request for only specified catalog data, e.g., product URL. You can also request for only specified related resource data. Learn more about sparse fieldsets.	GET /api/catalog-items?fields[catalog-item]=description,url
+
+GET /api/catalog-items?include=variants&fields[catalog-variant]=title
+include	Include related resources in the response, e.g., variants for a catalog item. Learn about the include query parameter.	GET /api/catalog-items?include=variants

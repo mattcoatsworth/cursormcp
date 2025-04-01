@@ -1,0 +1,476 @@
+Create flows and retrieve flow attributes with Flows API
+🚧
+These endpoints are in beta and are subject to change.
+
+A beta revision header (2024-10-15.pre) is required to use these beta APIs. Klaviyo APIs in beta are not intended for use in production. See our versioning and deprecation policy for more information.
+
+Before you begin
+Check out our general Flows API overview to make sure you’re ready to get started with specific Flows endpoints.
+
+The Flows API can be used to create and retrieve Klaviyo flows and their attributes.
+
+Beta limitations
+The following actions are not currently supported:
+A/B test actions — creation of A/B test variants for email & SMS
+Once a flow has been created, there currently isn't a way to update that flow via API. This is planned for a future release.
+
+Use cases
+These beta Flows API endpoints can be used to achieve the following use cases:
+
+Create a flow
+Create a metric-triggered flow for cart and browse abandonment use cases.
+Create a date-triggered birthday flow that gives customers a reward on their birthday.
+Create a price-drop flow that notifies customers when an item they were viewing is discounted.
+Retrieve a flow's definition
+For any flow, retrieve its definition to see how the flow is defined.
+Data model
+A flow has the following structure:
+
+id
+
+The ID of the flow.
+
+attributes
+
+name
+The name of the segment.
+
+definition
+The flow's definition.
+
+triggers
+The conditions that trigger a flow. Currently, a flow can have exactly 1 trigger.
+
+actions
+The set of actions that make up the flow, for example, time delays, email/SMS/push notifications, webhooks, and conditional splits.
+
+profile_filter
+The filter containing specified condition(s) checked on the profile to determine whether or not the profile qualifies for the flow (e.g., the profile has consented to receive SMS marketing).
+
+entry_action_id
+The ID of the starting action of the flow.
+
+status
+The current status of the flow, e.g., Draft, Manual, Live.
+
+archived
+A boolean value indicating whether the flow is archived.
+
+created
+Timestamp of when the flow was created.
+
+updated
+Timestamp of when the flow was last updated.
+
+trigger_type:
+The type of trigger for the flow. See Supported trigger types for more information.
+
+📘
+You can download the Flows API postman collection for a quickstart, or view these Flows API reference docs to interactively explore flows' structure.
+
+Create a flow
+POST /api/flows/
+
+Below we have outlined the recommended workflow for creating a new flow via Flows API.
+
+Create a flow with your desired settings in the Klaviyo UI.
+Retrieve that flow via the Get Flows API: GET /api/flows/:id?additional-fields[flow]=definition
+Make the following changes to the response body from the previous step to get the request body into a shape accepted by the API.
+Delete relationships and links from data.
+Remove created, updated, status, trigger_type from attributes.
+For each action in the attributes.definition.actions array, update the temporary_id field to reference the value of the id field. Then, delete the id field.
+All flows are created in a Draft status by default, unless action status is otherwise set in your initial request.
+
+🚧
+We don't recommend pre-creation of flows in customer accounts. There should be a guided UX for creating these flows, so users know where they came from.
+
+When creating a flow, actions are uniquely identified by a temporary_id. This identifier does not persist after saving. Once the flow is saved and returned via API, each action is returned with Klaviyo-generated IDs referenced in the links.
+
+Create a drag-and-drop flow template
+If you're looking to create a flow that has a drag-and-drop template for a "Send email" action, you can create HTML or hybrid templates via the Create Template API.
+
+To learn more about hybrid templates check out the guide to creating a hybrid email template.
+
+📘
+We currently support up to 2 drag-and-drop templates per app partner. Please submit an example flow using this form. Note that your submission is for the Create Flow API. Our team will reply with the template_ids needed to enable the following workflow.
+
+Call Clone Template API using the template_id provided by our team.
+
+Call the Create Flow API using the ID of the template in the Clone Template API response as the template_id in a "send-email" action.
+
+Response
+
+{
+    "data": {
+        "type": "flow",
+        "attributes": {
+            "name": "Metric-triggered Flow",
+            "definition": {
+                "triggers": [
+                    {
+                        "type": "metric",
+                        "id": "UpixsZ",
+                        "trigger_filter": {
+                            "condition_groups": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "type": "metric-property",
+                                            "metric_id": "UpixsZ",
+                                            "field": "price",
+                                            "filter": {
+                                                "type": "numeric",
+                                                "operator": "greater-than",
+                                                "value": 5
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "profile_filter": null,
+                "actions": [
+                    {
+                        "temporary_id": "56020948",
+                        "type": "time-delay",
+                        "links": {
+                            "next": "56035815"
+                        },
+                        "data": {
+                            "unit": "hours",
+                            "value": 1,
+                            "secondary_value": 0,
+                            "timezone": "profile",
+                            "delay_until_time": null,
+                            "delay_until_weekdays": [
+                                "monday",
+                                "tuesday",
+                                "wednesday"
+                            ]
+                        }
+                    },
+                    {
+                        "temporary_id": "56035815",
+                        "type": "conditional-split",
+                        "links": {
+                            "next_if_true": "56035822",
+                            "next_if_false": "56065784"
+                        },
+                        "data": {
+                            "profile_filter": {
+                                "condition_groups": [
+                                    {
+                                        "conditions": [
+                                            {
+                                                "type": "profile-marketing-consent",
+                                                "consent": {
+                                                    "channel": "sms",
+                                                    "can_receive_marketing": true,
+                                                    "consent_status": {
+                                                        "subscription": "subscribed",
+                                                        "filters": null
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "temporary_id": "56035822",
+                        "type": "send-sms",
+                        "links": {
+                            "next": null
+                        },
+                        "data": {
+                            "message": {
+                                "body": "Hello world!",
+                                "smart_sending_enabled": true,
+                                "transactional": false,
+                                "add_tracking_params": false,
+                                "respecting_sms_quiet_hours": true,
+                                "custom_tracking_params": null,
+                                "additional_filters": null,
+                                "name": "SMS #1",
+                                "id": "W8pBcV"
+                            },
+                            "status": "draft"
+                        }
+                    },
+                    {
+                        "temporary_id": "56065784",
+                        "type": "send-email",
+                        "links": {
+                            "next": null
+                        },
+                        "data": {
+                            "message": {
+                                "from_email": "sarah-mason@klaviyo-demo.com",
+                                "from_label": "Sarah Mason",
+                                "reply_to_email": null,
+                                "cc_email": null,
+                                "bcc_email": null,
+                                "subject_line": "Email #1 Subject",
+                                "preview_text": "",
+                                "template_id": "RfgG9g",
+                                "smart_sending_enabled": true,
+                                "transactional": false,
+                                "add_tracking_params": false,
+                                "custom_tracking_params": null,
+                                "additional_filters": null,
+                                "name": "Email #1",
+                                "id": "SxjMx3"
+                            },
+                            "status": "draft"
+                        }
+                    }
+                ],
+                "entry_action_id": "56020948"
+            }
+        }
+}
+Retrieve a flow's definition
+GET /api/flows/{id}/?additional-fields[flow]=definition
+
+We've added the ability to optionally retrieve a flow's definition alongside other attributes.
+
+The example response below returns a metric-triggered flow with a time delay and a conditional split that will cause the profile to receive an email:
+
+Response
+
+{
+    "data": {
+        "type": "flow",
+        "id": "VGEpVt",
+        "attributes": {
+            "name": "Metric-triggered Flow",
+            "status": "draft",
+            "archived": false,
+            "created": "2023-07-03T16:48:52+00:00",
+            "updated": "2023-07-03T16:52:43+00:00",
+            "trigger_type": "Metric",
+            "definition": {
+                "triggers": [
+                    {
+                        "type": "metric",
+                        "id": "UpixsZ",
+                        "trigger_filter": {
+                            "condition_groups": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "type": "metric-property",
+                                            "metric_id": "UpixsZ",
+                                            "field": "$value",
+                                            "filter": {
+                                                "type": "numeric",
+                                                "operator": "greater-than",
+                                                "value": 5
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "profile_filter": null,
+                "actions": [
+                    {
+                        "id": "56020948",
+                        "temporary_id": null,
+                        "type": "time-delay",
+                        "links": {
+                            "next": "56035815"
+                        },
+                        "data": {
+                            "unit": "hours",
+                            "value": 1,
+                            "secondary_value": 0,
+                            "timezone": "profile",
+                            "delay_until_time": null,
+                            "delay_until_weekdays": [
+                                "monday",
+                                "tuesday",
+                                "wednesday"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "56035815",
+                        "temporary_id": null,
+                        "type": "conditional-split",
+                        "links": {
+                            "next_if_true": "56035822",
+                            "next_if_false": "56065784"
+                        },
+                        "data": {
+                            "profile_filter": {
+                                "condition_groups": [
+                                    {
+                                        "conditions": [
+                                            {
+                                                "type": "profile-marketing-consent",
+                                                "consent": {
+                                                    "channel": "sms",
+                                                    "can_receive_marketing": true,
+                                                    "consent_status": {
+                                                        "subscription": "subscribed",
+                                                        "filters": null
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "id": "56035822",
+                        "temporary_id": null,
+                        "type": "send-sms",
+                        "links": {
+                            "next": null
+                        },
+                        "data": {
+                            "message": {
+                                "body": "Hello world!",
+                                "smart_sending_enabled": true,
+                                "transactional": false,
+                                "add_tracking_params": false,
+                                "respecting_sms_quiet_hours": true,
+                                "custom_tracking_params": null,
+                                "additional_filters": null,
+                                "name": "SMS #1",
+                                "id": "W8pBcV"
+                            },
+                            "status": "draft"
+                        }
+                    },
+                    {
+                        "id": "56065784",
+                        "temporary_id": null,
+                        "type": "send-email",
+                        "links": {
+                            "next": null
+                        },
+                        "data": {
+                            "message": {
+                                "from_email": "sarah-mason@klaviyo-demo.com",
+                                "from_label": "Sarah Mason",
+                                "reply_to_email": null,
+                                "cc_email": null,
+                                "bcc_email": null,
+                                "subject_line": "Email #1 Subject",
+                                "preview_text": "",
+                                "template_id": "RfgG9g",
+                                "smart_sending_enabled": true,
+                                "transactional": false,
+                                "add_tracking_params": false,
+                                "custom_tracking_params": null,
+                                "additional_filters": null,
+                                "name": "Email #1",
+                                "id": "SxjMx3"
+                            },
+                            "status": "draft"
+                        }
+                    }
+                ],
+                "entry_action_id": "56020948"
+            }
+        },
+        "relationships": {
+            "flow-actions": {
+                "links": {
+                    "self": "https://a.klaviyo.com/api/flows/VGEpVt/relationships/flow-actions/",
+                    "related": "https://a.klaviyo.com/api/flows/VGEpVt/flow-actions/"
+                }
+            },
+            "tags": {
+                "links": {
+                    "self": "https://a.klaviyo.com/api/flows/VGEpVt/relationships/tags/",
+                    "related": "https://a.klaviyo.com/api/flows/VGEpVt/tags/"
+                }
+            }
+        },
+        "links": {
+            "self": "https://a.klaviyo.com/api/flows/VGEpVt/"
+        }
+    },
+    "links": {
+        "self": "https://a.klaviyo.com/api/flows/VGEpVt/?additional-fields[flow]=definition"
+    }
+}
+Retrieve flows triggered by a metric
+This endpoint can be used to retrieve the set of flows that are triggered by metrics created by your OAuth app.
+
+GET https://a.klaviyo.com/api/metrics/{metric_ID}/flow-triggers
+
+📘
+To understand the performance of flows, use our Reporting APIs.
+
+For example, if you'd like to retrieve all flows triggered by the Shopify Placed Order metric, which has an ID of RcJaKy, make a call to GET /api/metrics/RcJaKy/flow-triggers. Example response shown below:
+
+Response
+
+{
+    "data": [
+        {
+            "type": "flow",
+            "id": "RzYr5H",
+            "attributes": {
+                "name": "Customer Thank You - New vs. Returning",
+                "status": "manual",
+                "archived": false,
+                "created": "2023-08-13T02:03:38+00:00",
+                "updated": "2023-08-13T02:03:39+00:00",
+                "trigger_type": "Metric"
+            },
+            "relationships": {
+                "flow-actions": {
+                    "links": {
+                        "self": "https://a.klaviyo.com/api/flows/RzYr5H/relationships/flow-actions/",
+                        "related": "https://a.klaviyo.com/api/flows/RzYr5H/flow-actions/"
+                    }
+                },
+                "tags": {
+                    "links": {
+                        "self": "https://a.klaviyo.com/api/flows/RzYr5H/relationships/tags/",
+                        "related": "https://a.klaviyo.com/api/flows/RzYr5H/tags/"
+                    }
+                }
+            },
+            "links": {
+                "self": "https://a.klaviyo.com/api/flows/RzYr5H/"
+            }
+        }
+    ],
+    "links": {
+        "self": "https://a.klaviyo.com/api/metrics/RcJaKy/flow-triggers"
+    }
+}
+Get IDs of flows triggered by a metric
+This relationships endpoint returns the IDs of the flows that are triggered by a particular metric.
+
+GET /api/metrics/{metric_ID}/relationships/flow-triggers
+
+For example, if you'd to retrieve the IDs of all flows triggered by the Shopify Placed Order metric, which has an ID of RcJaKy, make a call to GET /api/metrics/RcJaKy/relationships/flow-triggers. Example response shown below.
+
+Response
+
+{
+    "data": [
+        {
+            "type": "flow",
+            "id": "RzYr5H"
+        }
+    ],
+    "links": {
+        "self": "https://a.klaviyo.com/api/metrics/RcJaKy/relationships/flow-triggers"
+    }
+}
