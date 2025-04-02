@@ -1,0 +1,112 @@
+[
+  {
+    "query": "What is my current campaign performance in Klaviyo?",
+    "response": "Your current campaign performance in Klaviyo can be viewed by logging into your Klaviyo account and navigating to the Campaigns tab. You'll see an overview of your campaign metrics, including open rates, click-through rates, and conversion rates.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/campaigns",
+      "authentication": "Private API key or OAuth token",
+      "implementation": "Use the API endpoint to fetch campaign data, then parse the response to extract relevant metrics. Implement error handling to catch and display any API errors.",
+      "error_handling": "Try-except blocks to catch API request exceptions, error messages displayed to the user"
+    },
+    "tool": "Klaviyo",
+    "intent": "Campaign Performance",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Campaign Performance request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:38.504607"
+    }
+  },
+  {
+    "query": "How do I track the performance of my email campaigns in Klaviyo?",
+    "response": "To track the performance of your email campaigns in Klaviyo, navigate to the Campaigns tab, select the campaign you want to view, and click on the 'Metrics' tab. You'll see detailed metrics on open rates, click-through rates, and conversion rates.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/campaigns/{campaign_id}/metrics",
+      "authentication": "Private API key or OAuth token",
+      "implementation": "Use the API endpoint to fetch campaign metrics, then parse the response to extract relevant data. Implement error handling to catch and display any API errors.",
+      "error_handling": "Try-except blocks to catch API request exceptions, error messages displayed to the user"
+    },
+    "tool": "Klaviyo",
+    "intent": "Campaign Performance",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Campaign Performance request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:38.504627"
+    }
+  },
+  {
+    "query": "What are the most effective campaigns in Klaviyo based on conversion rates?",
+    "response": "To view the most effective campaigns in Klaviyo based on conversion rates, navigate to the Campaigns tab, select 'Conversion Rate' as the sorting metric, and look for campaigns with the highest conversion rates.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/campaigns?sort=conversion_rate",
+      "authentication": "Private API key or OAuth token",
+      "implementation": "Use the API endpoint to fetch campaign data, then parse the response to extract relevant metrics and sort by conversion rate. Implement error handling to catch and display any API errors.",
+      "error_handling": "Try-except blocks to catch API request exceptions, error messages displayed to the user"
+    },
+    "tool": "Klaviyo",
+    "intent": "Campaign Performance",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Campaign Performance request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:38.504635"
+    }
+  },
+  {
+    "query": "Can I get a list of all my campaigns in Klaviyo along with their performance metrics?",
+    "response": "Yes, you can view a list of all your campaigns in Klaviyo along with their performance metrics by logging into your Klaviyo account and navigating to the Campaigns tab. You'll see a list of all your campaigns, along with their open rates, click-through rates, and conversion rates.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/campaigns",
+      "authentication": "Private API key or OAuth token",
+      "implementation": "Use the API endpoint to fetch campaign data, then parse the response to extract relevant metrics. Implement error handling to catch and display any API errors.",
+      "error_handling": "Try-except blocks to catch API request exceptions, error messages displayed to the user"
+    },
+    "tool": "Klaviyo",
+    "intent": "Campaign Performance",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Campaign Performance request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:38.504641"
+    }
+  },
+  {
+    "query": "How do I compare the performance of different campaigns in Klaviyo?",
+    "response": "To compare the performance of different campaigns in Klaviyo, navigate to the Campaigns tab, select the campaigns you want to compare, and click on the 'Compare' button. You'll see a side-by-side comparison of the campaigns' metrics, including open rates, click-through rates, and conversion rates.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/campaigns/{campaign_id}/metrics",
+      "authentication": "Private API key or OAuth token",
+      "implementation": "Use the API endpoint to fetch campaign metrics for each campaign, then parse the responses to extract relevant data and compare the metrics. Implement error handling to catch and display any API errors.",
+      "error_handling": "Try-except blocks to catch API request exceptions, error messages displayed to the user"
+    },
+    "tool": "Klaviyo",
+    "intent": "Campaign Performance",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Campaign Performance request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:38.504646"
+    }
+  }
+]

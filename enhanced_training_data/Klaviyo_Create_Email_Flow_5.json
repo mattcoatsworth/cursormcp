@@ -1,0 +1,112 @@
+[
+  {
+    "query": "How do I create a welcome email series with Klaviyo?",
+    "response": "To create a welcome email series with Klaviyo, go to the Klaviyo dashboard, navigate to the 'Flows' tab, and click on 'Create Flow'. Then, choose the 'Welcome Series' template and customize the emails according to your needs.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/flows",
+      "authentication": "API key or OAuth token",
+      "implementation": "Use the Klaviyo API to create a new flow, then add emails to the flow using the 'Create Email' endpoint. Use the 'Update Flow' endpoint to customize the flow settings.",
+      "error_handling": "Handle errors using try-except blocks, and check the Klaviyo API documentation for error codes and troubleshooting guides."
+    },
+    "tool": "Klaviyo",
+    "intent": "Create Email Flow",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Create Email Flow request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:04.099086"
+    }
+  },
+  {
+    "query": "I want to set up an abandoned cart email flow in Klaviyo, how do I do it?",
+    "response": "To set up an abandoned cart email flow in Klaviyo, navigate to the 'Flows' tab, click on 'Create Flow', and choose the 'Abandoned Cart' template. Then, customize the emails and settings according to your needs.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/flows",
+      "authentication": "API key or OAuth token",
+      "implementation": "Use the Klaviyo API to create a new flow, then add emails to the flow using the 'Create Email' endpoint. Use the 'Update Flow' endpoint to customize the flow settings, and set up the abandoned cart trigger using the 'Create Trigger' endpoint.",
+      "error_handling": "Handle errors using try-except blocks, and check the Klaviyo API documentation for error codes and troubleshooting guides."
+    },
+    "tool": "Klaviyo",
+    "intent": "Create Email Flow",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Create Email Flow request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:04.099113"
+    }
+  },
+  {
+    "query": "Can I use Klaviyo to create a email flow for customers who haven't made a purchase in a while?",
+    "response": "Yes, you can use Klaviyo to create an email flow for customers who haven't made a purchase in a while. To do this, navigate to the 'Flows' tab, click on 'Create Flow', and choose the 'Winback' template. Then, customize the emails and settings according to your needs.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/flows",
+      "authentication": "API key or OAuth token",
+      "implementation": "Use the Klaviyo API to create a new flow, then add emails to the flow using the 'Create Email' endpoint. Use the 'Update Flow' endpoint to customize the flow settings, and set up the winback trigger using the 'Create Trigger' endpoint.",
+      "error_handling": "Handle errors using try-except blocks, and check the Klaviyo API documentation for error codes and troubleshooting guides."
+    },
+    "tool": "Klaviyo",
+    "intent": "Create Email Flow",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Create Email Flow request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:04.099122"
+    }
+  },
+  {
+    "query": "How do I create a browse abandonment email flow with Klaviyo?",
+    "response": "To create a browse abandonment email flow with Klaviyo, navigate to the 'Flows' tab, click on 'Create Flow', and choose the 'Browse Abandonment' template. Then, customize the emails and settings according to your needs.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/flows",
+      "authentication": "API key or OAuth token",
+      "implementation": "Use the Klaviyo API to create a new flow, then add emails to the flow using the 'Create Email' endpoint. Use the 'Update Flow' endpoint to customize the flow settings, and set up the browse abandonment trigger using the 'Create Trigger' endpoint.",
+      "error_handling": "Handle errors using try-except blocks, and check the Klaviyo API documentation for error codes and troubleshooting guides."
+    },
+    "tool": "Klaviyo",
+    "intent": "Create Email Flow",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Create Email Flow request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:04.099130"
+    }
+  },
+  {
+    "query": "I want to automate my email marketing with Klaviyo, can I create a flow for customers who have shown interest in a specific product?",
+    "response": "Yes, you can create a flow for customers who have shown interest in a specific product with Klaviyo. To do this, navigate to the 'Flows' tab, click on 'Create Flow', and choose the 'Product Interest' template. Then, customize the emails and settings according to your needs.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/flows",
+      "authentication": "API key or OAuth token",
+      "implementation": "Use the Klaviyo API to create a new flow, then add emails to the flow using the 'Create Email' endpoint. Use the 'Update Flow' endpoint to customize the flow settings, and set up the product interest trigger using the 'Create Trigger' endpoint.",
+      "error_handling": "Handle errors using try-except blocks, and check the Klaviyo API documentation for error codes and troubleshooting guides."
+    },
+    "tool": "Klaviyo",
+    "intent": "Create Email Flow",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Create Email Flow request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:04.099139"
+    }
+  }
+]

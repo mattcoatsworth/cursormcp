@@ -2,7 +2,8 @@ import {
   ApiConnection, 
   ChatMessage, 
   CommandHistoryEntry,
-  TrainingData
+  TrainingData,
+  ApiEndpoint
 } from './schema';
 
 // Define our Supabase database types
@@ -28,6 +29,11 @@ export type Database = {
         Row: TrainingData;
         Insert: Omit<TrainingData, 'id' | 'createdAt' | 'updatedAt'>;
         Update: Partial<TrainingData>;
+      };
+      api_endpoints: {
+        Row: ApiEndpoint;
+        Insert: Omit<ApiEndpoint, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<ApiEndpoint>;
       };
     };
     Views: {};

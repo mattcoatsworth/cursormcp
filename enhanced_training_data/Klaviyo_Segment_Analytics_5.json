@@ -1,0 +1,52 @@
+[
+  {
+    "query": "What is the open rate for my last campaign in Klaviyo?",
+    "response": "The open rate for your last campaign in Klaviyo is 25%. You can view more detailed analytics on the Klaviyo dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/metrics",
+      "authentication": "Private API key",
+      "implementation": "Use the Klaviyo API to fetch campaign metrics, then extract the open rate for the last campaign",
+      "error_handling": "Check for API rate limits, handle 404 errors for non-existent campaigns, and validate API responses"
+    }
+  },
+  {
+    "query": "How many customers have placed an order in the last 30 days?",
+    "response": "There have been 150 customers who placed an order in the last 30 days. You can view more customer insights on the Klaviyo dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/persons",
+      "authentication": "Private API key",
+      "implementation": "Use the Klaviyo API to fetch person data, then filter by 'placed_order' metric within the last 30 days",
+      "error_handling": "Check for API rate limits, handle 404 errors for non-existent persons, and validate API responses"
+    }
+  },
+  {
+    "query": "What is the average order value for customers who received my last email campaign?",
+    "response": "The average order value for customers who received your last email campaign is $50. You can view more detailed analytics on the Klaviyo dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/metrics",
+      "authentication": "Private API key",
+      "implementation": "Use the Klaviyo API to fetch campaign metrics, then extract the average order value for the last campaign",
+      "error_handling": "Check for API rate limits, handle 404 errors for non-existent campaigns, and validate API responses"
+    }
+  },
+  {
+    "query": "Can I get a list of customers who have not made a purchase in the last 60 days?",
+    "response": "Here is the list of 200 customers who have not made a purchase in the last 60 days. You can view more customer insights on the Klaviyo dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/persons",
+      "authentication": "Private API key",
+      "implementation": "Use the Klaviyo API to fetch person data, then filter by 'placed_order' metric outside of the last 60 days",
+      "error_handling": "Check for API rate limits, handle 404 errors for non-existent persons, and validate API responses"
+    }
+  },
+  {
+    "query": "What is the conversion rate for my last automation workflow?",
+    "response": "The conversion rate for your last automation workflow is 15%. You can view more detailed analytics on the Klaviyo dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/workflows",
+      "authentication": "Private API key",
+      "implementation": "Use the Klaviyo API to fetch workflow metrics, then extract the conversion rate for the last workflow",
+      "error_handling": "Check for API rate limits, handle 404 errors for non-existent workflows, and validate API responses"
+    }
+  }
+]

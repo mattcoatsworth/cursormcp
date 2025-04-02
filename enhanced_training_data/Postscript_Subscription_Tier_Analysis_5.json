@@ -1,0 +1,52 @@
+[
+  {
+    "query": "What subscription tier is my Postscript account on?",
+    "response": "You are currently on the Growth subscription tier. This tier offers 10,000 subscribers, 50,000 monthly emails, and priority support.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/account",
+      "authentication": "Bearer token authentication",
+      "implementation": "Send a GET request to the API endpoint with the Bearer token in the Authorization header. Parse the response JSON to extract the subscription tier.",
+      "error_handling": "Handle 401 Unauthorized errors by prompting the user to re-authenticate. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  },
+  {
+    "query": "How many subscribers do I have left in my Postscript subscription?",
+    "response": "You have 2,500 subscribers left in your current subscription tier. Your tier limit is 10,000 subscribers.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/account/subscribers",
+      "authentication": "Bearer token authentication",
+      "implementation": "Send a GET request to the API endpoint with the Bearer token in the Authorization header. Parse the response JSON to extract the current subscriber count and tier limit.",
+      "error_handling": "Handle 401 Unauthorized errors by prompting the user to re-authenticate. Handle 404 Not Found errors by displaying an error message indicating that the subscriber data is unavailable."
+    }
+  },
+  {
+    "query": "What are the pricing details for the Postscript subscription tiers?",
+    "response": "The pricing details for Postscript subscription tiers are as follows: Starter ($25/month), Growth ($100/month), and Pro ($250/month). Each tier offers different features and limits.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/pricing",
+      "authentication": "No authentication required",
+      "implementation": "Send a GET request to the API endpoint. Parse the response JSON to extract the pricing details for each tier.",
+      "error_handling": "Handle 404 Not Found errors by displaying an error message indicating that the pricing data is unavailable. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  },
+  {
+    "query": "Can I upgrade my Postscript subscription tier?",
+    "response": "Yes, you can upgrade your Postscript subscription tier. Please contact our support team to discuss available options and pricing.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/account/upgrade",
+      "authentication": "Bearer token authentication",
+      "implementation": "Send a POST request to the API endpoint with the Bearer token in the Authorization header. Include the desired new tier in the request body.",
+      "error_handling": "Handle 401 Unauthorized errors by prompting the user to re-authenticate. Handle 400 Bad Request errors by displaying an error message indicating that the upgrade request is invalid."
+    }
+  },
+  {
+    "query": "How do I downgrade my Postscript subscription tier?",
+    "response": "To downgrade your Postscript subscription tier, please contact our support team to discuss available options and pricing. Note that downgrading may result in loss of features and data.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/account/downgrade",
+      "authentication": "Bearer token authentication",
+      "implementation": "Send a POST request to the API endpoint with the Bearer token in the Authorization header. Include the desired new tier in the request body.",
+      "error_handling": "Handle 401 Unauthorized errors by prompting the user to re-authenticate. Handle 400 Bad Request errors by displaying an error message indicating that the downgrade request is invalid."
+    }
+  }
+]

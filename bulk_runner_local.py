@@ -7,8 +7,12 @@ import uuid
 from datetime import datetime
 from openai import OpenAI
 
-# Configure OpenAI API - fetch from environment variable
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Configure Together AI API
+TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY") or "74419c1e494c4265e1e519411ecaed493f1dd0cd1fed16e2c8d00035870f5b51"
+client = OpenAI(
+    api_key=TOGETHER_API_KEY,
+    base_url="https://api.together.xyz/v1"
+)
 
 # Directory for local storage
 LOCAL_STORAGE_DIR = "training_data_local"
@@ -34,7 +38,7 @@ tool_intents = {
 def generate_queries(tool, intent, count):
     """
     Generate a specified number of realistic user queries with system responses
-    for a given tool and intent using OpenAI's GPT model.
+    for a given tool and intent using Together AI's DeepSeek model.
     
     Args:
         tool (str): The e-commerce tool (e.g., Shopify, Klaviyo)
@@ -47,7 +51,7 @@ def generate_queries(tool, intent, count):
     try:
         print(f"Generating {count} {tool} query/response pairs for intent: {intent}")
         
-        # Craft the prompt for GPT
+        # Craft the prompt for DeepSeek
         system_prompt = f"""
         You are an assistant helping to generate training data for an e-commerce AI platform.
         Generate {count} different, realistic user queries that someone might ask about {tool} 
@@ -71,9 +75,9 @@ def generate_queries(tool, intent, count):
         }}
         """
         
-        # Call GPT-4o to generate the queries and responses
+        # Call DeepSeek via Together AI to generate the queries and responses
         response = client.chat.completions.create(
-            model="gpt-4o",  # Using the latest available model
+            model="meta-llama/Llama-3.3-70B-Instruct-Turbo",  # Using Meta's Llama 3.3 70B Instruct Turbo via Together AI
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"Generate {count} realistic {tool} query/response pairs for intent: {intent}"}
@@ -142,7 +146,7 @@ def save_to_local(tool, intent, items):
                 "response": item["response"],
                 "metadata": {
                     "generation_date": datetime.now().isoformat(),
-                    "model": "gpt-4o"
+                    "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo"
                 },
                 "createdAt": datetime.now().isoformat(),
                 "updatedAt": datetime.now().isoformat()
@@ -198,7 +202,7 @@ def run_bulk(count_per_intent=10, sleep_time=2):
                         "response": item["response"],
                         "metadata": {
                             "generation_date": datetime.now().isoformat(),
-                            "model": "gpt-4o"
+                            "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo"
                         }
                     })
                 

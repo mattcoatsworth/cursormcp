@@ -98,6 +98,11 @@ const PREDEFINED_SCENARIOS = [
   }
 ];
 
+// Model configuration
+const LLAMA_MODEL = "meta-llama/Llama-3.3-70B-Instruct-Turbo";  // Primary model for training data
+const GPT_MODEL = "gpt-4";  // Used for quality comparison
+const QUALITY_COMPARISON_RATIO = 0.05;  // 5% of examples will use GPT for quality comparison
+
 /**
  * Generate a random scenario for multi-service examples
  */
@@ -138,6 +143,19 @@ async function executeSql(sql, params = []) {
     console.error('Database error:', error);
     throw error;
   }
+}
+
+function standardizeMetadata(metadata, model) {
+    return {
+        source: metadata?.source || "multi_service_generator",
+        generated_at: metadata?.generated_at || new Date().toISOString(),
+        model: model,
+        is_multi_service: metadata?.is_multi_service || true,
+        services_required: metadata?.services_required || [],
+        scenario: metadata?.scenario || "",
+        description: metadata?.description || "",
+        complexity: metadata?.complexity || "medium"
+    };
 }
 
 /**
@@ -219,15 +237,23 @@ Return your answer as a JSON array of these objects.`;
       // Insert each example into the database
       for (const example of examples) {
         const id = `ms-${new Date().toISOString().replace(/[-:T.Z]/g, '')}-${Math.random().toString(36).substring(2, 10)}`;
-        const metadata = {
-          is_multi_service: true,
-          services_required: example.services_required || scenario.services_required,
-          scenario: scenario.name,
-          description: scenario.description,
-          complexity: example.complexity || scenario.complexity,
-          source: "auto-generated",
-          generated_at: new Date().toISOString()
-        };
+        
+        // Determine if this should be a quality comparison example
+        const isQualityComparison = Math.random() < QUALITY_COMPARISON_RATIO;
+        const model = isQualityComparison ? GPT_MODEL : LLAMA_MODEL;
+        
+        const metadata = standardizeMetadata(
+            {
+                is_multi_service: true,
+                services_required: example.services_required || scenario.services_required,
+                scenario: scenario.name,
+                description: scenario.description,
+                complexity: example.complexity || scenario.complexity,
+                source: "auto-generated",
+                is_quality_comparison: isQualityComparison
+            },
+            model
+        );
         
         try {
           // Insert directly using pg

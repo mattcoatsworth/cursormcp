@@ -1,0 +1,52 @@
+[
+  {
+    "query": "How do I schedule a message to send at a specific time?",
+    "response": "To schedule a message, go to the Messages tab, click on 'Create Message', and select the 'Schedule' option. Choose the date and time you want the message to send, and we'll take care of the rest.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/messages",
+      "authentication": "Bearer token authentication is required, with a valid API key",
+      "implementation": "Use the 'schedule' parameter in the request body to specify the send time. The 'send_at' parameter should be in ISO 8601 format.",
+      "error_handling": "Check for invalid API keys, invalid date/time formats, and messages that exceed character limits. Handle 400, 401, and 500 error codes accordingly."
+    }
+  },
+  {
+    "query": "Can I schedule a message to send to multiple subscribers at once?",
+    "response": "Yes, you can schedule a message to send to multiple subscribers at once. Simply select the subscribers you want to send to, and choose the 'Schedule' option when creating your message.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/messages",
+      "authentication": "Bearer token authentication is required, with a valid API key",
+      "implementation": "Use the 'subscribers' parameter in the request body to specify the subscriber IDs. The 'schedule' parameter should be used in conjunction with the 'send_at' parameter.",
+      "error_handling": "Check for invalid subscriber IDs, and handle 400, 401, and 500 error codes accordingly. Be sure to handle cases where some subscribers are not found or are invalid."
+    }
+  },
+  {
+    "query": "How far in advance can I schedule a message to send?",
+    "response": "You can schedule a message to send up to 30 days in advance. Simply choose the date and time you want the message to send, and we'll take care of the rest.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/messages",
+      "authentication": "Bearer token authentication is required, with a valid API key",
+      "implementation": "Use the 'send_at' parameter in the request body to specify the send time. The 'send_at' parameter should be in ISO 8601 format, and should not exceed 30 days from the current time.",
+      "error_handling": "Check for dates that exceed the 30-day limit, and handle 400 error codes accordingly. Be sure to handle cases where the scheduled time is in the past."
+    }
+  },
+  {
+    "query": "Can I cancel or edit a scheduled message?",
+    "response": "Yes, you can cancel or edit a scheduled message. To do so, go to the Messages tab, find the scheduled message, and click on the 'Edit' or 'Cancel' button.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/messages/{message_id}",
+      "authentication": "Bearer token authentication is required, with a valid API key",
+      "implementation": "Use the 'PATCH' method to update the message, and specify the changes in the request body. To cancel a message, use the 'DELETE' method.",
+      "error_handling": "Check for invalid message IDs, and handle 400, 401, and 404 error codes accordingly. Be sure to handle cases where the message has already been sent or is in the process of being sent."
+    }
+  },
+  {
+    "query": "Will my scheduled messages send if I'm not logged in?",
+    "response": "Yes, your scheduled messages will send even if you're not logged in. Our system will automatically send the messages at the scheduled time.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/messages",
+      "authentication": "Bearer token authentication is required, with a valid API key",
+      "implementation": "Our system will automatically send the scheduled messages at the specified time, regardless of user login status. No additional implementation steps are required.",
+      "error_handling": "Monitor system logs for any errors that may occur during message sending. Handle 500 error codes accordingly, and notify the user of any issues."
+    }
+  }
+]

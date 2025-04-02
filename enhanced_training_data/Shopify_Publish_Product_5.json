@@ -1,0 +1,112 @@
+[
+  {
+    "query": "How do I list a new product on Shopify?",
+    "response": "To publish a new product on Shopify, go to your Shopify admin panel, navigate to the 'Products' section, and click 'Add product'. Fill in the product details, and then click 'Save' to create the product. Once created, you can publish it by clicking the 'Publish' button.",
+    "execution_details": {
+      "api_endpoint": "POST /products.json",
+      "authentication": "Private app API password or public app API key and access token",
+      "implementation": "Send a POST request to the products endpoint with the product details in the request body. Use the Shopify API library for your programming language of choice to handle authentication and API calls.",
+      "error_handling": "Check for errors such as invalid product details, insufficient permissions, or network errors. Handle errors by logging the error message, notifying the user, and providing instructions for resolving the issue."
+    },
+    "tool": "Shopify",
+    "intent": "Publish Product",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Publish Product request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:49.307092"
+    }
+  },
+  {
+    "query": "What is the process to add a product to my Shopify store?",
+    "response": "The process to add a product to your Shopify store involves creating a new product, adding product details such as title, description, and price, and then publishing the product. You can do this manually through the Shopify admin panel or programmatically using the Shopify API.",
+    "execution_details": {
+      "api_endpoint": "POST /products.json",
+      "authentication": "Private app API password or public app API key and access token",
+      "implementation": "Use the Shopify API to create a new product by sending a POST request to the products endpoint. Include the product details in the request body, and handle authentication using the Shopify API library for your programming language of choice.",
+      "error_handling": "Implement error handling to catch and handle errors such as invalid product details, authentication issues, or network errors. Provide user-friendly error messages and instructions for resolving the issue."
+    },
+    "tool": "Shopify",
+    "intent": "Publish Product",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Publish Product request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:49.307105"
+    }
+  },
+  {
+    "query": "Can I use the Shopify API to publish products?",
+    "response": "Yes, you can use the Shopify API to publish products on your Shopify store. The Shopify API provides endpoints for creating, updating, and publishing products. You can use the API to automate product publishing or integrate it with your custom applications.",
+    "execution_details": {
+      "api_endpoint": "POST /products.json and then PUT /products/{product_id}/published.json",
+      "authentication": "Private app API password or public app API key and access token",
+      "implementation": "First, create a new product using the POST /products.json endpoint. Then, use the PUT /products/{product_id}/published.json endpoint to publish the product. Handle authentication and API calls using the Shopify API library for your programming language of choice.",
+      "error_handling": "Handle errors such as authentication issues, invalid product details, or network errors. Implement retry mechanisms and provide user-friendly error messages to handle errors gracefully."
+    },
+    "tool": "Shopify",
+    "intent": "Publish Product",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Publish Product request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:49.307108"
+    }
+  },
+  {
+    "query": "How do I automate product publishing on Shopify?",
+    "response": "You can automate product publishing on Shopify using the Shopify API. Create a script that uses the API to create and publish products, and then schedule the script to run at regular intervals using a scheduler like cron or a workflow automation tool.",
+    "execution_details": {
+      "api_endpoint": "POST /products.json and then PUT /products/{product_id}/published.json",
+      "authentication": "Private app API password or public app API key and access token",
+      "implementation": "Write a script that uses the Shopify API library to create a new product and then publish it. Use a scheduler to run the script at regular intervals, and handle errors and exceptions using try-except blocks and logging.",
+      "error_handling": "Implement robust error handling to catch and handle errors such as authentication issues, invalid product details, or network errors. Provide user-friendly error messages and instructions for resolving the issue, and consider implementing retry mechanisms to handle transient errors."
+    },
+    "tool": "Shopify",
+    "intent": "Publish Product",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Publish Product request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:49.307111"
+    }
+  },
+  {
+    "query": "What are the steps to publish a product on Shopify using the API?",
+    "response": "To publish a product on Shopify using the API, first create a new product using the POST /products.json endpoint. Then, use the PUT /products/{product_id}/published.json endpoint to publish the product. Make sure to handle authentication and API calls using the Shopify API library for your programming language of choice.",
+    "execution_details": {
+      "api_endpoint": "POST /products.json and then PUT /products/{product_id}/published.json",
+      "authentication": "Private app API password or public app API key and access token",
+      "implementation": "Use the Shopify API library to send a POST request to the products endpoint to create a new product. Then, use the PUT endpoint to publish the product. Handle authentication and API calls, and implement error handling to catch and handle errors.",
+      "error_handling": "Check for errors such as invalid product details, authentication issues, or network errors. Handle errors by logging the error message, notifying the user, and providing instructions for resolving the issue. Consider implementing retry mechanisms to handle transient errors."
+    },
+    "tool": "Shopify",
+    "intent": "Publish Product",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Publish Product request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:49.307115"
+    }
+  }
+]

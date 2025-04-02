@@ -1,0 +1,112 @@
+[
+  {
+    "query": "How do I create a new list in Klaviyo?",
+    "response": "To create a new list in Klaviyo, navigate to the Lists tab, click on Create List, and follow the prompts to set up your new list.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/lists",
+      "authentication": "API key or OAuth token",
+      "implementation": "Use a POST request to create a new list with a JSON payload containing list name and description. You can use the Klaviyo API library in your preferred programming language to simplify the process.",
+      "error_handling": "Check the API response for error codes and messages. Handle common errors such as invalid API key, insufficient permissions, or duplicate list name."
+    },
+    "tool": "Klaviyo",
+    "intent": "List Management",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process List Management request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:47.722858"
+    }
+  },
+  {
+    "query": "What is the best way to segment my list in Klaviyo?",
+    "response": "The best way to segment your list in Klaviyo is to use a combination of properties, metrics, and events to create targeted groups. You can use Klaviyo's built-in segmentation tools or create custom segments using the API.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/segments",
+      "authentication": "API key or OAuth token",
+      "implementation": "Use a POST request to create a new segment with a JSON payload containing the segment definition. You can use the Klaviyo API library to simplify the process. For custom segments, use the /person endpoint to retrieve person data and apply your segmentation logic.",
+      "error_handling": "Check the API response for error codes and messages. Handle common errors such as invalid API key, insufficient permissions, or invalid segment definition."
+    },
+    "tool": "Klaviyo",
+    "intent": "List Management",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process List Management request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:47.722892"
+    }
+  },
+  {
+    "query": "How do I add a subscriber to a list in Klaviyo?",
+    "response": "To add a subscriber to a list in Klaviyo, navigate to the Lists tab, select the list, and click on Add Subscribers. You can also use the API to add subscribers programmatically.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/list/{list_id}/members",
+      "authentication": "API key or OAuth token",
+      "implementation": "Use a POST request to add a new member to the list with a JSON payload containing the person's email address and other optional properties. You can use the Klaviyo API library to simplify the process.",
+      "error_handling": "Check the API response for error codes and messages. Handle common errors such as invalid API key, insufficient permissions, or duplicate email address."
+    },
+    "tool": "Klaviyo",
+    "intent": "List Management",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process List Management request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:47.722903"
+    }
+  },
+  {
+    "query": "Can I remove a subscriber from a list in Klaviyo?",
+    "response": "Yes, you can remove a subscriber from a list in Klaviyo. Navigate to the Lists tab, select the list, and click on the three dots next to the subscriber's email address. You can also use the API to remove subscribers programmatically.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/list/{list_id}/members/{member_id}",
+      "authentication": "API key or OAuth token",
+      "implementation": "Use a DELETE request to remove a member from the list. You can use the Klaviyo API library to simplify the process. Make sure to replace {list_id} and {member_id} with the actual IDs.",
+      "error_handling": "Check the API response for error codes and messages. Handle common errors such as invalid API key, insufficient permissions, or non-existent list or member."
+    },
+    "tool": "Klaviyo",
+    "intent": "List Management",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process List Management request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:47.722912"
+    }
+  },
+  {
+    "query": "How do I export my list from Klaviyo?",
+    "response": "To export your list from Klaviyo, navigate to the Lists tab, select the list, and click on Export. You can also use the API to export lists programmatically.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/lists/{list_id}/export",
+      "authentication": "API key or OAuth token",
+      "implementation": "Use a GET request to export the list. You can use the Klaviyo API library to simplify the process. Make sure to replace {list_id} with the actual ID. The API will return a URL to download the exported list.",
+      "error_handling": "Check the API response for error codes and messages. Handle common errors such as invalid API key, insufficient permissions, or non-existent list."
+    },
+    "tool": "Klaviyo",
+    "intent": "List Management",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process List Management request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:47.722921"
+    }
+  }
+]

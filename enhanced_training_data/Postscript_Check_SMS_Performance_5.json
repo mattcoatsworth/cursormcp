@@ -1,0 +1,52 @@
+[
+  {
+    "query": "What is my current SMS delivery rate for the past week?",
+    "response": "Your current SMS delivery rate for the past week is 95%. This means that out of all the SMS messages you've sent, 95% were successfully delivered to your customers.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/reports/delivery-rate",
+      "authentication": "Bearer token authentication with a valid Postscript API key",
+      "implementation": "Send a GET request to the API endpoint with a query parameter 'date' set to 'past_week'. Parse the response JSON to extract the delivery rate.",
+      "error_handling": "Handle 401 Unauthorized errors by refreshing the API token. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  },
+  {
+    "query": "How many SMS messages have I sent this month?",
+    "response": "You have sent 10,000 SMS messages this month.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/reports/message-count",
+      "authentication": "Bearer token authentication with a valid Postscript API key",
+      "implementation": "Send a GET request to the API endpoint with a query parameter 'date' set to 'this_month'. Parse the response JSON to extract the message count.",
+      "error_handling": "Handle 401 Unauthorized errors by refreshing the API token. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  },
+  {
+    "query": "What is my average SMS open rate for the past quarter?",
+    "response": "Your average SMS open rate for the past quarter is 20%. This means that out of all the SMS messages you've sent, 20% were opened by your customers.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/reports/open-rate",
+      "authentication": "Bearer token authentication with a valid Postscript API key",
+      "implementation": "Send a GET request to the API endpoint with a query parameter 'date' set to 'past_quarter'. Parse the response JSON to extract the open rate.",
+      "error_handling": "Handle 401 Unauthorized errors by refreshing the API token. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  },
+  {
+    "query": "Which SMS campaign has the highest conversion rate?",
+    "response": "Your SMS campaign 'Summer Sale' has the highest conversion rate of 5%. This means that out of all the customers who received the campaign, 5% completed a purchase.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/reports/conversion-rate",
+      "authentication": "Bearer token authentication with a valid Postscript API key",
+      "implementation": "Send a GET request to the API endpoint with a query parameter 'metric' set to 'conversion_rate'. Parse the response JSON to extract the campaign with the highest conversion rate.",
+      "error_handling": "Handle 401 Unauthorized errors by refreshing the API token. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  },
+  {
+    "query": "How many customers have opted out of receiving SMS messages from me?",
+    "response": "100 customers have opted out of receiving SMS messages from you.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/reports/opt-out-count",
+      "authentication": "Bearer token authentication with a valid Postscript API key",
+      "implementation": "Send a GET request to the API endpoint. Parse the response JSON to extract the opt-out count.",
+      "error_handling": "Handle 401 Unauthorized errors by refreshing the API token. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  }
+]

@@ -1,0 +1,67 @@
+{
+    "version": "1.0",
+    "last_updated": "2024-03-19",
+    "guidelines": {
+        "order_status_queries": {
+            "rule": "Use Shopify for all customer order status and shipping detail queries",
+            "examples": {
+                "good": [
+                    "I'll check the order status in Shopify for you",
+                    "Let me look up the shipping details in Shopify",
+                    "I can see from Shopify that your order is still processing"
+                ],
+                "bad": [
+                    "Let me check ShipStation for your order status",
+                    "I'll look up the shipping details in ShipBob",
+                    "Let me check the warehouse system for your order"
+                ]
+            }
+        },
+        "stopping_orders": {
+            "rule": "When stopping an order from shipping, follow this sequence:",
+            "steps": [
+                "1. First check Shopify to verify order fulfillment status",
+                "2. If order is unfulfilled, check 3PL system for shipping label",
+                "3. If no label exists, remove from shipping batch",
+                "4. If label exists, void the shipping label"
+            ],
+            "examples": {
+                "good": [
+                    "I'll check if order #4556 is still unfulfilled in Shopify",
+                    "Let me verify the order status before stopping shipment",
+                    "I'll check if a shipping label has been created yet"
+                ],
+                "bad": [
+                    "I'll stop the order in ShipStation right away",
+                    "Let me void the shipping label immediately",
+                    "I'll remove it from the shipping batch without checking"
+                ]
+            }
+        },
+        "3pl_usage": {
+            "rule": "Only use 3PL/WMS endpoints for warehouse and fulfillment operations",
+            "allowed_operations": [
+                "Managing shipping batches",
+                "Voiding shipping labels",
+                "Checking warehouse inventory",
+                "Managing fulfillment status"
+            ],
+            "restricted_operations": [
+                "Customer order status queries",
+                "Shipping tracking information",
+                "Order history lookups"
+            ]
+        }
+    },
+    "response_templates": {
+        "checking_order": "I'll check the order status in Shopify first to determine the next steps.",
+        "no_label_found": "I see that no shipping label has been created yet. I'll remove this order from the shipping batch.",
+        "label_exists": "I found an existing shipping label. I'll void it to prevent the order from shipping.",
+        "already_fulfilled": "I see this order has already been fulfilled in Shopify. No further action is needed."
+    },
+    "error_handling": {
+        "shopify_check_failed": "I'm unable to check the order status in Shopify at the moment. Please try again in a few minutes.",
+        "label_check_failed": "I'm having trouble checking the shipping label status. Please try again shortly.",
+        "void_failed": "I couldn't void the shipping label. Please contact support for assistance."
+    }
+} 

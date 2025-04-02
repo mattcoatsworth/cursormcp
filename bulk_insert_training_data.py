@@ -1,151 +1,96 @@
 #!/usr/bin/env python3
 """
-This script bulk inserts locally generated training data into the database directly.
+This script bulk inserts locally generated training data into Supabase.
 It reads the JSON files stored in a specific file and inserts them
-into the database using the psycopg2 library.
+into Supabase using the Supabase Python client.
 """
 
 import os
 import json
 import time
 import argparse
-import psycopg2
 from datetime import datetime
-from psycopg2.extras import Json
+from supabase import create_client, Client
 
-# Connect to PostgreSQL database directly
-def connect_to_db():
-    """Connect to PostgreSQL database using DATABASE_URL"""
-    database_url = os.environ.get("DATABASE_URL")
-    if not database_url:
-        raise ValueError("DATABASE_URL environment variable is not set")
-        
-    conn = psycopg2.connect(database_url)
-    return conn
-
-def insert_training_data(conn, examples, batch_size=25):
-    """Insert training data directly using SQL with batch processing for speed"""
-    inserted_count = 0
-    error_count = 0
-    total_examples = len(examples)
+# Connect to Supabase
+def connect_to_supabase() -> Client:
+    """Connect to Supabase using environment variables"""
+    supabase_url = os.environ.get("SUPABASE_URL")
+    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
     
-    # Process in batches
-    for i in range(0, total_examples, batch_size):
-        batch = examples[i:i+batch_size]
-        batch_size_actual = len(batch)
-        print(f"Processing batch {i//batch_size + 1} ({i+1}-{i+batch_size_actual} of {total_examples})")
+    if not supabase_url or not supabase_key:
+        raise ValueError("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables must be set")
         
-        # Prepare all parameter sets for this batch
-        values_list = []
-        ids_list = []
-        
-        for example in batch:
-            # Store ID for logging
-            ids_list.append(example["id"])
-            
-            # Prepare the record tuple
-            values = (
-                example["id"],
-                example["tool"],
-                example["intent"],
-                example["query"],
-                example["response"],
-                json.dumps(example["metadata"]),
-            )
-            values_list.append(values)
-        
-        # Execute batch insert with a single transaction
-        try:
-            with conn.cursor() as cur:
-                # Use executemany for efficient batch insertion
-                cur.executemany(
-                    """
-                    INSERT INTO training_data (id, tool, intent, query, response, metadata, created_at, updated_at)
-                    VALUES (%s, %s, %s, %s, %s, %s::jsonb, NOW(), NOW())
-                    ON CONFLICT (id) DO NOTHING
-                    """,
-                    values_list
-                )
-                
-                # Commit the entire batch at once
-                conn.commit()
-                
-                inserted_count += batch_size_actual
-                print(f"Successfully inserted batch of {batch_size_actual} examples")
-                
-        except Exception as e:
-            # If batch insertion fails, try one by one
-            print(f"Batch insertion failed: {e}")
-            print("Falling back to individual inserts")
-            
-            # Create a new cursor
-            with conn.cursor() as cur:
-                for idx, example in enumerate(batch):
-                    try:
-                        # Prepare the record
-                        record = (
-                            example["id"],
-                            example["tool"],
-                            example["intent"],
-                            example["query"],
-                            example["response"],
-                            json.dumps(example["metadata"]),
-                        )
-                        
-                        # Insert individually
-                        cur.execute(
-                            """
-                            INSERT INTO training_data (id, tool, intent, query, response, metadata, created_at, updated_at)
-                            VALUES (%s, %s, %s, %s, %s, %s::jsonb, NOW(), NOW())
-                            ON CONFLICT (id) DO NOTHING
-                            """,
-                            record
-                        )
-                        
-                        # Commit each individual insert
-                        conn.commit()
-                        
-                        inserted_count += 1
-                        print(f"Successfully inserted example {example['id']}")
-                        
-                    except Exception as inner_e:
-                        error_count += 1
-                        print(f"Error inserting example {example['id']}: {inner_e}")
-        
-        # Brief pause between batches to allow other processes
-        time.sleep(0.05)
-    
-    return inserted_count, error_count
+    return create_client(supabase_url, supabase_key)
 
 def main():
-    parser = argparse.ArgumentParser(description='Insert training data from JSON file')
-    parser.add_argument('file', help='JSON file containing training data')
+    parser = argparse.ArgumentParser(description="Bulk insert training data from local files to Supabase")
+    parser.add_argument("--input-dir", required=True, help="Directory containing JSON files")
+    parser.add_argument("--batch-size", type=int, default=100, help="Number of records to insert in each batch")
+    parser.add_argument("--sleep-time", type=float, default=0.1, help="Seconds to sleep between batches")
     
     args = parser.parse_args()
     
-    try:
-        # Load the data from the JSON file
-        with open(args.file, 'r') as f:
-            examples = json.load(f)
+    # Connect to Supabase
+    supabase = connect_to_supabase()
+    
+    # Get list of JSON files
+    json_files = [f for f in os.listdir(args.input_dir) if f.endswith('.json')]
+    
+    if not json_files:
+        print(f"No JSON files found in {args.input_dir}")
+        return
+        
+    print(f"Found {len(json_files)} JSON files to process")
+    
+    total_records = 0
+    start_time = time.time()
+    
+    for json_file in json_files:
+        file_path = os.path.join(args.input_dir, json_file)
+        print(f"\nProcessing {json_file}...")
+        
+        try:
+            with open(file_path, 'r') as f:
+                records = json.load(f)
+                
+            if not records:
+                print(f"No records found in {json_file}")
+                continue
+                
+            print(f"Found {len(records)} records to insert")
             
-        print(f"Loaded {len(examples)} examples from {args.file}")
-        
-        # Connect to the database
-        conn = connect_to_db()
-        
-        # Insert the data
-        inserted, errors = insert_training_data(conn, examples)
-        
-        print(f"Insertion complete: {inserted} examples inserted, {errors} errors")
-        
-        # Close the connection
-        conn.close()
-        
-    except Exception as e:
-        print(f"Error: {e}")
-        return 1
-        
-    return 0
+            # Process records in batches
+            for i in range(0, len(records), args.batch_size):
+                batch = records[i:i + args.batch_size]
+                
+                try:
+                    # Insert batch into Supabase
+                    result = supabase.table('training_data').insert(batch).execute()
+                    
+                    if result.error:
+                        print(f"Error inserting batch: {result.error}")
+                    else:
+                        print(f"Successfully inserted batch of {len(batch)} records")
+                        total_records += len(batch)
+                        
+                except Exception as e:
+                    print(f"Error inserting batch: {str(e)}")
+                    
+                # Sleep between batches to avoid rate limiting
+                time.sleep(args.sleep_time)
+                
+        except Exception as e:
+            print(f"Error processing {json_file}: {str(e)}")
+            continue
+            
+    end_time = time.time()
+    duration = end_time - start_time
+    
+    print(f"\nMigration completed:")
+    print(f"Total records inserted: {total_records}")
+    print(f"Total time: {duration:.2f} seconds")
+    print(f"Average speed: {total_records/duration:.2f} records/second")
 
 if __name__ == "__main__":
     main()

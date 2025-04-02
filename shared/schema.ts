@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, jsonb, uuid } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -50,6 +50,28 @@ export const insertCommandHistorySchema = createInsertSchema(commandHistory).omi
   createdAt: true,
 });
 
+// API endpoints schema
+export const apiEndpoints = pgTable("api_endpoints", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  service: text("service").notNull(),
+  resource: text("resource").notNull(),
+  action: text("action").notNull(),
+  method: text("method").notNull(),
+  path: text("path").notNull(),
+  parameters: jsonb("parameters").default({}).notNull(),
+  authType: text("auth_type").notNull(),
+  authKey: text("auth_key").notNull(),
+  rateLimit: text("rate_limit").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+export const insertApiEndpointSchema = createInsertSchema(apiEndpoints).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 // Export types
 export type ApiConnection = typeof apiConnections.$inferSelect;
 export type InsertApiConnection = z.infer<typeof insertApiConnectionSchema>;
@@ -91,3 +113,7 @@ export const insertTrainingDataSchema = createInsertSchema(trainingData).omit({
 
 export type TrainingData = typeof trainingData.$inferSelect;
 export type InsertTrainingData = z.infer<typeof insertTrainingDataSchema>;
+
+// API endpoint types
+export type ApiEndpoint = typeof apiEndpoints.$inferSelect;
+export type InsertApiEndpoint = z.infer<typeof insertApiEndpointSchema>;

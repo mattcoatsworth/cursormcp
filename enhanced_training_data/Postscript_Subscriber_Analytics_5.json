@@ -1,0 +1,52 @@
+[
+  {
+    "query": "What are the current subscriber counts for my Postscript account?",
+    "response": "Your Postscript account currently has 10,000 subscribers. You can view more detailed analytics on the Postscript dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/subscribers/count",
+      "authentication": "API key authentication with a Bearer token",
+      "implementation": "Send a GET request to the API endpoint with the API key in the Authorization header",
+      "error_handling": "Check for 401 Unauthorized errors and refresh the API key if necessary. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  },
+  {
+    "query": "How many new subscribers did I get today?",
+    "response": "You gained 50 new subscribers today. You can view more detailed information about your subscribers on the Postscript dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/subscribers/today",
+      "authentication": "API key authentication with a Bearer token",
+      "implementation": "Send a GET request to the API endpoint with the API key in the Authorization header and a query parameter for the date",
+      "error_handling": "Check for 401 Unauthorized errors and refresh the API key if necessary. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  },
+  {
+    "query": "What is the current subscriber growth rate for my Postscript account?",
+    "response": "Your Postscript account is currently experiencing a 5% weekly subscriber growth rate. You can view more detailed analytics on the Postscript dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/subscribers/growth-rate",
+      "authentication": "API key authentication with a Bearer token",
+      "implementation": "Send a GET request to the API endpoint with the API key in the Authorization header and query parameters for the time period",
+      "error_handling": "Check for 401 Unauthorized errors and refresh the API key if necessary. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  },
+  {
+    "query": "Can I get a list of all my subscribers?",
+    "response": "Here is a list of your 10,000 subscribers. You can view more detailed information about each subscriber on the Postscript dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/subscribers",
+      "authentication": "API key authentication with a Bearer token",
+      "implementation": "Send a GET request to the API endpoint with the API key in the Authorization header and query parameters for pagination",
+      "error_handling": "Check for 401 Unauthorized errors and refresh the API key if necessary. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  },
+  {
+    "query": "How many subscribers have unsubscribed from my Postscript account this month?",
+    "response": "10 subscribers have unsubscribed from your Postscript account this month. You can view more detailed information about unsubscribed subscribers on the Postscript dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/subscribers/unsubscribed",
+      "authentication": "API key authentication with a Bearer token",
+      "implementation": "Send a GET request to the API endpoint with the API key in the Authorization header and query parameters for the date range",
+      "error_handling": "Check for 401 Unauthorized errors and refresh the API key if necessary. Handle 500 Internal Server errors by retrying the request after a short delay."
+    }
+  }
+]

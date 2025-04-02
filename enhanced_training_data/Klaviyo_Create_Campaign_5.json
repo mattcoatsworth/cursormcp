@@ -1,0 +1,112 @@
+[
+  {
+    "query": "How do I create a new campaign in Klaviyo",
+    "response": "To create a new campaign in Klaviyo, navigate to the Campaigns tab and click on Create Campaign. From there, you can choose your campaign type, set up your email template, and customize your settings.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/campaigns",
+      "authentication": "Klaviyo API key",
+      "implementation": "1. Authenticate with Klaviyo API key, 2. Send a POST request to the campaigns endpoint with campaign details, 3. Set up email template and customize settings",
+      "error_handling": "Check for API key validity, handle 401 Unauthorized errors, and catch any exceptions during the request"
+    },
+    "tool": "Klaviyo",
+    "intent": "Create Campaign",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Create Campaign request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:56.429534"
+    }
+  },
+  {
+    "query": "I want to create a welcome email campaign in Klaviyo",
+    "response": "To create a welcome email campaign in Klaviyo, go to the Campaigns tab, click Create Campaign, and select the Welcome Series template. Then, customize your email content and settings to fit your brand.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/campaigns",
+      "authentication": "Klaviyo API key",
+      "implementation": "1. Authenticate with Klaviyo API key, 2. Send a POST request to the campaigns endpoint with campaign details and template ID for welcome series, 3. Customize email content and settings",
+      "error_handling": "Check for API key validity, handle 401 Unauthorized errors, and catch any exceptions during the request"
+    },
+    "tool": "Klaviyo",
+    "intent": "Create Campaign",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Create Campaign request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:56.429559"
+    }
+  },
+  {
+    "query": "How do I set up an abandoned cart campaign in Klaviyo",
+    "response": "To set up an abandoned cart campaign in Klaviyo, navigate to the Campaigns tab, click Create Campaign, and select the Abandoned Cart template. Then, configure your campaign settings and customize your email content.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/campaigns",
+      "authentication": "Klaviyo API key",
+      "implementation": "1. Authenticate with Klaviyo API key, 2. Send a POST request to the campaigns endpoint with campaign details and template ID for abandoned cart, 3. Configure campaign settings and customize email content",
+      "error_handling": "Check for API key validity, handle 401 Unauthorized errors, and catch any exceptions during the request"
+    },
+    "tool": "Klaviyo",
+    "intent": "Create Campaign",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Create Campaign request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:56.429566"
+    }
+  },
+  {
+    "query": "I need to create a campaign to promote a new product in Klaviyo",
+    "response": "To create a campaign to promote a new product in Klaviyo, go to the Campaigns tab, click Create Campaign, and select the Product Promotion template. Then, customize your email content and settings to showcase your new product.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/campaigns",
+      "authentication": "Klaviyo API key",
+      "implementation": "1. Authenticate with Klaviyo API key, 2. Send a POST request to the campaigns endpoint with campaign details and template ID for product promotion, 3. Customize email content and settings",
+      "error_handling": "Check for API key validity, handle 401 Unauthorized errors, and catch any exceptions during the request"
+    },
+    "tool": "Klaviyo",
+    "intent": "Create Campaign",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Create Campaign request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:56.429572"
+    }
+  },
+  {
+    "query": "Can I create a campaign in Klaviyo to nurture my leads",
+    "response": "To create a campaign in Klaviyo to nurture your leads, navigate to the Campaigns tab, click Create Campaign, and select the Lead Nurturing template. Then, set up your email series and customize your settings to fit your lead nurturing strategy.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/campaigns",
+      "authentication": "Klaviyo API key",
+      "implementation": "1. Authenticate with Klaviyo API key, 2. Send a POST request to the campaigns endpoint with campaign details and template ID for lead nurturing, 3. Set up email series and customize settings",
+      "error_handling": "Check for API key validity, handle 401 Unauthorized errors, and catch any exceptions during the request"
+    },
+    "tool": "Klaviyo",
+    "intent": "Create Campaign",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Create Campaign request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:56.429578"
+    }
+  }
+]

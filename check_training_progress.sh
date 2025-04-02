@@ -34,14 +34,27 @@ fi
 echo ""
 echo "=== CURRENT TRAINING DATA COUNTS ==="
 
-# Get both types of training data counts using direct queries
-STANDARD_COUNT=$(python -c "import psycopg2, os; conn = psycopg2.connect(os.environ.get('DATABASE_URL')); cur = conn.cursor(); cur.execute('SELECT COUNT(*) FROM training_data WHERE is_complex_multi_system IS NULL OR is_complex_multi_system = FALSE'); print(cur.fetchone()[0]); conn.close()" 2>/dev/null) || echo "Unknown"
-COMPLEX_COUNT=$(python -c "import psycopg2, os; conn = psycopg2.connect(os.environ.get('DATABASE_URL')); cur = conn.cursor(); cur.execute('SELECT COUNT(*) FROM training_data WHERE is_complex_multi_system = TRUE'); print(cur.fetchone()[0]); conn.close()" 2>/dev/null) || echo "Unknown"
-TOTAL_COUNT=$(python -c "import psycopg2, os; conn = psycopg2.connect(os.environ.get('DATABASE_URL')); cur = conn.cursor(); cur.execute('SELECT COUNT(*) FROM training_data'); print(cur.fetchone()[0]); conn.close()" 2>/dev/null) || echo "Unknown"
+# Get counts from Supabase
+python -c "
+from supabase import create_client
+import os
 
-echo "Standard examples: $STANDARD_COUNT"
-echo "Complex examples: $COMPLEX_COUNT"
-echo "Total examples: $TOTAL_COUNT"
+# Connect to Supabase
+supabase = create_client(os.environ.get('SUPABASE_URL'), os.environ.get('SUPABASE_SERVICE_ROLE_KEY'))
+
+# Get standard examples count
+standard = supabase.table('training_data').select('id', count='exact').neq('tool', 'complex_interaction').execute()
+
+# Get complex examples count
+complex = supabase.table('training_data').select('id', count='exact').eq('tool', 'complex_interaction').execute()
+
+# Get total count
+total = supabase.table('training_data').select('id', count='exact').execute()
+
+print(f'Standard examples: {standard.count}')
+print(f'Complex examples: {complex.count}')
+print(f'Total examples: {total.count}')
+"
 
 # Get most recent examples
 echo ""

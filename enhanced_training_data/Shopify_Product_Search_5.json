@@ -1,0 +1,112 @@
+[
+  {
+    "query": "What are the best selling products on Shopify",
+    "response": "The best selling products on Shopify include print-on-demand t-shirts, phone cases, and home decor items. You can find more information on Shopify's website or through their API.",
+    "execution_details": {
+      "api_endpoint": "https://api.shopify.com/v2/products.json",
+      "authentication": "Private API key or password authentication",
+      "implementation": "Use the Shopify API to retrieve a list of products, then sort and filter the results to find the best selling products.",
+      "error_handling": "Check for errors such as invalid API credentials, network errors, or rate limiting. Handle errors by retrying the request or displaying an error message to the user."
+    },
+    "tool": "Shopify",
+    "intent": "Product Search",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Product Search request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:30.656421"
+    }
+  },
+  {
+    "query": "Find me a coffee mug with a cat on it",
+    "response": "I found a few coffee mugs with cats on them. Here are some options: [list of products]. You can find more products like this by searching on Shopify or using their API.",
+    "execution_details": {
+      "api_endpoint": "https://api.shopify.com/v2/products.json",
+      "authentication": "Private API key or password authentication",
+      "implementation": "Use the Shopify API to search for products with the keyword 'cat' and 'coffee mug', then filter the results to find relevant products.",
+      "error_handling": "Check for errors such as invalid API credentials, network errors, or rate limiting. Handle errors by retrying the request or displaying an error message to the user."
+    },
+    "tool": "Shopify",
+    "intent": "Product Search",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Product Search request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:30.656439"
+    }
+  },
+  {
+    "query": "What are some popular products for men on Shopify",
+    "response": "Some popular products for men on Shopify include watches, leather wallets, and grooming kits. You can find more information on Shopify's website or through their API.",
+    "execution_details": {
+      "api_endpoint": "https://api.shopify.com/v2/products.json",
+      "authentication": "Private API key or password authentication",
+      "implementation": "Use the Shopify API to retrieve a list of products, then filter the results to find products that are popular among men.",
+      "error_handling": "Check for errors such as invalid API credentials, network errors, or rate limiting. Handle errors by retrying the request or displaying an error message to the user."
+    },
+    "tool": "Shopify",
+    "intent": "Product Search",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Product Search request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:30.656443"
+    }
+  },
+  {
+    "query": "Show me some gift ideas for women under $20",
+    "response": "Here are some gift ideas for women under $20: [list of products]. You can find more products like this by searching on Shopify or using their API.",
+    "execution_details": {
+      "api_endpoint": "https://api.shopify.com/v2/products.json",
+      "authentication": "Private API key or password authentication",
+      "implementation": "Use the Shopify API to search for products with a price under $20, then filter the results to find products that are suitable as gifts for women.",
+      "error_handling": "Check for errors such as invalid API credentials, network errors, or rate limiting. Handle errors by retrying the request or displaying an error message to the user."
+    },
+    "tool": "Shopify",
+    "intent": "Product Search",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Product Search request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:30.656448"
+    }
+  },
+  {
+    "query": "Find me a product with a specific brand name",
+    "response": "I found a few products from [brand name]. Here are some options: [list of products]. You can find more products like this by searching on Shopify or using their API.",
+    "execution_details": {
+      "api_endpoint": "https://api.shopify.com/v2/products.json",
+      "authentication": "Private API key or password authentication",
+      "implementation": "Use the Shopify API to search for products with the specific brand name, then filter the results to find relevant products.",
+      "error_handling": "Check for errors such as invalid API credentials, network errors, or rate limiting. Handle errors by retrying the request or displaying an error message to the user."
+    },
+    "tool": "Shopify",
+    "intent": "Product Search",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Product Search request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:30.656451"
+    }
+  }
+]

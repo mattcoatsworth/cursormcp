@@ -6,6 +6,7 @@ import json
 import requests
 import time
 from datetime import datetime
+from typing import Dict
 
 # Configure Supabase credentials from environment variables
 SUPABASE_URL = os.getenv("SUPABASE_URL")
@@ -17,6 +18,20 @@ HEADERS = {
     "Authorization": f"Bearer {SUPABASE_KEY}",
     "Content-Type": "application/json"
 }
+
+def standardize_metadata(metadata: Dict, model: str) -> Dict:
+    """Standardize metadata for training data insertion"""
+    standardized = {
+        "source": metadata.get("source", "json_uploader"),
+        "generated_at": metadata.get("generated_at", datetime.now().isoformat()),
+        "model": model,
+        "is_multi_service": metadata.get("is_multi_service", False),
+        "services_required": metadata.get("services_required", []),
+        "scenario": metadata.get("scenario", ""),
+        "description": metadata.get("description", ""),
+        "complexity": metadata.get("complexity", "medium")
+    }
+    return standardized
 
 def upload_from_json(file_path):
     """
@@ -74,16 +89,11 @@ def upload_from_json(file_path):
                 "intent": item["intent"],
                 "query": item["query"],
                 "response": item["response"],
-                "metadata": item.get("metadata", {})  # Optional, fallback to empty dict
+                "metadata": standardize_metadata(
+                    item.get("metadata", {}),
+                    item.get("metadata", {}).get("model", "imported")  # Use existing model or "imported"
+                )
             }
-            
-            # Add timestamp if not present
-            if "metadata" in payload and "generation_date" not in payload["metadata"]:
-                payload["metadata"]["generation_date"] = datetime.now().isoformat()
-                
-            # Add model if not present
-            if "metadata" in payload and "model" not in payload["metadata"]:
-                payload["metadata"]["model"] = "imported"
             
             # Insert into Supabase
             r = requests.post(f"{SUPABASE_URL}/rest/v1/training_data", headers=HEADERS, json=payload)

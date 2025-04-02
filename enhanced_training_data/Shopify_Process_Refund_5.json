@@ -1,0 +1,112 @@
+[
+  {
+    "query": "How do I refund an order on Shopify?",
+    "response": "To refund an order, go to the order page, click 'More actions', then 'Refund', and follow the prompts to complete the refund.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.dev/api/admin/rest/reference/orders/refund",
+      "authentication": "API key and password or access token",
+      "implementation": "Use the Refund API endpoint to create a refund, specifying the order ID and refund amount. Handle the response to confirm the refund.",
+      "error_handling": "Catch and handle API errors, such as invalid order ID or insufficient funds, and provide a user-friendly error message."
+    },
+    "tool": "Shopify",
+    "intent": "Process Refund",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Process Refund request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:58.065207"
+    }
+  },
+  {
+    "query": "Can I refund a customer through Shopify?",
+    "response": "Yes, you can refund a customer through Shopify by creating a refund through the order page or using the Refund API.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.dev/api/admin/rest/reference/orders/refund",
+      "authentication": "API key and password or access token",
+      "implementation": "Use the Refund API endpoint to create a refund, specifying the order ID, customer ID, and refund amount. Handle the response to confirm the refund.",
+      "error_handling": "Catch and handle API errors, such as invalid order ID or customer ID, and provide a user-friendly error message."
+    },
+    "tool": "Shopify",
+    "intent": "Process Refund",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Process Refund request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:58.065235"
+    }
+  },
+  {
+    "query": "How do I process a refund for a cancelled order on Shopify?",
+    "response": "To process a refund for a cancelled order, go to the order page, click 'More actions', then 'Refund', and follow the prompts to complete the refund.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.dev/api/admin/rest/reference/orders/refund",
+      "authentication": "API key and password or access token",
+      "implementation": "Use the Refund API endpoint to create a refund, specifying the order ID and refund amount. Update the order status to 'cancelled' and handle the response to confirm the refund.",
+      "error_handling": "Catch and handle API errors, such as invalid order ID or insufficient funds, and provide a user-friendly error message."
+    },
+    "tool": "Shopify",
+    "intent": "Process Refund",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Process Refund request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:58.065239"
+    }
+  },
+  {
+    "query": "What is the process for refunding a customer on Shopify?",
+    "response": "The process for refunding a customer on Shopify involves creating a refund through the order page or using the Refund API, specifying the order ID, customer ID, and refund amount.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.dev/api/admin/rest/reference/orders/refund",
+      "authentication": "API key and password or access token",
+      "implementation": "Use the Refund API endpoint to create a refund, handling the response to confirm the refund. Update the order status and notify the customer of the refund.",
+      "error_handling": "Catch and handle API errors, such as invalid order ID or customer ID, and provide a user-friendly error message."
+    },
+    "tool": "Shopify",
+    "intent": "Process Refund",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Process Refund request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:58.065243"
+    }
+  },
+  {
+    "query": "How do I issue a refund to a customer who paid with a credit card on Shopify?",
+    "response": "To issue a refund to a customer who paid with a credit card, go to the order page, click 'More actions', then 'Refund', and follow the prompts to complete the refund. The refund will be processed through the original payment method.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.dev/api/admin/rest/reference/orders/refund",
+      "authentication": "API key and password or access token",
+      "implementation": "Use the Refund API endpoint to create a refund, specifying the order ID, customer ID, and refund amount. Handle the response to confirm the refund and update the order status.",
+      "error_handling": "Catch and handle API errors, such as invalid order ID or payment method errors, and provide a user-friendly error message."
+    },
+    "tool": "Shopify",
+    "intent": "Process Refund",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Process Refund request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:58.065248"
+    }
+  }
+]

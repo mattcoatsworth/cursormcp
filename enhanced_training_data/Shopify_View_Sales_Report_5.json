@@ -1,0 +1,112 @@
+[
+  {
+    "query": "What are my total sales for this quarter on Shopify?",
+    "response": "Your total sales for this quarter on Shopify are $100,000.",
+    "execution_details": {
+      "api_endpoint": "GET /orders.json",
+      "authentication": "OAuth 2.0 with Shopify API credentials",
+      "implementation": "Use the Shopify API to fetch orders for the current quarter, calculate the total sales, and return the result.",
+      "error_handling": "Handle errors such as invalid API credentials, network issues, or invalid date format."
+    },
+    "tool": "Shopify",
+    "intent": "View Sales Report",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process View Sales Report request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:12.170912"
+    }
+  },
+  {
+    "query": "How many sales did I make on Shopify last month?",
+    "response": "You made 500 sales on Shopify last month.",
+    "execution_details": {
+      "api_endpoint": "GET /orders.json",
+      "authentication": "OAuth 2.0 with Shopify API credentials",
+      "implementation": "Use the Shopify API to fetch orders for the previous month, count the number of orders, and return the result.",
+      "error_handling": "Handle errors such as invalid API credentials, network issues, or invalid date format."
+    },
+    "tool": "Shopify",
+    "intent": "View Sales Report",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process View Sales Report request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:12.170927"
+    }
+  },
+  {
+    "query": "What are my best-selling products on Shopify?",
+    "response": "Your best-selling products on Shopify are Product A, Product B, and Product C.",
+    "execution_details": {
+      "api_endpoint": "GET /orders.json",
+      "authentication": "OAuth 2.0 with Shopify API credentials",
+      "implementation": "Use the Shopify API to fetch orders, calculate the sales for each product, and return the top-selling products.",
+      "error_handling": "Handle errors such as invalid API credentials, network issues, or invalid product data."
+    },
+    "tool": "Shopify",
+    "intent": "View Sales Report",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process View Sales Report request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:12.170933"
+    }
+  },
+  {
+    "query": "Can I see my sales report for the last 30 days on Shopify?",
+    "response": "Your sales report for the last 30 days on Shopify shows $50,000 in sales.",
+    "execution_details": {
+      "api_endpoint": "GET /orders.json",
+      "authentication": "OAuth 2.0 with Shopify API credentials",
+      "implementation": "Use the Shopify API to fetch orders for the last 30 days, calculate the total sales, and return the result.",
+      "error_handling": "Handle errors such as invalid API credentials, network issues, or invalid date format."
+    },
+    "tool": "Shopify",
+    "intent": "View Sales Report",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process View Sales Report request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:12.170937"
+    }
+  },
+  {
+    "query": "How much revenue did I generate on Shopify this year?",
+    "response": "You generated $500,000 in revenue on Shopify this year.",
+    "execution_details": {
+      "api_endpoint": "GET /orders.json",
+      "authentication": "OAuth 2.0 with Shopify API credentials",
+      "implementation": "Use the Shopify API to fetch orders for the current year, calculate the total revenue, and return the result.",
+      "error_handling": "Handle errors such as invalid API credentials, network issues, or invalid date format."
+    },
+    "tool": "Shopify",
+    "intent": "View Sales Report",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process View Sales Report request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:12.170943"
+    }
+  }
+]

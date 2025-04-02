@@ -1,206 +1,237 @@
 #!/usr/bin/env python3
 """
-Optimized training data generator for MCP system using Supabase
+Script to generate training data responses following system_training guidelines,
+track applied guidelines, and store everything in the training_data table.
 """
 
 import os
 import json
-import time
-import random
-import argparse
-from datetime import datetime
-import openai
+import uuid
+from datetime import datetime, timezone
+from typing import Dict, List, Any
 from supabase import create_client, Client
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import logging
-from typing import List, Dict, Any
-import asyncio
-import aiohttp
-from tqdm import tqdm
+from dotenv import load_dotenv
 
-# Set up logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("training_generation.log"),
-        logging.StreamHandler()
-    ]
-)
+# Load environment variables
+load_dotenv()
 
-# Configuration
-BATCH_SIZE = 50
-MAX_WORKERS = 10
-OPENAI_MODEL = "gpt-4-turbo-preview"
-TEMP_DIR = "temp"
-OUTPUT_DIR = "training_data_local"
-
-# Get Supabase credentials from environment variables
-SUPABASE_URL = os.getenv('SUPABASE_URL')
-SUPABASE_KEY = os.getenv('SUPABASE_KEY')
-
-if not SUPABASE_URL or not SUPABASE_KEY:
-    raise ValueError("SUPABASE_URL and SUPABASE_KEY environment variables must be set")
-
-class TrainingDataGenerator:
-    def __init__(self):
-        self.openai_client = openai.AsyncOpenAI()
-        self.session = None
-        self.supabase: Client = None
-        self.progress_bars = {}
-        
-    async def initialize(self):
-        """Initialize async session and Supabase client"""
-        self.session = aiohttp.ClientSession()
-        self.supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
-        
-    async def close(self):
-        """Clean up resources"""
-        if self.session:
-            await self.session.close()
-            
-    async def generate_example(self, scenario: Dict[str, Any], temperature: float = 0.8) -> Dict[str, Any]:
-        """Generate a single training example using async OpenAI API"""
-        prompt = self._create_prompt(scenario)
-        
-        try:
-            response = await self.openai_client.chat.completions.create(
-                model=OPENAI_MODEL,
-                messages=[
-                    {"role": "system", "content": "You are a training data generator for a multi-service integration platform."},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=temperature
-            )
-            
-            result = response.choices[0].message.content
-            return self._parse_response(result, scenario)
-            
-        except Exception as e:
-            logging.error(f"Error generating example: {str(e)}")
-            return None
-            
-    async def generate_batch(self, scenarios: List[Dict[str, Any]], batch_size: int = BATCH_SIZE):
-        """Generate a batch of examples in parallel"""
-        tasks = []
-        for _ in range(batch_size):
-            scenario = random.choice(scenarios)
-            tasks.append(self.generate_example(scenario))
-            
-        results = await asyncio.gather(*tasks)
-        return [r for r in results if r is not None]
-        
-    async def save_batch(self, batch: List[Dict[str, Any]], batch_id: str):
-        """Save batch to both file and Supabase"""
-        # Save to file
-        filename = f"{OUTPUT_DIR}/batch_{batch_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        os.makedirs(OUTPUT_DIR, exist_ok=True)
-        
-        with open(filename, 'w') as f:
-            json.dump(batch, f, indent=2)
-            
-        # Save to Supabase
-        await self._save_to_supabase(batch)
-        
-    async def _save_to_supabase(self, batch: List[Dict[str, Any]]):
-        """Save batch to Supabase"""
-        try:
-            # Prepare data for bulk insert
-            values = [
-                {
-                    "query": example['query'],
-                    "response": example['response'],
-                    "systems": example['systems'],
-                    "workflow": example['workflow'],
-                    "metadata": example['metadata']
-                }
-                for example in batch
-            ]
-            
-            # Bulk insert using Supabase
-            result = self.supabase.table('training_data').upsert(
-                values,
-                on_conflict='query'
-            ).execute()
-            
-            if result.error:
-                raise Exception(f"Supabase error: {result.error}")
-                
-        except Exception as e:
-            logging.error(f"Error saving to Supabase: {str(e)}")
-            raise
-            
-    def _create_prompt(self, scenario: Dict[str, Any]) -> str:
-        """Create prompt for OpenAI"""
-        return f"""
-        Generate a natural language query and its corresponding system response for the following scenario:
-        
-        Scenario: {scenario['name']}
-        Systems: {', '.join(scenario['systems'])}
-        Description: {scenario['description']}
-        Workflow: {', '.join(scenario['workflow'])}
-        
-        Generate a realistic user query that would trigger this workflow and the expected system response.
-        The response should include the sequence of API calls and their expected results.
-        """
-        
-    def _parse_response(self, response: str, scenario: Dict[str, Any]) -> Dict[str, Any]:
-        """Parse OpenAI response into structured format"""
-        try:
-            # Split response into query and system response
-            parts = response.split("\n\nSystem Response:")
-            query = parts[0].strip()
-            system_response = parts[1].strip() if len(parts) > 1 else ""
-            
-            return {
-                "query": query,
-                "response": system_response,
-                "systems": scenario['systems'],
-                "workflow": scenario['workflow'],
-                "metadata": {
-                    "scenario": scenario['name'],
-                    "generated_at": datetime.now().isoformat(),
-                    "model": OPENAI_MODEL
-                }
-            }
-        except Exception as e:
-            logging.error(f"Error parsing response: {str(e)}")
-            return None
-
-async def main():
-    parser = argparse.ArgumentParser(description='Generate training data for MCP system')
-    parser.add_argument('--count', type=int, default=10000, help='Number of examples to generate')
-    parser.add_argument('--batch-size', type=int, default=BATCH_SIZE, help='Batch size for generation')
-    args = parser.parse_args()
+def connect_to_supabase() -> Client:
+    """Connect to Supabase using environment variables"""
+    supabase_url = os.getenv("SUPABASE_URL")
+    supabase_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
     
-    # Initialize generator
-    generator = TrainingDataGenerator()
-    await generator.initialize()
+    if not supabase_url or not supabase_key:
+        raise ValueError("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables must be set")
+        
+    return create_client(supabase_url, supabase_key)
+
+def get_system_guidelines(supabase: Client) -> Dict[str, Any]:
+    """Fetch all system training guidelines"""
+    print("\nFetching system guidelines...")
+    result = supabase.table('system_training').select('*').execute()
     
+    if hasattr(result, 'error') and result.error:
+        raise Exception(f"Error fetching system guidelines: {result.error}")
+        
+    guidelines = {}
+    for entry in result.data:
+        # Skip duplicate system entries
+        if entry['category'] == 'system' and 'system' in guidelines:
+            continue
+        guidelines[entry['category']] = entry
+        print(f"Found guidelines for category: {entry['category']}")
+    return guidelines
+
+def determine_applicable_guidelines(query: str, guidelines: Dict[str, Any]) -> Dict[str, Any]:
+    """Determine which guidelines apply to the query"""
+    print(f"\nAnalyzing query: {query}")
+    applicable = {
+        'general_guidelines': [],
+        'domain_guidelines': []
+    }
+    
+    # Always apply system response guidelines
+    applicable['general_guidelines'].append({
+        'category': 'system',
+        'name': guidelines.get('system', {}).get('name', 'System Guidelines'),
+        'applied_rules': ['tone', 'format', 'structure']
+    })
+    print("Applied system response guidelines")
+    
+    # Check for domain-specific guidelines
+    query_lower = query.lower()
+    
+    # Check warehouse/3PL guidelines
+    if any(term in query_lower for term in ['warehouse', '3pl', 'fulfillment', 'inventory', 'shipping']):
+        if 'warehouse_3pl' in guidelines:
+            applicable['domain_guidelines'].append({
+                'category': 'warehouse_3pl',
+                'name': guidelines['warehouse_3pl'].get('name', 'Warehouse/3PL Guidelines'),
+                'applied_rules': ['fulfillment_control', 'inventory_management']
+            })
+            print("Applied warehouse/3PL guidelines")
+    
+    # Check data handling guidelines
+    if any(term in query_lower for term in ['data', 'validation', 'process', 'transform']):
+        applicable['domain_guidelines'].append({
+            'category': 'data_handling',
+            'name': guidelines.get('data_handling', {}).get('name', 'Data Processing Guidelines'),
+            'applied_rules': ['validation', 'transformation']
+        })
+        print("Applied data handling guidelines")
+    
+    # Check API integration guidelines
+    if any(term in query_lower for term in ['api', 'endpoint', 'integration', 'connect']):
+        applicable['domain_guidelines'].append({
+            'category': 'api_integration',
+            'name': guidelines.get('api_integration', {}).get('name', 'API Integration Guidelines'),
+            'applied_rules': ['authentication', 'rate_limiting']
+        })
+        print("Applied API integration guidelines")
+    
+    # Check error handling guidelines
+    if any(term in query_lower for term in ['error', 'exception', 'fail', 'issue']):
+        applicable['domain_guidelines'].append({
+            'category': 'error_handling',
+            'name': guidelines.get('error_handling', {}).get('name', 'Error Handling Guidelines'),
+            'applied_rules': ['detection', 'recovery']
+        })
+        print("Applied error handling guidelines")
+    
+    return applicable
+
+def generate_response(query: str, applicable_guidelines: Dict[str, Any], guidelines: Dict[str, Any]) -> str:
+    """Generate a response following the applicable guidelines"""
+    print("\nGenerating response...")
+    response_parts = []
+    
+    # Apply general response guidelines
+    if applicable_guidelines['general_guidelines']:
+        system_guidelines = guidelines.get('system', {}).get('guidelines', {})
+        if isinstance(system_guidelines, dict) and 'response_examples' in system_guidelines:
+            if isinstance(system_guidelines['response_examples'], list):
+                if system_guidelines['response_examples']:
+                    response_parts.append(system_guidelines['response_examples'][0])
+            elif isinstance(system_guidelines['response_examples'], dict):
+                example = next(iter(system_guidelines['response_examples'].values()))
+                response_parts.append(example)
+        if not response_parts:
+            response_parts.append("I'll help you with that.")
+        print("Applied general response format")
+    
+    # Apply domain-specific guidelines
+    for domain in applicable_guidelines['domain_guidelines']:
+        domain_guidelines = guidelines.get(domain['category'], {}).get('guidelines', {})
+        
+        # Add relevant response examples
+        if isinstance(domain_guidelines, dict) and 'response_examples' in domain_guidelines:
+            if isinstance(domain_guidelines['response_examples'], dict):
+                # Handle structured response examples
+                for key, example in domain_guidelines['response_examples'].items():
+                    if key in query.lower():
+                        formatted_example = (example.replace('[number]', '12345')  # Example order number
+                                                 .replace('[date]', '2024-04-10')   # Example date
+                                                 .replace('[SKU]', 'ABC123')        # Example SKU
+                                                 .replace('[quantity]', '50')       # Example quantity
+                                                 .replace('[location]', 'Warehouse A')  # Example location
+                                                 .replace('[action]', 'processed')      # Example action
+                                                 .replace('[reason/explanation]', 'as requested')) # Example reason
+                        response_parts.append(formatted_example)
+                        print(f"Added response example for {key}")
+            elif isinstance(domain_guidelines['response_examples'], list) and domain_guidelines['response_examples']:
+                response_parts.append(domain_guidelines['response_examples'][0])
+                print(f"Added response example for {domain['category']}")
+    
+    # Combine response parts
+    response = " ".join(response_parts)
+    
+    # Ensure response follows general guidelines
+    if not response:
+        response = "I understand your query. Let me help you with that following the appropriate guidelines."
+        print("Using default response format")
+    
+    return response
+
+def store_training_data(supabase: Client, query: str, response: str, 
+                       applicable_guidelines: Dict[str, Any], version: str = "1.0") -> None:
+    """Store the generated response and metadata in training_data table"""
+    print("\nStoring training data...")
+    
+    # Determine primary category from guidelines
+    category = "system"
+    if applicable_guidelines['domain_guidelines']:
+        category = applicable_guidelines['domain_guidelines'][0]['category']
+    
+    training_data = {
+        'id': str(uuid.uuid4()),
+        'tool': 'system',  # All responses use the system tool
+        'intent': 'response',  # All entries are responses
+        'query': query,
+        'response': response,
+        'applied_guidelines': applicable_guidelines,
+        'timestamp': datetime.now(timezone.utc).isoformat(),
+        'version': version,
+        'source': ['system_generated'],
+        'is_active': True
+    }
+    
+    print("Training data to store:")
+    print(json.dumps(training_data, indent=2))
+    
+    result = supabase.table('training_data').insert(training_data).execute()
+    
+    if hasattr(result, 'error') and result.error:
+        raise Exception(f"Error storing training data: {result.error}")
+    print("Successfully stored training data")
+
+def process_training_query(query: str, version: str = "1.0"):
+    """Process a training query and store the result"""
     try:
-        # Load scenarios
-        with open('generate_complex_cross_system_data.py', 'r') as f:
-            content = f.read()
-            # Extract COMPLEX_SCENARIOS from the file
-            scenarios = eval(content.split('COMPLEX_SCENARIOS = ')[1].split('\n\n')[0])
+        print(f"\n{'='*50}")
+        print(f"Processing query: {query}")
+        print(f"{'='*50}")
         
-        # Calculate number of batches
-        num_batches = (args.count + args.batch_size - 1) // args.batch_size
+        # Connect to Supabase
+        supabase = connect_to_supabase()
         
-        # Generate batches with progress bar
-        with tqdm(total=args.count, desc="Generating training data") as pbar:
-            for batch_idx in range(num_batches):
-                batch = await generator.generate_batch(scenarios, args.batch_size)
-                batch_id = f"{batch_idx:04d}"
-                
-                await generator.save_batch(batch, batch_id)
-                pbar.update(len(batch))
-                
-                # Small delay to avoid rate limits
-                await asyncio.sleep(1)
-                
-    finally:
-        await generator.close()
+        # Get system guidelines
+        guidelines = get_system_guidelines(supabase)
+        
+        # Determine applicable guidelines
+        applicable_guidelines = determine_applicable_guidelines(query, guidelines)
+        
+        # Generate response
+        response = generate_response(query, applicable_guidelines, guidelines)
+        
+        # Store in training_data table
+        store_training_data(supabase, query, response, applicable_guidelines, version)
+        
+        print("\nSummary:")
+        print(f"Query: {query}")
+        print(f"Response: {response}")
+        print("Applied guidelines:")
+        print(json.dumps(applicable_guidelines, indent=2))
+        print(f"{'='*50}\n")
+        
+    except Exception as e:
+        print(f"\nError processing query: {str(e)}")
+        if hasattr(e, 'response'):
+            print(f"Response: {e.response.text if hasattr(e.response, 'text') else e.response}")
+
+def main():
+    """Main function"""
+    # Example queries to process
+    example_queries = [
+        "How do I check warehouse inventory levels?",
+        "What's the process for handling API rate limits?",
+        "How should I validate customer data?",
+        "What's the error handling procedure for failed orders?"
+    ]
+    
+    print("Starting training data generation...")
+    for query in example_queries:
+        process_training_query(query)
+    print("\nProcessing completed")
 
 if __name__ == "__main__":
-    asyncio.run(main()) 
+    main() 

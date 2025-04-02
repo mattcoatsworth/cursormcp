@@ -1,0 +1,52 @@
+[
+  {
+    "query": "How do I automate sending a welcome message to new subscribers in Postscript?",
+    "response": "To automate sending a welcome message, go to the Postscript dashboard, navigate to the 'Automations' tab, and click 'Create Automation'. Choose the trigger 'Subscriber Added' and set up an action to send a message with your desired welcome content.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/automations",
+      "authentication": "API key authentication, obtainable through the Postscript dashboard",
+      "implementation": "Use the Postscript API to create a new automation with the 'Subscriber Added' trigger and a 'Send Message' action. Specify the welcome message content in the action's 'message' field.",
+      "error_handling": "Catch and log any API errors, such as invalid API key or automation creation failures. Implement retries with exponential backoff for transient errors."
+    }
+  },
+  {
+    "query": "Can I set up an automation to send a discount code to customers who abandon their carts in Postscript?",
+    "response": "Yes, you can automate sending a discount code to customers who abandon their carts. In the Postscript dashboard, go to 'Automations', click 'Create Automation', and choose the 'Cart Abandoned' trigger. Set up an action to send a message with your discount code.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/automations",
+      "authentication": "API key authentication, obtainable through the Postscript dashboard",
+      "implementation": "Create a new automation using the Postscript API with the 'Cart Abandoned' trigger and a 'Send Message' action. Include the discount code in the message content. You may need to integrate with your e-commerce platform to track cart abandonment.",
+      "error_handling": "Handle API errors, such as automation creation failures or message sending errors. Implement logging and monitoring to detect issues with the automation or integration with the e-commerce platform."
+    }
+  },
+  {
+    "query": "How do I create an automation to send a birthday message to subscribers in Postscript?",
+    "response": "To create an automation for sending birthday messages, navigate to the 'Automations' tab in the Postscript dashboard and click 'Create Automation'. Choose the 'Subscriber Birthday' trigger and set up an action to send a birthday message.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/automations",
+      "authentication": "API key authentication, obtainable through the Postscript dashboard",
+      "implementation": "Use the Postscript API to create a new automation with the 'Subscriber Birthday' trigger and a 'Send Message' action. Specify the birthday message content in the action's 'message' field. Ensure you have collected subscribers' birth dates through a capture form or other means.",
+      "error_handling": "Catch and handle API errors, such as invalid API key or automation creation failures. Monitor for issues with birthday data quality or missing birth dates among subscribers."
+    }
+  },
+  {
+    "query": "Is it possible to automate sending a win-back campaign to inactive subscribers in Postscript?",
+    "response": "Yes, you can automate a win-back campaign for inactive subscribers. In Postscript, go to 'Automations', click 'Create Automation', and choose the 'Subscriber Inactive' trigger. Set up actions to send a series of win-back messages.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/automations",
+      "authentication": "API key authentication, obtainable through the Postscript dashboard",
+      "implementation": "Create a new automation using the Postscript API with the 'Subscriber Inactive' trigger. Design a series of 'Send Message' actions for the win-back campaign, spacing them out appropriately. Consider integrating with your e-commerce platform to track subscriber activity and define inactivity.",
+      "error_handling": "Handle API errors, such as automation creation failures or message sending errors. Monitor the performance of the win-back campaign and adjust the automation based on results, such as reopening or unsubscribe rates."
+    }
+  },
+  {
+    "query": "Can I automate sending a notification when a new product is added to our store in Postscript?",
+    "response": "To automate notifications for new products, integrate your e-commerce platform with Postscript, then create an automation with the 'Product Created' trigger, setting up an action to send a notification message to subscribers.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/automations",
+      "authentication": "API key authentication, obtainable through the Postscript dashboard",
+      "implementation": "Use the Postscript API to create a new automation with the 'Product Created' trigger, which may require integration with your e-commerce platform to detect new products. Set up a 'Send Message' action with the notification content. Ensure product data, such as images and descriptions, is accessible for inclusion in the message.",
+      "error_handling": "Catch and log API errors, such as invalid API key, automation creation failures, or issues with product data integration. Monitor for errors in message sending and adjust the automation as needed based on subscriber engagement and feedback."
+    }
+  }
+]

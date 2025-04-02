@@ -67,4 +67,4 @@ python3 generate_complex_cross_system_data.py \
 
 echo ""
 echo "Generation complete!"
-echo "To view training data count, run: python -c \"import psycopg2; conn = psycopg2.connect(open('.env').read().split('DATABASE_URL=')[1].strip().split('\\n')[0]); cur = conn.cursor(); cur.execute('SELECT COUNT(*) FROM training_data WHERE is_complex_multi_system = TRUE'); print(cur.fetchone()[0]); conn.close()\""
+echo "To view training data count, run: python -c \"from supabase import create_client; import os; supabase = create_client(os.environ.get('SUPABASE_URL'), os.environ.get('SUPABASE_SERVICE_ROLE_KEY')); result = supabase.table('training_data').select('id', count='exact').eq('tool', 'complex_interaction').execute(); print(result.count)\""

@@ -1,69 +1,120 @@
 #!/usr/bin/env python3
 """
-Minimal script to add a small number of training examples to avoid timeouts
+Script to add individual training examples to Supabase.
+This script allows adding single examples or reading from a JSON file.
 """
 
 import os
-import sys
 import json
 import time
-import psycopg2
+import argparse
 from datetime import datetime
+from supabase import create_client, Client
 
-# Get the current count
-def count_examples():
-    database_url = os.environ.get("DATABASE_URL")
-    if not database_url:
-        return "unknown"
+def connect_to_supabase() -> Client:
+    """Connect to Supabase using environment variables"""
+    supabase_url = os.environ.get("SUPABASE_URL")
+    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+    
+    if not supabase_url or not supabase_key:
+        raise ValueError("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables must be set")
         
-    try:
-        conn = psycopg2.connect(database_url)
-        cur = conn.cursor()
-        cur.execute("SELECT COUNT(*) FROM training_data")
-        count = cur.fetchone()[0]
-        conn.close()
-        return count
-    except Exception as e:
-        return f"error: {e}"
+    return create_client(supabase_url, supabase_key)
 
-# Generate a few examples and insert directly
+def insert_example(supabase: Client, example: dict):
+    """Insert a single training example into Supabase"""
+    try:
+        result = supabase.table('training_data').insert(example).execute()
+        
+        if result.error:
+            print(f"Error inserting example: {result.error}")
+            return False
+        else:
+            print(f"Successfully inserted example with ID: {example.get('id', 'unknown')}")
+            return True
+            
+    except Exception as e:
+        print(f"Error inserting example: {str(e)}")
+        return False
+
 def main():
-    # Print the current count
-    start_count = count_examples()
-    print(f"Starting with {start_count} examples")
+    parser = argparse.ArgumentParser(description='Add training examples to Supabase')
+    parser.add_argument('--input-file', type=str, help='Input JSON file containing training examples')
+    parser.add_argument('--tool', type=str, help='Tool name for the example')
+    parser.add_argument('--intent', type=str, help='Intent for the example')
+    parser.add_argument('--query', type=str, help='Query text for the example')
+    parser.add_argument('--response', type=str, help='Response text for the example')
+    parser.add_argument('--metadata', type=str, help='JSON string of additional metadata')
     
-    # Import these functions directly to avoid subprocess issues
-    from generate_multi_service_examples import generate_complex_examples, save_to_json
-    from bulk_insert_training_data import connect_to_db, insert_training_data
+    args = parser.parse_args()
     
-    # Generate a small number of examples
-    batch_size = 3
-    print(f"Generating {batch_size} examples...")
-    examples = generate_complex_examples(count=batch_size, batch_size=1)
-    
-    # Save to file as backup
-    filename = f"mini_batch_{datetime.now().strftime('%Y%m%d%H%M%S')}.json"
-    save_to_json(examples, filename)
-    
-    # Connect to database and insert
-    print("Connecting to database...")
-    conn = connect_to_db()
-    
-    # Insert the examples
-    print(f"Inserting {len(examples)} examples...")
-    inserted, errors = insert_training_data(conn, examples)
-    conn.close()
-    
-    # Print the final count
-    end_count = count_examples()
-    print(f"Finished with {end_count} examples")
-    print(f"Added {inserted} examples with {errors} errors")
-    
+    try:
+        # Connect to Supabase
+        supabase = connect_to_supabase()
+        
+        if args.input_file:
+            # Read examples from file
+            print(f"Reading examples from {args.input_file}...")
+            with open(args.input_file, 'r') as f:
+                examples = json.load(f)
+            
+            if not isinstance(examples, list):
+                examples = [examples]
+            
+            print(f"Found {len(examples)} examples to insert")
+            
+            success_count = 0
+            error_count = 0
+            
+            for example in examples:
+                if insert_example(supabase, example):
+                    success_count += 1
+                else:
+                    error_count += 1
+                    
+                # Brief pause between inserts to avoid rate limiting
+                time.sleep(0.05)
+            
+            print("\nInsertion Summary:")
+            print(f"Total examples: {len(examples)}")
+            print(f"Successfully inserted: {success_count}")
+            print(f"Errors: {error_count}")
+            
+        else:
+            # Create single example from command line arguments
+            if not all([args.tool, args.intent, args.query, args.response]):
+                print("Error: --tool, --intent, --query, and --response are required for single example insertion")
+                return 1
+            
+            example = {
+                'id': f'example_{int(time.time())}',
+                'tool': args.tool,
+                'intent': args.intent,
+                'query': args.query,
+                'response': args.response,
+                'metadata': {
+                    'generated_at': datetime.now().isoformat()
+                }
+            }
+            
+            if args.metadata:
+                try:
+                    additional_metadata = json.loads(args.metadata)
+                    example['metadata'].update(additional_metadata)
+                except json.JSONDecodeError:
+                    print("Error: --metadata must be a valid JSON string")
+                    return 1
+            
+            if insert_example(supabase, example):
+                return 0
+            else:
+                return 1
+        
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return 1
+        
     return 0
 
 if __name__ == "__main__":
-    try:
-        exit(main())
-    except Exception as e:
-        print(f"Error: {e}")
-        exit(1)
+    main()

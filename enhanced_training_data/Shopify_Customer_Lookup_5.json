@@ -1,0 +1,112 @@
+[
+  {
+    "query": "Find customer John Doe in Shopify",
+    "response": "The customer John Doe has been found with ID 12345. Their email address is johndoe@example.com.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.com/api/v2/customers/search.json",
+      "authentication": "Private app API password or API access token",
+      "implementation": "Send a GET request to the API endpoint with the customer name as a query parameter, then parse the JSON response to extract the customer ID and email address",
+      "error_handling": "Check the API response status code for errors, handle 404 Not Found for customer not found, and 401 Unauthorized for authentication issues"
+    },
+    "tool": "Shopify",
+    "intent": "Customer Lookup",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Customer Lookup request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:22.589639"
+    }
+  },
+  {
+    "query": "Get customer info for johndoe@example.com",
+    "response": "The customer with email johndoe@example.com has ID 12345 and name John Doe.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.com/api/v2/customers/search.json",
+      "authentication": "Private app API password or API access token",
+      "implementation": "Send a GET request to the API endpoint with the customer email as a query parameter, then parse the JSON response to extract the customer ID and name",
+      "error_handling": "Check the API response status code for errors, handle 404 Not Found for customer not found, and 401 Unauthorized for authentication issues"
+    },
+    "tool": "Shopify",
+    "intent": "Customer Lookup",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Customer Lookup request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:22.589653"
+    }
+  },
+  {
+    "query": "Lookup customer by phone number 123-456-7890",
+    "response": "The customer with phone number 123-456-7890 has been found with ID 67890 and name Jane Doe.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.com/api/v2/customers/search.json",
+      "authentication": "Private app API password or API access token",
+      "implementation": "Send a GET request to the API endpoint with the customer phone number as a query parameter, then parse the JSON response to extract the customer ID and name",
+      "error_handling": "Check the API response status code for errors, handle 404 Not Found for customer not found, and 401 Unauthorized for authentication issues"
+    },
+    "tool": "Shopify",
+    "intent": "Customer Lookup",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Customer Lookup request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:22.589660"
+    }
+  },
+  {
+    "query": "Search for customers in Shopify with name containing 'Doe'",
+    "response": "Found 2 customers with name containing 'Doe': John Doe (ID 12345) and Jane Doe (ID 67890).",
+    "execution_details": {
+      "api_endpoint": "https://shopify.com/api/v2/customers/search.json",
+      "authentication": "Private app API password or API access token",
+      "implementation": "Send a GET request to the API endpoint with the customer name as a query parameter, then parse the JSON response to extract the customer IDs and names",
+      "error_handling": "Check the API response status code for errors, handle 404 Not Found for no customers found, and 401 Unauthorized for authentication issues"
+    },
+    "tool": "Shopify",
+    "intent": "Customer Lookup",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Customer Lookup request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:22.589664"
+    }
+  },
+  {
+    "query": "Find customer by ID 12345",
+    "response": "The customer with ID 12345 is John Doe with email johndoe@example.com.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.com/api/v2/customers/{customer_id}.json",
+      "authentication": "Private app API password or API access token",
+      "implementation": "Send a GET request to the API endpoint with the customer ID, then parse the JSON response to extract the customer name and email",
+      "error_handling": "Check the API response status code for errors, handle 404 Not Found for customer not found, and 401 Unauthorized for authentication issues"
+    },
+    "tool": "Shopify",
+    "intent": "Customer Lookup",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Customer Lookup request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:22.589668"
+    }
+  }
+]

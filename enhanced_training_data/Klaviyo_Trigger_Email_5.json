@@ -1,0 +1,52 @@
+[
+  {
+    "query": "How do I trigger an email to customers who abandoned their carts in Klaviyo?",
+    "response": "To trigger an email to customers who abandoned their carts in Klaviyo, you can use the 'Cart Abandonment' flow and set up an email to send after a certain amount of time has passed since the customer left their cart. You can customize the email template and content to fit your brand's voice and style.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/person",
+      "authentication": "Klaviyo API Key",
+      "implementation": "Use the Klaviyo API to create a new flow, add a trigger for cart abandonment, and set up an email to send after a certain amount of time. Use the 'person' endpoint to update the customer's profile with the abandoned cart information.",
+      "error_handling": "Check for errors such as invalid API key, missing required fields, or exceeded rate limits. Handle errors by logging the error message and retrying the request after a certain amount of time."
+    }
+  },
+  {
+    "query": "Can I use Klaviyo to send a welcome email to new subscribers?",
+    "response": "Yes, you can use Klaviyo to send a welcome email to new subscribers. You can set up a 'Welcome Series' flow to send a series of emails to new subscribers, including a welcome email, over a set period of time.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/flows",
+      "authentication": "Klaviyo API Key",
+      "implementation": "Use the Klaviyo API to create a new flow, add a 'Welcome Series' trigger, and set up an email to send to new subscribers. Use the 'flows' endpoint to create and manage the welcome series flow.",
+      "error_handling": "Check for errors such as invalid API key, missing required fields, or exceeded rate limits. Handle errors by logging the error message and retrying the request after a certain amount of time."
+    }
+  },
+  {
+    "query": "How do I trigger an email to customers who have made a purchase in Klaviyo?",
+    "response": "To trigger an email to customers who have made a purchase in Klaviyo, you can use the 'Thank You' flow and set up an email to send after a purchase has been completed. You can customize the email template and content to fit your brand's voice and style.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/orders",
+      "authentication": "Klaviyo API Key",
+      "implementation": "Use the Klaviyo API to create a new flow, add a trigger for purchase completion, and set up an email to send to customers. Use the 'orders' endpoint to retrieve information about the completed order.",
+      "error_handling": "Check for errors such as invalid API key, missing required fields, or exceeded rate limits. Handle errors by logging the error message and retrying the request after a certain amount of time."
+    }
+  },
+  {
+    "query": "Can I use Klaviyo to send a birthday email to subscribers?",
+    "response": "Yes, you can use Klaviyo to send a birthday email to subscribers. You can set up a 'Birthday' flow to send an email to subscribers on their birthday, and customize the email template and content to fit your brand's voice and style.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/person",
+      "authentication": "Klaviyo API Key",
+      "implementation": "Use the Klaviyo API to create a new flow, add a 'Birthday' trigger, and set up an email to send to subscribers on their birthday. Use the 'person' endpoint to update the subscriber's profile with their birthday information.",
+      "error_handling": "Check for errors such as invalid API key, missing required fields, or exceeded rate limits. Handle errors by logging the error message and retrying the request after a certain amount of time."
+    }
+  },
+  {
+    "query": "How do I trigger an email to customers who have not made a purchase in a while in Klaviyo?",
+    "response": "To trigger an email to customers who have not made a purchase in a while in Klaviyo, you can use the 'Win Back' flow and set up an email to send after a certain amount of time has passed since the customer's last purchase. You can customize the email template and content to fit your brand's voice and style.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/orders",
+      "authentication": "Klaviyo API Key",
+      "implementation": "Use the Klaviyo API to create a new flow, add a trigger for inactivity, and set up an email to send to customers. Use the 'orders' endpoint to retrieve information about the customer's purchase history.",
+      "error_handling": "Check for errors such as invalid API key, missing required fields, or exceeded rate limits. Handle errors by logging the error message and retrying the request after a certain amount of time."
+    }
+  }
+]

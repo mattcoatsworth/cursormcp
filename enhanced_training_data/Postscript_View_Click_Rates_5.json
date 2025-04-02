@@ -1,0 +1,52 @@
+[
+  {
+    "query": "What is the click rate for my latest campaign?",
+    "response": "The click rate for your latest campaign is 2.5%. This means that out of 1000 emails sent, 25 users clicked on the link.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/campaigns/{campaign_id}/metrics",
+      "authentication": "API authentication is done through a Bearer token, which can be obtained by registering for a Postscript account and generating an API key.",
+      "implementation": "To get the click rate, send a GET request to the API endpoint with the campaign ID and retrieve the 'click_rate' metric from the response. Multiply the click rate by 100 to convert it to a percentage.",
+      "error_handling": "Handle errors by checking the API response status code. A 200 status code indicates a successful request, while a 404 status code indicates that the campaign was not found."
+    }
+  },
+  {
+    "query": "How many users clicked on the link in my email campaign?",
+    "response": "A total of 250 users clicked on the link in your email campaign.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/campaigns/{campaign_id}/metrics",
+      "authentication": "API authentication is done through a Bearer token, which can be obtained by registering for a Postscript account and generating an API key.",
+      "implementation": "To get the total number of clicks, send a GET request to the API endpoint with the campaign ID and retrieve the 'clicks' metric from the response.",
+      "error_handling": "Handle errors by checking the API response status code. A 200 status code indicates a successful request, while a 404 status code indicates that the campaign was not found."
+    }
+  },
+  {
+    "query": "What percentage of users clicked on the link after opening the email?",
+    "response": "The click-to-open rate for your campaign is 10%. This means that out of 100 users who opened the email, 10 users clicked on the link.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/campaigns/{campaign_id}/metrics",
+      "authentication": "API authentication is done through a Bearer token, which can be obtained by registering for a Postscript account and generating an API key.",
+      "implementation": "To get the click-to-open rate, send a GET request to the API endpoint with the campaign ID and retrieve the 'opens' and 'clicks' metrics from the response. Calculate the click-to-open rate by dividing the number of clicks by the number of opens and multiplying by 100.",
+      "error_handling": "Handle errors by checking the API response status code. A 200 status code indicates a successful request, while a 404 status code indicates that the campaign was not found."
+    }
+  },
+  {
+    "query": "Can I see the click rate for each link in my campaign?",
+    "response": "Here are the click rates for each link in your campaign: Link 1: 1.2%, Link 2: 3.5%, Link 3: 0.5%.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/campaigns/{campaign_id}/links",
+      "authentication": "API authentication is done through a Bearer token, which can be obtained by registering for a Postscript account and generating an API key.",
+      "implementation": "To get the click rate for each link, send a GET request to the API endpoint with the campaign ID and retrieve the 'links' metric from the response. Loop through each link and calculate the click rate by dividing the number of clicks by the total number of emails sent and multiplying by 100.",
+      "error_handling": "Handle errors by checking the API response status code. A 200 status code indicates a successful request, while a 404 status code indicates that the campaign was not found."
+    }
+  },
+  {
+    "query": "How does the click rate for my campaign compare to the average click rate for my industry?",
+    "response": "The average click rate for your industry is 2.2%. Your campaign's click rate of 2.5% is higher than the industry average.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/industries/{industry_id}/metrics",
+      "authentication": "API authentication is done through a Bearer token, which can be obtained by registering for a Postscript account and generating an API key.",
+      "implementation": "To get the average click rate for the industry, send a GET request to the API endpoint with the industry ID and retrieve the 'average_click_rate' metric from the response. Compare the campaign's click rate to the industry average click rate.",
+      "error_handling": "Handle errors by checking the API response status code. A 200 status code indicates a successful request, while a 404 status code indicates that the industry was not found."
+    }
+  }
+]

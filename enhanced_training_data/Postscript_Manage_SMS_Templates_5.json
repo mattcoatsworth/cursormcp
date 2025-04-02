@@ -1,0 +1,52 @@
+[
+  {
+    "query": "How do I create a new SMS template in Postscript?",
+    "response": "To create a new SMS template, go to your Postscript dashboard, navigate to the 'Templates' tab, click 'New Template', and fill out the required fields. You can also use the Postscript API to create a template programmatically.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/templates",
+      "authentication": "Bearer token authentication",
+      "implementation": "Send a POST request to the API endpoint with the template details in the request body. The template details should include the template name, content, and any other required fields.",
+      "error_handling": "Check for errors such as invalid template details or authentication issues. Handle errors by logging the error message and retrying the request if necessary."
+    }
+  },
+  {
+    "query": "Can I customize the SMS templates in Postscript to fit my brand's voice and style?",
+    "response": "Yes, you can customize SMS templates in Postscript to fit your brand's voice and style. You can use variables, conditional logic, and other features to personalize your templates and make them more engaging.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/templates/{template_id}",
+      "authentication": "Bearer token authentication",
+      "implementation": "Use the Postscript API to retrieve the template details, modify the template content, and then update the template using the API. You can also use the Postscript dashboard to customize templates manually.",
+      "error_handling": "Check for errors such as invalid template IDs or authentication issues. Handle errors by logging the error message and retrying the request if necessary."
+    }
+  },
+  {
+    "query": "How do I delete an existing SMS template in Postscript?",
+    "response": "To delete an existing SMS template, go to your Postscript dashboard, navigate to the 'Templates' tab, find the template you want to delete, and click the 'Delete' button. You can also use the Postscript API to delete a template programmatically.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/templates/{template_id}",
+      "authentication": "Bearer token authentication",
+      "implementation": "Send a DELETE request to the API endpoint with the template ID in the URL path. Make sure to handle any dependencies or references to the template before deleting it.",
+      "error_handling": "Check for errors such as invalid template IDs or authentication issues. Handle errors by logging the error message and retrying the request if necessary."
+    }
+  },
+  {
+    "query": "Can I duplicate an existing SMS template in Postscript?",
+    "response": "Yes, you can duplicate an existing SMS template in Postscript. Duplicating a template allows you to create a new template with the same content and settings as the original template.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/templates/{template_id}/duplicate",
+      "authentication": "Bearer token authentication",
+      "implementation": "Send a POST request to the API endpoint with the template ID in the URL path. The new template will be created with the same content and settings as the original template.",
+      "error_handling": "Check for errors such as invalid template IDs or authentication issues. Handle errors by logging the error message and retrying the request if necessary."
+    }
+  },
+  {
+    "query": "How do I update an existing SMS template in Postscript?",
+    "response": "To update an existing SMS template, go to your Postscript dashboard, navigate to the 'Templates' tab, find the template you want to update, and click the 'Edit' button. You can also use the Postscript API to update a template programmatically.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/templates/{template_id}",
+      "authentication": "Bearer token authentication",
+      "implementation": "Send a PATCH request to the API endpoint with the updated template details in the request body. Make sure to include the template ID in the URL path and handle any dependencies or references to the template.",
+      "error_handling": "Check for errors such as invalid template IDs or authentication issues. Handle errors by logging the error message and retrying the request if necessary."
+    }
+  }
+]

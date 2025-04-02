@@ -1,22 +1,33 @@
--- training_data table for MCP training data
-CREATE TABLE IF NOT EXISTS public.training_data (
+-- Part 1: Create the table and basic structure
+-- Drop existing table if it exists
+DROP TABLE IF EXISTS public.training_data CASCADE;
+
+-- Create the training_data table
+CREATE TABLE public.training_data (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   tool TEXT NOT NULL,
   intent TEXT NOT NULL,
   query TEXT NOT NULL,
   response TEXT NOT NULL,
+  systems TEXT[] DEFAULT '{}',
+  workflow TEXT[] DEFAULT '{}',
+  execution_details JSONB DEFAULT '{}'::jsonb,
   metadata JSONB DEFAULT '{}'::jsonb,
+  follow_up_queries TEXT[] DEFAULT '{}',
+  follow_up_responses TEXT[] DEFAULT '{}',
+  follow_up_context JSONB DEFAULT '{}'::jsonb,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Create indexes for faster searching
-CREATE INDEX IF NOT EXISTS idx_training_data_tool ON public.training_data (tool);
-CREATE INDEX IF NOT EXISTS idx_training_data_intent ON public.training_data (intent);
-CREATE INDEX IF NOT EXISTS idx_training_data_tool_intent ON public.training_data (tool, intent);
+-- Create basic indexes
+CREATE INDEX idx_training_data_tool ON public.training_data (tool);
+CREATE INDEX idx_training_data_intent ON public.training_data (intent);
+CREATE INDEX idx_training_data_query ON public.training_data (query);
+CREATE INDEX idx_training_data_follow_up ON public.training_data USING gin (follow_up_queries);
 
--- Enable full text search for the query field
-CREATE INDEX IF NOT EXISTS idx_training_data_query_fts ON public.training_data USING gin(to_tsvector('english', query));
+-- Temporarily disable RLS for testing
+ALTER TABLE public.training_data DISABLE ROW LEVEL SECURITY;
 
 -- Comments for documentation
 COMMENT ON TABLE public.training_data IS 'Stores training data for MCP tools and intents';
@@ -24,32 +35,16 @@ COMMENT ON COLUMN public.training_data.tool IS 'The name of the e-commerce tool/
 COMMENT ON COLUMN public.training_data.intent IS 'The specific intent for the tool (e.g., Check Order Status)';
 COMMENT ON COLUMN public.training_data.query IS 'The user query text';
 COMMENT ON COLUMN public.training_data.response IS 'The system response text';
+COMMENT ON COLUMN public.training_data.systems IS 'Array of systems involved in the workflow';
+COMMENT ON COLUMN public.training_data.workflow IS 'Array of steps in the workflow';
+COMMENT ON COLUMN public.training_data.execution_details IS 'Details about how the workflow was executed';
 COMMENT ON COLUMN public.training_data.metadata IS 'Additional metadata about the training example';
+COMMENT ON COLUMN public.training_data.follow_up_queries IS 'Array of follow-up queries that can be used after this response';
+COMMENT ON COLUMN public.training_data.follow_up_responses IS 'Array of responses to the follow-up queries';
+COMMENT ON COLUMN public.training_data.follow_up_context IS 'Context information needed for follow-up responses';
 
--- Create training data table in Supabase
-CREATE TABLE IF NOT EXISTS public.training_data (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    query TEXT NOT NULL,
-    response TEXT NOT NULL,
-    systems TEXT[] NOT NULL,
-    workflow TEXT[] NOT NULL,
-    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(query)
-);
-
--- Create indexes for efficient querying
-CREATE INDEX IF NOT EXISTS idx_training_data_systems ON public.training_data USING GIN (systems);
-CREATE INDEX IF NOT EXISTS idx_training_data_workflow ON public.training_data USING GIN (workflow);
-CREATE INDEX IF NOT EXISTS idx_training_data_metadata ON public.training_data USING GIN (metadata);
-CREATE INDEX IF NOT EXISTS idx_training_data_created_at ON public.training_data (created_at);
-
--- Enable full text search for the query field
-CREATE INDEX IF NOT EXISTS idx_training_data_query_fts ON public.training_data USING gin(to_tsvector('english', query));
-
--- Create function to update updated_at timestamp
-CREATE OR REPLACE FUNCTION public.update_updated_at_column()
+-- Create a function to update the updated_at timestamp
+CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = CURRENT_TIMESTAMP;
@@ -57,11 +52,11 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
--- Create trigger to automatically update updated_at
+-- Create a trigger to automatically update the updated_at column
 CREATE TRIGGER update_training_data_updated_at
     BEFORE UPDATE ON public.training_data
     FOR EACH ROW
-    EXECUTE FUNCTION public.update_updated_at_column();
+    EXECUTE FUNCTION update_updated_at_column();
 
 -- Create view for training data statistics
 CREATE OR REPLACE VIEW public.training_data_stats AS
@@ -69,6 +64,7 @@ SELECT
     COUNT(*) as total_examples,
     COUNT(DISTINCT query) as unique_queries,
     AVG(array_length(workflow, 1)) as avg_workflow_length,
+    AVG(array_length(follow_up_queries, 1)) as avg_follow_ups,
     jsonb_object_agg(
         system,
         count
@@ -95,6 +91,9 @@ RETURNS TABLE (
     systems TEXT[],
     workflow TEXT[],
     metadata JSONB,
+    follow_up_queries TEXT[],
+    follow_up_responses TEXT[],
+    follow_up_context JSONB,
     created_at TIMESTAMP WITH TIME ZONE,
     similarity FLOAT
 ) AS $$
@@ -107,6 +106,9 @@ BEGIN
         td.systems,
         td.workflow,
         td.metadata,
+        td.follow_up_queries,
+        td.follow_up_responses,
+        td.follow_up_context,
         td.created_at,
         similarity(td.query, search_query) as similarity
     FROM public.training_data td
@@ -119,18 +121,15 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Set up Row Level Security (RLS)
-ALTER TABLE public.training_data ENABLE ROW LEVEL SECURITY;
-
--- Create policy to allow all operations for authenticated users
-CREATE POLICY "Allow all operations for authenticated users" ON public.training_data
-    FOR ALL
-    TO authenticated
-    USING (true)
-    WITH CHECK (true);
-
--- Create policy to allow read operations for anon users
-CREATE POLICY "Allow read operations for anon users" ON public.training_data
-    FOR SELECT
-    TO anon
-    USING (true);
+-- Add execution_details column if it doesn't exist
+DO $$ 
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 
+        FROM information_schema.columns 
+        WHERE table_name = 'training_data' 
+        AND column_name = 'execution_details'
+    ) THEN
+        ALTER TABLE public.training_data ADD COLUMN execution_details JSONB DEFAULT '{}'::jsonb;
+    END IF;
+END $$;

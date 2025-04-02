@@ -1,0 +1,112 @@
+[
+  {
+    "query": "How can I create a discount code for my Shopify store?",
+    "response": "You can create a discount code by going to the 'Discounts' tab, clicking 'Create discount', and following the prompts to set the discount type, amount, and usage limits.",
+    "execution_details": {
+      "api_endpoint": "POST /discounts.json",
+      "authentication": "Private app API key or password",
+      "implementation": "Use the Shopify API to create a new discount by sending a POST request with the discount details, such as discount type, amount, and usage limits.",
+      "error_handling": "Check for errors such as invalid API credentials, missing required fields, or duplicate discount codes, and handle them accordingly."
+    },
+    "tool": "Shopify",
+    "intent": "Create Discount",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Create Discount request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:38.184799"
+    }
+  },
+  {
+    "query": "I want to offer 10% off all orders over $100, how do I set this up in Shopify?",
+    "response": "You can create a discount code that applies to orders over $100 by setting the 'Minimum purchase requirement' to $100 and the 'Discount amount' to 10% in the discount creation process.",
+    "execution_details": {
+      "api_endpoint": "POST /discounts.json",
+      "authentication": "Private app API key or password",
+      "implementation": "Use the Shopify API to create a new discount by sending a POST request with the discount details, such as minimum purchase requirement, discount amount, and discount type.",
+      "error_handling": "Check for errors such as invalid API credentials, missing required fields, or duplicate discount codes, and handle them accordingly."
+    },
+    "tool": "Shopify",
+    "intent": "Create Discount",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Create Discount request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:38.184811"
+    }
+  },
+  {
+    "query": "Can I create a buy one get one free discount in Shopify?",
+    "response": "Yes, you can create a buy one get one free discount by setting the 'Discount type' to 'Buy one get one free' and configuring the eligible products or collections in the discount creation process.",
+    "execution_details": {
+      "api_endpoint": "POST /discounts.json",
+      "authentication": "Private app API key or password",
+      "implementation": "Use the Shopify API to create a new discount by sending a POST request with the discount details, such as discount type, eligible products or collections, and usage limits.",
+      "error_handling": "Check for errors such as invalid API credentials, missing required fields, or duplicate discount codes, and handle them accordingly."
+    },
+    "tool": "Shopify",
+    "intent": "Create Discount",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Create Discount request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:38.184815"
+    }
+  },
+  {
+    "query": "How do I create a limited-time discount in Shopify?",
+    "response": "You can create a limited-time discount by setting the 'Start date' and 'End date' for the discount in the discount creation process.",
+    "execution_details": {
+      "api_endpoint": "POST /discounts.json",
+      "authentication": "Private app API key or password",
+      "implementation": "Use the Shopify API to create a new discount by sending a POST request with the discount details, such as start date, end date, and discount amount.",
+      "error_handling": "Check for errors such as invalid API credentials, missing required fields, or duplicate discount codes, and handle them accordingly."
+    },
+    "tool": "Shopify",
+    "intent": "Create Discount",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Create Discount request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:38.184818"
+    }
+  },
+  {
+    "query": "Can I create a discount that applies to specific products or collections in Shopify?",
+    "response": "Yes, you can create a discount that applies to specific products or collections by configuring the 'Eligible products' or 'Eligible collections' in the discount creation process.",
+    "execution_details": {
+      "api_endpoint": "POST /discounts.json",
+      "authentication": "Private app API key or password",
+      "implementation": "Use the Shopify API to create a new discount by sending a POST request with the discount details, such as eligible products or collections, discount amount, and usage limits.",
+      "error_handling": "Check for errors such as invalid API credentials, missing required fields, or duplicate discount codes, and handle them accordingly."
+    },
+    "tool": "Shopify",
+    "intent": "Create Discount",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Create Discount request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:45:38.184822"
+    }
+  }
+]

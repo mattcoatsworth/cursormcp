@@ -1,0 +1,80 @@
+{
+    "version": "1.0",
+    "last_updated": "2024-03-19",
+    "guidelines": {
+        "warehouse_3pl_operations": {
+            "rule": "Only use warehouse/3PL endpoints for fulfillment control and warehouse operations",
+            "allowed_operations": [
+                "Voiding shipping labels",
+                "Managing shipping batches",
+                "Pausing fulfillment",
+                "Removing orders from shipping batches",
+                "Checking warehouse inventory levels",
+                "Managing warehouse locations"
+            ],
+            "response_format": {
+                "void_label": "I've voided the shipping label for order #[number]",
+                "pause_fulfillment": "I've paused order #[number] from shipping as it was still unfulfilled",
+                "remove_from_batch": "I've removed order #[number] from the shipping batch as it was still unfulfilled",
+                "already_shipped": "Unfortunately, order #[number] has already shipped and is arriving on [date]"
+            },
+            "examples": {
+                "good": [
+                    "I've voided the shipping label for order #7890 to prevent it from shipping.",
+                    "I've paused order #4556 from shipping as it was still unfulfilled.",
+                    "I've removed order #1234 from the shipping batch as it was still unfulfilled.",
+                    "Unfortunately, order #9999 has already shipped and is arriving on March 28th."
+                ],
+                "bad": [
+                    "Let me check if the order is still unfulfilled in Shopify first.",
+                    "I'll verify the order status before stopping shipment.",
+                    "I'll check if a shipping label has been created yet."
+                ]
+            }
+        },
+        "workflow": {
+            "stop_shipping": [
+                "1. Check Shopify order fulfillment status",
+                "2. If unfulfilled, check for shipping label in 3PL",
+                "3. Take appropriate action (pause/void/remove from batch)",
+                "4. If already fulfilled, inform user with arrival date"
+            ],
+            "warehouse_operations": [
+                "1. Verify warehouse location",
+                "2. Check inventory availability",
+                "3. Execute warehouse operation",
+                "4. Confirm operation completion"
+            ]
+        },
+        "restricted_operations": {
+            "shopify_only": [
+                "Order status queries",
+                "Tracking number lookups",
+                "Shipping status checks",
+                "Order history lookups"
+            ],
+            "explanation": "These operations should be handled through Shopify endpoints only, not warehouse/3PL endpoints"
+        }
+    },
+    "response_rules": {
+        "always_include": [
+            "Order number in response",
+            "Specific action taken",
+            "Clear explanation of outcome"
+        ],
+        "never_include": [
+            "Technical system names unless necessary",
+            "Internal process steps",
+            "Ambiguous or incomplete information"
+        ],
+        "format_guidelines": {
+            "dates": "Use specific dates for shipping and arrival times",
+            "actions": "Use past tense for completed actions (e.g., 'I've voided' not 'I'll void')"
+        }
+    },
+    "error_handling": {
+        "label_check_failed": "I'm having trouble checking the shipping label status. Please try again shortly.",
+        "void_failed": "I couldn't void the shipping label. Please contact support for assistance.",
+        "warehouse_operation_failed": "I couldn't complete the warehouse operation. Please try again or contact support."
+    }
+} 

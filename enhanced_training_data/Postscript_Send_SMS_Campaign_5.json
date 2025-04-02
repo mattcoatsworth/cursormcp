@@ -1,0 +1,52 @@
+[
+  {
+    "query": "How do I send an SMS campaign to my customers using Postscript?",
+    "response": "To send an SMS campaign, go to the Postscript dashboard, click on 'Campaigns', then 'Create Campaign', and follow the prompts to set up your message and recipient list.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/campaigns",
+      "authentication": "API key authentication, with the key provided in the Postscript dashboard",
+      "implementation": "Use the API to create a new campaign, specifying the message, recipient list, and any other desired settings. Then, use the API to send the campaign.",
+      "error_handling": "Check the API response for any error messages, and handle accordingly. Common errors include invalid API key, insufficient credits, or invalid recipient list."
+    }
+  },
+  {
+    "query": "What is the best way to automate sending SMS campaigns through Postscript?",
+    "response": "To automate sending SMS campaigns, use Postscript's API to integrate with your e-commerce platform or CRM. This allows you to automatically trigger campaigns based on customer actions or events.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/campaigns",
+      "authentication": "API key authentication, with the key provided in the Postscript dashboard",
+      "implementation": "Use webhooks or API calls to trigger campaigns automatically. For example, use a webhook to trigger a campaign when a customer makes a purchase or abandons their cart.",
+      "error_handling": "Implement retry logic and error handling to ensure that campaigns are sent successfully. Monitor API response codes and handle errors accordingly."
+    }
+  },
+  {
+    "query": "Can I use Postscript to send personalized SMS campaigns to my customers?",
+    "response": "Yes, Postscript allows you to send personalized SMS campaigns using custom fields and merge tags. This enables you to address customers by name, reference their order history, and more.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/campaigns",
+      "authentication": "API key authentication, with the key provided in the Postscript dashboard",
+      "implementation": "Use Postscript's custom fields and merge tags to personalize your campaign messages. For example, use a merge tag to insert the customer's name or order total into the message.",
+      "error_handling": "Test your campaign messages to ensure that merge tags are working correctly. Handle any errors that occur during message personalization, such as invalid merge tags or missing customer data."
+    }
+  },
+  {
+    "query": "How do I track the performance of my SMS campaigns in Postscript?",
+    "response": "To track the performance of your SMS campaigns, use Postscript's analytics dashboard. This provides insights into campaign metrics such as open rates, click-through rates, and conversion rates.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/analytics",
+      "authentication": "API key authentication, with the key provided in the Postscript dashboard",
+      "implementation": "Use the API to retrieve analytics data for your campaigns, including metrics such as opens, clicks, and conversions. You can also use webhooks to receive notifications when a customer interacts with your campaign.",
+      "error_handling": "Handle any errors that occur when retrieving analytics data, such as invalid API key or insufficient permissions. Implement retry logic to ensure that data is retrieved successfully."
+    }
+  },
+  {
+    "query": "Can I use Postscript to send SMS campaigns to customers who have abandoned their carts?",
+    "response": "Yes, Postscript allows you to send targeted SMS campaigns to customers who have abandoned their carts. This can help recover lost sales and encourage customers to complete their purchases.",
+    "execution_details": {
+      "api_endpoint": "https://api.postscript.io/v1/campaigns",
+      "authentication": "API key authentication, with the key provided in the Postscript dashboard",
+      "implementation": "Use Postscript's API to create a campaign that targets customers who have abandoned their carts. You can use webhooks or API calls to trigger the campaign automatically when a customer abandons their cart.",
+      "error_handling": "Implement retry logic and error handling to ensure that campaigns are sent successfully. Monitor API response codes and handle errors accordingly, such as invalid API key or insufficient credits."
+    }
+  }
+]

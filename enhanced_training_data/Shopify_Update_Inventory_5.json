@@ -1,0 +1,112 @@
+[
+  {
+    "query": "How do I update the stock level of a product in Shopify?",
+    "response": "To update the stock level of a product in Shopify, you can use the Shopify API to send a request with the new stock level. You can also do this directly in the Shopify admin dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.com/api/2022-04/products/{product_id}.json",
+      "authentication": "You need to have a private app or public app with the 'read_products' and 'write_products' permissions. You can authenticate using API key and password or using OAuth 2.0.",
+      "implementation": "First, retrieve the product ID of the product you want to update. Then, send a PUT request to the API endpoint with the updated stock level in the request body. Use the 'inventory_quantity' field to update the stock level.",
+      "error_handling": "Check the API response for errors. Common errors include 'product not found' or 'invalid request'. Handle these errors by checking the product ID and the request data."
+    },
+    "tool": "Shopify",
+    "intent": "Update Inventory",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Update Inventory request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:16:56.072130"
+    }
+  },
+  {
+    "query": "Can I update inventory levels in bulk using Shopify API?",
+    "response": "Yes, you can update inventory levels in bulk using the Shopify API. You can use the bulk update endpoint to update multiple products at once.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.com/api/2022-04/products/bulk.json",
+      "authentication": "You need to have a private app or public app with the 'read_products' and 'write_products' permissions. You can authenticate using API key and password or using OAuth 2.0.",
+      "implementation": "First, prepare a list of products with their updated stock levels. Then, send a PUT request to the bulk update endpoint with the list of products in the request body. Use the 'inventory_quantity' field to update the stock level for each product.",
+      "error_handling": "Check the API response for errors. Common errors include 'product not found' or 'invalid request'. Handle these errors by checking the product IDs and the request data."
+    },
+    "tool": "Shopify",
+    "intent": "Update Inventory",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Update Inventory request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:16:56.072149"
+    }
+  },
+  {
+    "query": "How do I track inventory across multiple locations in Shopify?",
+    "response": "To track inventory across multiple locations in Shopify, you can use the Shopify API to retrieve the inventory levels for each location. You can also use the 'inventory_levels' endpoint to update the inventory levels for each location.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.com/api/2022-04/inventory_levels.json",
+      "authentication": "You need to have a private app or public app with the 'read_inventory' and 'write_inventory' permissions. You can authenticate using API key and password or using OAuth 2.0.",
+      "implementation": "First, retrieve the inventory levels for each location using the 'inventory_levels' endpoint. Then, use the 'location_id' field to update the inventory levels for each location. You can also use the 'inventory_item_id' field to update the inventory levels for a specific product.",
+      "error_handling": "Check the API response for errors. Common errors include 'location not found' or 'invalid request'. Handle these errors by checking the location IDs and the request data."
+    },
+    "tool": "Shopify",
+    "intent": "Update Inventory",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Update Inventory request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:16:56.072156"
+    }
+  },
+  {
+    "query": "Can I automate inventory updates in Shopify using webhooks?",
+    "response": "Yes, you can automate inventory updates in Shopify using webhooks. You can set up webhooks to receive notifications when the inventory levels change, and then use the Shopify API to update the inventory levels.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.com/api/2022-04/webhooks.json",
+      "authentication": "You need to have a private app or public app with the 'read_inventory' and 'write_inventory' permissions. You can authenticate using API key and password or using OAuth 2.0.",
+      "implementation": "First, set up a webhook to receive notifications when the inventory levels change. Then, use the webhook payload to retrieve the updated inventory levels and update the inventory levels using the Shopify API. Use the 'inventory_quantity' field to update the stock level.",
+      "error_handling": "Check the webhook payload for errors. Common errors include 'invalid payload' or 'missing data'. Handle these errors by checking the payload and the request data."
+    },
+    "tool": "Shopify",
+    "intent": "Update Inventory",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Update Inventory request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:16:56.072162"
+    }
+  },
+  {
+    "query": "How do I update the inventory quantity of a variant in Shopify?",
+    "response": "To update the inventory quantity of a variant in Shopify, you can use the Shopify API to send a request with the new inventory quantity. You can also do this directly in the Shopify admin dashboard.",
+    "execution_details": {
+      "api_endpoint": "https://shopify.com/api/2022-04/variants/{variant_id}.json",
+      "authentication": "You need to have a private app or public app with the 'read_products' and 'write_products' permissions. You can authenticate using API key and password or using OAuth 2.0.",
+      "implementation": "First, retrieve the variant ID of the variant you want to update. Then, send a PUT request to the API endpoint with the updated inventory quantity in the request body. Use the 'inventory_quantity' field to update the inventory quantity.",
+      "error_handling": "Check the API response for errors. Common errors include 'variant not found' or 'invalid request'. Handle these errors by checking the variant ID and the request data."
+    },
+    "tool": "Shopify",
+    "intent": "Update Inventory",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Update Inventory request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:16:56.072168"
+    }
+  }
+]

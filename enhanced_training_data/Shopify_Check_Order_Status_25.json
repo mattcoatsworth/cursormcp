@@ -1,0 +1,907 @@
+[
+  {
+    "query": "Hey, can you check what's going on with order #ABC123? Customer's been waiting a while without any updates.",
+    "response": "The order #ABC123 is currently in 'Preparation' and is expected to ship on March 23rd. Would you like me to send an email update to the customer?",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:38.518752",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "What's the latest with the order placed on 3/10/2023? There's no update since it entered 'Preparation'.",
+    "response": "The order placed on 3/10/2023 is still in 'Preparation'. However, there was an issue with the shipping address. The customer needs to update the address to ensure the product is delivered correctly. Would you like me to email the customer to get their shipping address updated?",
+    "follow_up": true,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:38.518766",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Could you check if order #XYZ987 shipped out yet? It's been 3 days since the last update.",
+    "response": "The order #XYZ987 is currently in 'Shipping' and is expected to be delivered on March 24th. Would you like me to send an email update to the customer?",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:38.518771",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "I've noticed order #78945 has been in 'Preparation' for several days now. Is everything alright?",
+    "response": "The order #78945 is still in 'Preparation'. There seems to be an issue with the supplier. I'll reach out to them to clarify the situation and update you as soon as I have more information.",
+    "follow_up": true,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:38.518775",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Is there any update on order #DEF876? No notification or email update has been received.",
+    "response": "The order #DEF876 is currently in 'Shipping' and is expected to be delivered on March 25th. However, I haven't sent an email update. Would you like me to send an email update to the customer?",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:38.518779",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Hey, what's the status of order #123456 for the 'Eco-Friendly Towels' set?",
+    "response": "The order #123456 for the 'Eco-Friendly Towels' set is currently in 'Preparation'. It's expected to ship on March 23rd. Would you like me to send an email update to the customer?",
+    "follow_up": false,
+    "auto_notify": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:50.597619",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "What's the status of order #234567 placed on March 15th? Order value was $5,000.",
+    "response": "The order #234567 placed on March 15th is in 'Processing'. It's expected to ship on March 20th. I can send an email update to the customer if needed.",
+    "follow_up": false,
+    "auto_notify": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:50.597634",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Hey, any issues with order #345678? Customer's been waiting for a while.",
+    "response": "The order #345678 has been in 'Processing' since March 17th. I'll look into the reason for the delay and get back to you soon. If necessary, I can send an email update to the customer.",
+    "follow_up": true,
+    "auto_notify": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:50.597638",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "What's the status of order #456789 from our VIP customer? Order value was $10,000.",
+    "response": "The order #456789 from our VIP customer is in 'Fulfillment'. It's expected to be shipped on March 21st. I'll double-check to make sure everything's as planned and send an email update to the customer if needed.",
+    "follow_up": false,
+    "auto_notify": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:50.597642",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "How many orders did we get today? Need to update the team.",
+    "response": "We received 20 orders today with a total value of $3,000. I'll let the team know.",
+    "follow_up": false,
+    "auto_notify": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:50.597646",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Hey, what's up with order #678901? The customer's been waiting a while.",
+    "response": "The order #678901 is currently in 'Preparation' and is expected to ship on April 5th. Would you like me to send an email update to the customer?",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:54.714831",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Got any updates on order #101101?",
+    "response": "The order #101101 is currently in 'Shipped' status. It was shipped on March 27th and is expected to arrive on April 1st. No further updates are expected.",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:54.715281",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "What's the status of order #987654? I need to follow up with the customer.",
+    "response": "The order #987654 is currently in 'Payment Received' status and is awaiting preparation. It is expected to be prepared and shipped on March 31st. Would you like me to send an email update to the customer?",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:54.715288",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "How's the order status for #234567? Need to make sure everything's on track.",
+    "response": "The order #234567 is currently in 'Fulfilled' status. It was shipped on March 25th and is expected to arrive on March 28th. No further updates are expected.",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:54.716739",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "What about order #321098? I haven't heard anything from the customer.",
+    "response": "The order #321098 is currently in 'Payment Received' status and is awaiting preparation. It is expected to be prepared and shipped on March 30th. Would you like me to send an email update to the customer?",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:54.716746",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Hey, how's order #ABC123 progressing? I saw a customer raised a concern.",
+    "response": "The order #ABC123 is currently in 'Preparation' and is expected to ship on April 18th. I can send an email update to the customer if you'd like.",
+    "follow_up": "Would you like me to send an email update to the customer?",
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:58.487638",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "What's the most recent update on order #XYZ789? I need to follow up with the supplier.",
+    "response": "The order #XYZ789 is currently in 'Fulfillment'. It's expected to be shipped on March 22nd and delivered on March 25th.",
+    "follow_up": "Would you like me to reach out to the supplier for the most recent update?",
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:58.487652",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Can you check the status of order #MNO456? I've received an inquiry from the customer.",
+    "response": "The order #MNO456 is currently in 'Preparation' and is expected to ship on March 20th. Would you like me to send an email update to the customer?",
+    "follow_up": "Would you like me to send an email update to the customer?",
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:58.487656",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "What's the status of order #LKJ789? I'd like to make sure it's on track.",
+    "response": "The order #LKJ789 is currently in 'In Transit' and is expected to be delivered on March 23rd.",
+    "follow_up": null,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:58.487660",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "How's order #DEF456 coming along? I noticed the customer hasn't received a confirmation yet.",
+    "response": "The order #DEF456 is currently in 'Awaiting Fulfillment'. I can send an email confirmation to the customer if you'd like.",
+    "follow_up": "Would you like me to send an email confirmation to the customer?",
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:17:58.487664",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Hey, can you check the status of order #A1B2C345? Customer's been asking about it.",
+    "response": "The order #A1B2C345 is currently in 'Preparation' and is expected to ship on March 23rd. Would you like me to send an email update to the customer?",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:18:03.504346",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "What's the status of all orders from yesterday?",
+    "response": "All orders processed yesterday are in 'Preparation' status. The total number of orders is 50, with a combined value of $3,750. There are no orders in 'Shipped' status yet.",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:18:03.504361",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Is there an issue with order #X9Y0Z123? Sales team says they haven't received any updates.",
+    "response": "There has been an issue with the order #X9Y0Z123. It was initially marked as 'Processed' but then moved back to 'Awaiting Fulfillment'. I've escalated this to the customer service team to investigate this issue further. Would you like me to follow up with the sales team and report back?",
+    "follow_up": true,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:18:03.504365",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "Need to check the status of a few orders before the end of the day. Specifically, orders #L5M6N789 and #O9P0Q123.",
+    "response": "The order #L5M6N789 is currently in 'Shipped' status and is expected to arrive on March 24th. The order #O9P0Q123 is still in 'Preparation' and is expected to ship on March 23rd. Would you like me to email updates to the customers for these orders?",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:18:03.504369",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  },
+  {
+    "query": "What's the status of our inventory for the summer collection?",
+    "response": "The inventory levels for the summer collection are as follows: Beach Towels - 1,000 units, Beach Blankets - 500 units, Beach Umbrellas - 300 units, Beach Toys - 200 units. Current inventory value is $25,000.",
+    "follow_up": false,
+    "tool": "Shopify",
+    "intent": "Check Order Status",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Check Order Status request"
+    ],
+    "execution_details": {
+      "steps": [
+        "Execute Check Order Status for Shopify"
+      ],
+      "status": "completed"
+    },
+    "metadata": {
+      "generated_at": "2025-04-02T09:18:03.504373",
+      "source": "training_generator",
+      "quality_score": 0.8,
+      "validation_status": "pending",
+      "system_context": {
+        "system_type": "comprehensive_business_operations",
+        "user_persona": "founders_executives",
+        "perspective": "business_operations",
+        "query_type": "operational",
+        "validation_rules": [
+          "user_perspective",
+          "tech_stack_management",
+          "comprehensive_operations"
+        ]
+      }
+    }
+  }
+]

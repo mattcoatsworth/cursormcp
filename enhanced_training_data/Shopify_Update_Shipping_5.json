@@ -1,0 +1,112 @@
+[
+  {
+    "query": "How do I update shipping rates for my Shopify store?",
+    "response": "To update shipping rates for your Shopify store, go to your Shopify admin panel, navigate to Settings > Shipping, and edit the rates for each shipping zone.",
+    "execution_details": {
+      "api_endpoint": "https://api.shopify.com/admin/api/2022-04/shipping_zones.json",
+      "authentication": "API key and password, or OAuth token",
+      "implementation": "Use the Shopify API to retrieve the current shipping zones, update the rates, and then use the API to update the shipping zones",
+      "error_handling": "Check for errors such as invalid API credentials, shipping zone not found, or rate update failed"
+    },
+    "tool": "Shopify",
+    "intent": "Update Shipping",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Update Shipping request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:46:07.221194"
+    }
+  },
+  {
+    "query": "Can I change the shipping carrier for an order in Shopify?",
+    "response": "Yes, you can change the shipping carrier for an order in Shopify. Go to the order details page, click on 'More actions', and select 'Update shipping carrier'.",
+    "execution_details": {
+      "api_endpoint": "https://api.shopify.com/admin/api/2022-04/orders/{order_id}.json",
+      "authentication": "API key and password, or OAuth token",
+      "implementation": "Use the Shopify API to retrieve the order details, update the shipping carrier, and then use the API to update the order",
+      "error_handling": "Check for errors such as invalid API credentials, order not found, or shipping carrier update failed"
+    },
+    "tool": "Shopify",
+    "intent": "Update Shipping",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Update Shipping request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:46:07.221213"
+    }
+  },
+  {
+    "query": "How do I add a new shipping method to my Shopify store?",
+    "response": "To add a new shipping method to your Shopify store, go to your Shopify admin panel, navigate to Settings > Shipping, and click on 'Add shipping method'.",
+    "execution_details": {
+      "api_endpoint": "https://api.shopify.com/admin/api/2022-04/shipping_zones.json",
+      "authentication": "API key and password, or OAuth token",
+      "implementation": "Use the Shopify API to create a new shipping zone, add the new shipping method, and then use the API to update the shipping zones",
+      "error_handling": "Check for errors such as invalid API credentials, shipping zone creation failed, or shipping method addition failed"
+    },
+    "tool": "Shopify",
+    "intent": "Update Shipping",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Update Shipping request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:46:07.221219"
+    }
+  },
+  {
+    "query": "Can I update the shipping address for an order in Shopify?",
+    "response": "Yes, you can update the shipping address for an order in Shopify. Go to the order details page, click on 'More actions', and select 'Update shipping address'.",
+    "execution_details": {
+      "api_endpoint": "https://api.shopify.com/admin/api/2022-04/orders/{order_id}.json",
+      "authentication": "API key and password, or OAuth token",
+      "implementation": "Use the Shopify API to retrieve the order details, update the shipping address, and then use the API to update the order",
+      "error_handling": "Check for errors such as invalid API credentials, order not found, or shipping address update failed"
+    },
+    "tool": "Shopify",
+    "intent": "Update Shipping",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Update Shipping request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:46:07.221224"
+    }
+  },
+  {
+    "query": "How do I set up free shipping for my Shopify store?",
+    "response": "To set up free shipping for your Shopify store, go to your Shopify admin panel, navigate to Settings > Shipping, and click on 'Add shipping method'. Then, select 'Free shipping' and set the conditions for when free shipping is available.",
+    "execution_details": {
+      "api_endpoint": "https://api.shopify.com/admin/api/2022-04/shipping_zones.json",
+      "authentication": "API key and password, or OAuth token",
+      "implementation": "Use the Shopify API to create a new shipping zone, add the free shipping method, and then use the API to update the shipping zones",
+      "error_handling": "Check for errors such as invalid API credentials, shipping zone creation failed, or free shipping method addition failed"
+    },
+    "tool": "Shopify",
+    "intent": "Update Shipping",
+    "systems": [
+      "Shopify"
+    ],
+    "workflow": [
+      "Process Update Shipping request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-02T00:46:07.221229"
+    }
+  }
+]

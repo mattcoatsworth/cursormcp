@@ -1,0 +1,112 @@
+[
+  {
+    "query": "What is the open rate for my latest email campaign in Klaviyo?",
+    "response": "The open rate for your latest email campaign in Klaviyo is 25%. This means that out of the total number of recipients, 25% opened your email.",
+    "execution_details": {
+      "api_endpoint": "GET /v1/campaigns/{campaign_id}/metrics",
+      "authentication": "Klaviyo API key",
+      "implementation": "1. Retrieve the latest campaign ID from Klaviyo. 2. Use the campaign ID to fetch metrics from the Klaviyo API. 3. Extract the open rate from the response.",
+      "error_handling": "Handle 401 Unauthorized errors by refreshing the API key. Handle 404 Not Found errors by checking the campaign ID."
+    },
+    "tool": "Klaviyo",
+    "intent": "Get Open Rates",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Get Open Rates request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:12.946602"
+    }
+  },
+  {
+    "query": "How do I track the open rates of my email campaigns in Klaviyo?",
+    "response": "You can track the open rates of your email campaigns in Klaviyo by using the Klaviyo dashboard or by integrating with Klaviyo's API. To do this, go to the 'Campaigns' tab, select the campaign you want to track, and click on 'Metrics'.",
+    "execution_details": {
+      "api_endpoint": "GET /v1/campaigns/{campaign_id}/metrics",
+      "authentication": "Klaviyo API key",
+      "implementation": "1. Retrieve the campaign ID from Klaviyo. 2. Use the campaign ID to fetch metrics from the Klaviyo API. 3. Extract the open rate from the response.",
+      "error_handling": "Handle 401 Unauthorized errors by refreshing the API key. Handle 404 Not Found errors by checking the campaign ID."
+    },
+    "tool": "Klaviyo",
+    "intent": "Get Open Rates",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Get Open Rates request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:12.946622"
+    }
+  },
+  {
+    "query": "What is a good open rate for an email campaign in Klaviyo?",
+    "response": "A good open rate for an email campaign in Klaviyo varies depending on the industry and audience, but generally, an open rate of 15% to 25% is considered average, while an open rate above 25% is considered good.",
+    "execution_details": {
+      "api_endpoint": "None",
+      "authentication": "None",
+      "implementation": "Provide general information about average open rates for email campaigns.",
+      "error_handling": "None"
+    },
+    "tool": "Klaviyo",
+    "intent": "Get Open Rates",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Get Open Rates request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:12.946628"
+    }
+  },
+  {
+    "query": "Can I get the open rate for a specific email campaign in Klaviyo?",
+    "response": "Yes, you can get the open rate for a specific email campaign in Klaviyo by using the Klaviyo API. To do this, you need to provide the campaign ID and use the 'GET /v1/campaigns/{campaign_id}/metrics' endpoint.",
+    "execution_details": {
+      "api_endpoint": "GET /v1/campaigns/{campaign_id}/metrics",
+      "authentication": "Klaviyo API key",
+      "implementation": "1. Retrieve the campaign ID from Klaviyo. 2. Use the campaign ID to fetch metrics from the Klaviyo API. 3. Extract the open rate from the response.",
+      "error_handling": "Handle 401 Unauthorized errors by refreshing the API key. Handle 404 Not Found errors by checking the campaign ID."
+    },
+    "tool": "Klaviyo",
+    "intent": "Get Open Rates",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Get Open Rates request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:12.946635"
+    }
+  },
+  {
+    "query": "How do I compare the open rates of different email campaigns in Klaviyo?",
+    "response": "You can compare the open rates of different email campaigns in Klaviyo by using the Klaviyo dashboard or by integrating with Klaviyo's API. To do this, go to the 'Campaigns' tab, select the campaigns you want to compare, and click on 'Metrics'.",
+    "execution_details": {
+      "api_endpoint": "GET /v1/campaigns/{campaign_id}/metrics",
+      "authentication": "Klaviyo API key",
+      "implementation": "1. Retrieve the campaign IDs from Klaviyo. 2. Use the campaign IDs to fetch metrics from the Klaviyo API. 3. Extract the open rates from the responses and compare them.",
+      "error_handling": "Handle 401 Unauthorized errors by refreshing the API key. Handle 404 Not Found errors by checking the campaign IDs."
+    },
+    "tool": "Klaviyo",
+    "intent": "Get Open Rates",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Get Open Rates request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:38:12.946640"
+    }
+  }
+]

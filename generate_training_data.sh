@@ -1,62 +1,12 @@
 #!/bin/bash
 
-# Script to generate training data quickly using the parallel generator
-# Usage: ./generate_training_data.sh [small|medium|large|massive]
+# Generate training data using the fast generator
+echo "Generating training data..."
+python fast_run_generator_loop.py --batch-size 25 --sleep-time 0.1
 
-# Set default values
-WORKERS=4
-EXAMPLES=10
-BATCH_SIZE=10
-SIZE="small"
+# Save progress to file
+echo "Saving progress to generated_examples.json..."
 
-# Parse command line argument
-if [ $# -ge 1 ]; then
-  SIZE=$1
-fi
-
-# Set configuration based on size
-case $SIZE in
-  "small")
-    WORKERS=4
-    EXAMPLES=10
-    BATCH_SIZE=10
-    echo "Running SMALL generation (approx. 400-600 examples)"
-    ;;
-  "medium")
-    WORKERS=6
-    EXAMPLES=25
-    BATCH_SIZE=25
-    echo "Running MEDIUM generation (approx. 2,000-3,000 examples)"
-    ;;
-  "large")
-    WORKERS=8
-    EXAMPLES=50
-    BATCH_SIZE=25
-    echo "Running LARGE generation (approx. 5,000-7,000 examples)"
-    ;;
-  "massive")
-    WORKERS=10
-    EXAMPLES=100
-    BATCH_SIZE=25
-    echo "Running MASSIVE generation (approx. 10,000-15,000 examples)"
-    ;;
-  *)
-    echo "Unknown size: $SIZE. Using small."
-    ;;
-esac
-
-# Create output directory with timestamp
-TIMESTAMP=$(date +"%Y%m%d%H%M%S")
-OUTPUT_DIR="training_data_output_${TIMESTAMP}"
-
-# Run the generator
-echo "Starting parallel generation with $WORKERS workers, $EXAMPLES examples per item, batch size $BATCH_SIZE"
-echo "Output directory: $OUTPUT_DIR"
-echo ""
-
-python3 parallel_training_generator.py --workers $WORKERS --examples $EXAMPLES --batch-size $BATCH_SIZE --output-dir $OUTPUT_DIR
-
-echo ""
-echo "Generation complete!"
-echo "Generated data is stored in $OUTPUT_DIR and imported to database"
-echo "To view training data count, run: python -c \"import psycopg2; conn = psycopg2.connect(open('.env').read().split('DATABASE_URL=')[1].strip().split('\\n')[0]); cur = conn.cursor(); cur.execute('SELECT COUNT(*) FROM training_data'); print(cur.fetchone()[0]); conn.close()\""
+# Print summary
+echo "Training data generation complete!"
+echo "To view training data count, run: python -c \"from supabase import create_client; import os; supabase = create_client(os.environ.get('SUPABASE_URL'), os.environ.get('SUPABASE_SERVICE_ROLE_KEY')); result = supabase.table('training_data').select('id', count='exact').execute(); print(result.count)\""

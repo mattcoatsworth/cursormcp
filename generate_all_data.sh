@@ -1,42 +1,19 @@
 #!/bin/bash
 
-# Script to generate both standard and complex cross-system training data
-# Usage: ./generate_all_data.sh [small|medium|large|massive]
-# 
-# This script runs both standard and complex cross-system data generation
-# Complex data includes 18 different multi-service scenarios covering all 13 integrations
+# Generate all types of training data
+echo "Generating all training data..."
 
-# Default size
-SIZE=${1:-"small"}
+# Generate standard training data
+echo "Generating standard training data..."
+python fast_run_generator_loop.py --batch-size 25 --sleep-time 0.1
 
-echo "=== TRAINING DATA GENERATION ==="
-echo "Generating both standard and complex cross-system training data"
-echo "Size: $SIZE"
-echo ""
+# Generate complex cross-system training data
+echo "Generating complex cross-system training data..."
+python generate_complex_cross_system_data.py --count 100 --batch-size 25
 
-# First generate standard training data
-echo "=== STEP 1: GENERATING STANDARD TRAINING DATA ==="
-./generate_training_data.sh $SIZE
-echo ""
+# Save progress to files
+echo "Saving progress to generated_examples.json and complex_cross_system_examples.json..."
 
-# Then generate complex cross-system data
-echo "=== STEP 2: GENERATING COMPLEX CROSS-SYSTEM DATA ==="
-./generate_complex_data.sh $SIZE
-echo ""
-
-# Final stats
-echo "=== GENERATION COMPLETE ==="
-echo "To view current training data counts:"
-
-# Get count of standard examples
-STANDARD_COUNT=$(python -c "import psycopg2; conn = psycopg2.connect(open('.env').read().split('DATABASE_URL=')[1].strip().split('\n')[0]); cur = conn.cursor(); cur.execute('SELECT COUNT(*) FROM training_data WHERE is_complex_multi_system IS NULL OR is_complex_multi_system = FALSE'); print(cur.fetchone()[0]); conn.close()" 2>/dev/null) || echo "Unknown"
-
-# Get count of complex examples
-COMPLEX_COUNT=$(python -c "import psycopg2; conn = psycopg2.connect(open('.env').read().split('DATABASE_URL=')[1].strip().split('\n')[0]); cur = conn.cursor(); cur.execute('SELECT COUNT(*) FROM training_data WHERE is_complex_multi_system = TRUE'); print(cur.fetchone()[0]); conn.close()" 2>/dev/null) || echo "Unknown"
-
-# Get total count
-TOTAL_COUNT=$(python -c "import psycopg2; conn = psycopg2.connect(open('.env').read().split('DATABASE_URL=')[1].strip().split('\n')[0]); cur = conn.cursor(); cur.execute('SELECT COUNT(*) FROM training_data'); print(cur.fetchone()[0]); conn.close()" 2>/dev/null) || echo "Unknown"
-
-echo "Standard examples: $STANDARD_COUNT"
-echo "Complex examples: $COMPLEX_COUNT"
-echo "Total examples: $TOTAL_COUNT"
+# Print summary
+echo "All training data generation complete!"
+echo "To view training data counts, run: python -c \"from supabase import create_client; import os; supabase = create_client(os.environ.get('SUPABASE_URL'), os.environ.get('SUPABASE_SERVICE_ROLE_KEY')); standard = supabase.table('training_data').select('id', count='exact').neq('tool', 'complex_interaction').execute(); complex = supabase.table('training_data').select('id', count='exact').eq('tool', 'complex_interaction').execute(); total = supabase.table('training_data').select('id', count='exact').execute(); print(f'Standard examples: {standard.count}\nComplex examples: {complex.count}\nTotal examples: {total.count}')\""

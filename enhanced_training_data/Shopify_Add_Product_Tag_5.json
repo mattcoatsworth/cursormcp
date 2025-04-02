@@ -1,0 +1,52 @@
+[
+  {
+    "query": "How do I add a product tag in Shopify for a new summer collection?",
+    "response": "To add a product tag in Shopify, go to the product details page, click on 'Add tags', and type in the tag you want to add, such as 'summer-collection'. You can also use the bulk editor to add tags to multiple products at once.",
+    "execution_details": {
+      "api_endpoint": "POST /products/{product_id}/metafields.json",
+      "authentication": "Private app API key or password, or public app API key with 'write_products' scope",
+      "implementation": "1. Retrieve the product ID, 2. Create a new metafield with the namespace 'tags' and key 'tag', 3. Set the value of the metafield to the desired tag, 4. Send the request to the API endpoint",
+      "error_handling": "Check for 401 Unauthorized or 403 Forbidden errors if authentication fails, and 422 Unprocessable Entity error if the request is invalid"
+    }
+  },
+  {
+    "query": "What is the best way to assign a product tag to multiple products in Shopify?",
+    "response": "You can assign a product tag to multiple products in Shopify using the bulk editor. Select the products you want to tag, click on 'Edit products', and then click on 'Add tags'. Type in the tag you want to add and click 'Save'.",
+    "execution_details": {
+      "api_endpoint": "POST /products/bulk.json",
+      "authentication": "Private app API key or password, or public app API key with 'write_products' scope",
+      "implementation": "1. Retrieve the IDs of the products to tag, 2. Create a bulk update request with the 'add_tags' action, 3. Set the value of the 'add_tags' action to the desired tag, 4. Send the request to the API endpoint",
+      "error_handling": "Check for 401 Unauthorized or 403 Forbidden errors if authentication fails, and 422 Unprocessable Entity error if the request is invalid"
+    }
+  },
+  {
+    "query": "Can I use the Shopify API to add product tags in bulk?",
+    "response": "Yes, you can use the Shopify API to add product tags in bulk. You can use the 'POST /products/bulk.json' endpoint to update multiple products at once and add tags to them.",
+    "execution_details": {
+      "api_endpoint": "POST /products/bulk.json",
+      "authentication": "Private app API key or password, or public app API key with 'write_products' scope",
+      "implementation": "1. Retrieve the IDs of the products to tag, 2. Create a bulk update request with the 'add_tags' action, 3. Set the value of the 'add_tags' action to the desired tag, 4. Send the request to the API endpoint",
+      "error_handling": "Check for 401 Unauthorized or 403 Forbidden errors if authentication fails, and 422 Unprocessable Entity error if the request is invalid"
+    }
+  },
+  {
+    "query": "How do I automatically add a product tag to new products in Shopify?",
+    "response": "You can use a Shopify automation app or a custom script to automatically add a product tag to new products in Shopify. The app or script can listen for the 'product_creation' event and add the tag to the product using the Shopify API.",
+    "execution_details": {
+      "api_endpoint": "POST /products/{product_id}/metafields.json",
+      "authentication": "Private app API key or password, or public app API key with 'write_products' scope",
+      "implementation": "1. Set up an automation app or custom script to listen for the 'product_creation' event, 2. Retrieve the ID of the newly created product, 3. Create a new metafield with the namespace 'tags' and key 'tag', 4. Set the value of the metafield to the desired tag, 5. Send the request to the API endpoint",
+      "error_handling": "Check for 401 Unauthorized or 403 Forbidden errors if authentication fails, and 422 Unprocessable Entity error if the request is invalid"
+    }
+  },
+  {
+    "query": "What are the limitations of adding product tags in Shopify?",
+    "response": "There are some limitations to adding product tags in Shopify. For example, you can only add a maximum of 250 tags per product, and tag names must be 255 characters or less. Additionally, some characters are not allowed in tag names.",
+    "execution_details": {
+      "api_endpoint": "GET /products/{product_id}.json",
+      "authentication": "Private app API key or password, or public app API key with 'read_products' scope",
+      "implementation": "1. Retrieve the product ID, 2. Send a GET request to the API endpoint to retrieve the product details, 3. Check the 'tags' field in the response to see the existing tags, 4. Validate the new tag against the Shopify tag limitations",
+      "error_handling": "Check for 401 Unauthorized or 403 Forbidden errors if authentication fails, and 404 Not Found error if the product does not exist"
+    }
+  }
+]

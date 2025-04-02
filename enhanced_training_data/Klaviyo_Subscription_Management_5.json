@@ -1,0 +1,112 @@
+[
+  {
+    "query": "How do I cancel my Klaviyo subscription?",
+    "response": "To cancel your Klaviyo subscription, go to your account settings, click on 'Billing' and select 'Cancel Subscription'. Confirm the cancellation to stop future payments.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/account",
+      "authentication": "Private API key or OAuth token",
+      "implementation": "Send a DELETE request to the API endpoint with the account ID and confirmation of cancellation.",
+      "error_handling": "Handle 401 for unauthorized access, 404 for account not found, and 500 for internal server errors."
+    },
+    "tool": "Klaviyo",
+    "intent": "Subscription Management",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Subscription Management request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:39:05.234040"
+    }
+  },
+  {
+    "query": "Can I downgrade my Klaviyo plan?",
+    "response": "Yes, you can downgrade your Klaviyo plan at any time. Go to your account settings, click on 'Billing', and select 'Change Plan'. Choose your new plan and confirm the change.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/account/plan",
+      "authentication": "Private API key or OAuth token",
+      "implementation": "Send a PATCH request to the API endpoint with the new plan details.",
+      "error_handling": "Handle 401 for unauthorized access, 404 for plan not found, and 500 for internal server errors."
+    },
+    "tool": "Klaviyo",
+    "intent": "Subscription Management",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Subscription Management request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:39:05.234064"
+    }
+  },
+  {
+    "query": "How do I update my payment method in Klaviyo?",
+    "response": "To update your payment method, go to your account settings, click on 'Billing', and select 'Payment Method'. Enter your new payment details and save the changes.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/account/payment-method",
+      "authentication": "Private API key or OAuth token",
+      "implementation": "Send a PUT request to the API endpoint with the updated payment details.",
+      "error_handling": "Handle 401 for unauthorized access, 422 for invalid payment details, and 500 for internal server errors."
+    },
+    "tool": "Klaviyo",
+    "intent": "Subscription Management",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Subscription Management request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:39:05.234072"
+    }
+  },
+  {
+    "query": "Can I pause my Klaviyo subscription?",
+    "response": "Yes, you can pause your Klaviyo subscription for up to 3 months. Go to your account settings, click on 'Billing', and select 'Pause Subscription'. Choose the pause duration and confirm.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/account/subscription/pause",
+      "authentication": "Private API key or OAuth token",
+      "implementation": "Send a POST request to the API endpoint with the pause duration.",
+      "error_handling": "Handle 401 for unauthorized access, 404 for subscription not found, and 500 for internal server errors."
+    },
+    "tool": "Klaviyo",
+    "intent": "Subscription Management",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Subscription Management request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:39:05.234079"
+    }
+  },
+  {
+    "query": "How do I reactivate my canceled Klaviyo subscription?",
+    "response": "To reactivate your canceled Klaviyo subscription, go to your account settings, click on 'Billing', and select 'Reactivate Subscription'. Confirm the reactivation to resume your subscription.",
+    "execution_details": {
+      "api_endpoint": "https://a.klaviyo.com/api/v1/account/subscription/reactivate",
+      "authentication": "Private API key or OAuth token",
+      "implementation": "Send a POST request to the API endpoint with the account ID and confirmation of reactivation.",
+      "error_handling": "Handle 401 for unauthorized access, 404 for subscription not found, and 500 for internal server errors."
+    },
+    "tool": "Klaviyo",
+    "intent": "Subscription Management",
+    "systems": [
+      "Klaviyo"
+    ],
+    "workflow": [
+      "Process Subscription Management request"
+    ],
+    "metadata": {
+      "source": "parallel_training_generator",
+      "generated_at": "2025-04-01T23:39:05.234085"
+    }
+  }
+]
