@@ -26,8 +26,8 @@ def connect_to_supabase() -> Client:
     """Connect to Supabase with service role key"""
     load_dotenv()
     
-    supabase_url = os.getenv("SUPABASE_URL")
-    service_role_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+    supabase_url = os.getenv("https://jmpxvzuxbyfjrttxwtnn.supabase.co")
+    service_role_key = os.getenv("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptcHh2enV4YnlmanJ0dHh3dG5uIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MzI5MDQ2NCwiZXhwIjoyMDU4ODY2NDY0fQ.796c1dass2GiHo6rwn0BeAYJQ71iyaJjrHObWYUV4rQ")
     
     if not supabase_url or not service_role_key:
         raise ValueError("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set in .env file")
@@ -42,12 +42,12 @@ def execute_sql(supabase: Client, sql: str) -> bool:
     """Execute SQL using Supabase Management API"""
     try:
         # Get the project ID from the URL
-        project_id = os.getenv("SUPABASE_PROJECT_ID")
+        project_id = os.getenv("jmpxvzuxbyfjrttxwtnn")
         if not project_id:
             raise ValueError("SUPABASE_PROJECT_ID must be set in .env file")
         
         # Get the management API key
-        management_key = os.getenv("SUPABASE_MANAGEMENT_KEY")
+        management_key = os.getenv("sbp_aec9141ee427b300938adeab7fa12b4ccdc26aec")
         if not management_key:
             raise ValueError("SUPABASE_MANAGEMENT_KEY must be set in .env file")
         

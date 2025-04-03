@@ -29,7 +29,7 @@ def connect_to_supabase() -> Client:
     """Connect to Supabase with service role key"""
     load_dotenv()
     
-    supabase_url = os.getenv("SUPABASE_URL")
+    supabase_url = os.getenv("https://jmpxvzuxbyfjrttxwtnn.supabase.co")
     service_role_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
     
     if not supabase_url or not service_role_key:

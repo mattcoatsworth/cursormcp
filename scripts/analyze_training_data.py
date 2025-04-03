@@ -2,9 +2,10 @@ import os
 import json
 import logging
 import argparse
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from supabase import create_client, Client
 from dotenv import load_dotenv
+from datetime import datetime
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -17,6 +18,154 @@ load_dotenv()
 supabase_url = os.getenv("SUPABASE_URL")
 supabase_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")  # Use service role key for admin access
 supabase: Client = create_client(supabase_url, supabase_key)
+
+class TrainingDataAnalyzer:
+    def __init__(self):
+        self.supabase = supabase
+
+    def get_training_data(self, limit: int = 100) -> List[Dict]:
+        """Fetch training data from Supabase."""
+        try:
+            response = self.supabase.table('training_data').select('*').limit(limit).execute()
+            return response.data
+        except Exception as e:
+            logger.error(f"Error fetching training data: {str(e)}")
+            return []
+
+    def analyze_ratings(self, data: List[Dict]) -> Dict:
+        """Analyze ratings and feedback from training data."""
+        analysis = {
+            'old_ratings': {
+                'feedback_score': {'count': 0, 'total': 0, 'average': 0},
+                'rating': {'count': 0, 'total': 0, 'average': 0}
+            },
+            'new_ratings': {
+                'query_ratings': {'count': 0, 'total': 0, 'average': 0},
+                'response_ratings': {'count': 0, 'total': 0, 'average': 0},
+                'endpoint_ratings': {'count': 0, 'total': 0, 'average': 0}
+            },
+            'feedback_counts': {
+                'old': {
+                    'feedback_notes': {},
+                    'feedback': {}
+                },
+                'new': {
+                    'query': {},
+                    'response': {},
+                    'endpoint': {}
+                }
+            }
+        }
+
+        for item in data:
+            # Analyze old ratings
+            if item.get('feedback_score') is not None:
+                analysis['old_ratings']['feedback_score']['count'] += 1
+                analysis['old_ratings']['feedback_score']['total'] += item['feedback_score']
+            
+            if item.get('rating') is not None:
+                analysis['old_ratings']['rating']['count'] += 1
+                analysis['old_ratings']['rating']['total'] += item['rating']
+            
+            # Analyze new ratings
+            if item.get('query_rating') is not None:
+                analysis['new_ratings']['query_ratings']['count'] += 1
+                analysis['new_ratings']['query_ratings']['total'] += item['query_rating']
+            
+            if item.get('response_rating') is not None:
+                analysis['new_ratings']['response_ratings']['count'] += 1
+                analysis['new_ratings']['response_ratings']['total'] += item['response_rating']
+            
+            if item.get('endpoint_rating') is not None:
+                analysis['new_ratings']['endpoint_ratings']['count'] += 1
+                analysis['new_ratings']['endpoint_ratings']['total'] += item['endpoint_rating']
+            
+            # Analyze old feedback
+            for feedback_type in ['feedback_notes', 'feedback']:
+                feedback = item.get(feedback_type)
+                if feedback:
+                    if feedback not in analysis['feedback_counts']['old'][feedback_type]:
+                        analysis['feedback_counts']['old'][feedback_type][feedback] = 0
+                    analysis['feedback_counts']['old'][feedback_type][feedback] += 1
+            
+            # Analyze new feedback
+            for feedback_type in ['query', 'response', 'endpoint']:
+                feedback = item.get(f'{feedback_type}_feedback')
+                if feedback:
+                    if feedback not in analysis['feedback_counts']['new'][feedback_type]:
+                        analysis['feedback_counts']['new'][feedback_type][feedback] = 0
+                    analysis['feedback_counts']['new'][feedback_type][feedback] += 1
+
+        # Calculate averages for old ratings
+        for rating_type in ['feedback_score', 'rating']:
+            if analysis['old_ratings'][rating_type]['count'] > 0:
+                analysis['old_ratings'][rating_type]['average'] = (
+                    analysis['old_ratings'][rating_type]['total'] / 
+                    analysis['old_ratings'][rating_type]['count']
+                )
+
+        # Calculate averages for new ratings
+        for rating_type in ['query_ratings', 'response_ratings', 'endpoint_ratings']:
+            if analysis['new_ratings'][rating_type]['count'] > 0:
+                analysis['new_ratings'][rating_type]['average'] = (
+                    analysis['new_ratings'][rating_type]['total'] / 
+                    analysis['new_ratings'][rating_type]['count']
+                )
+
+        return analysis
+
+    def generate_report(self, analysis: Dict) -> str:
+        """Generate a report from the analysis."""
+        report = []
+        report.append("Training Data Analysis Report")
+        report.append("=" * 30)
+        report.append(f"Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+
+        # Old ratings section
+        report.append("Old Ratings Analysis")
+        report.append("-" * 20)
+        for rating_type in ['feedback_score', 'rating']:
+            report.append(f"{rating_type.replace('_', ' ').title()}:")
+            report.append(f"  Total rated: {analysis['old_ratings'][rating_type]['count']}")
+            report.append(f"  Average rating: {analysis['old_ratings'][rating_type]['average']:.2f}\n")
+
+        # New ratings section
+        report.append("New Ratings Analysis")
+        report.append("-" * 20)
+        for rating_type in ['query_ratings', 'response_ratings', 'endpoint_ratings']:
+            name = rating_type.replace('_ratings', '').title()
+            report.append(f"{name} Ratings:")
+            report.append(f"  Total rated: {analysis['new_ratings'][rating_type]['count']}")
+            report.append(f"  Average rating: {analysis['new_ratings'][rating_type]['average']:.2f}\n")
+
+        # Old feedback section
+        report.append("Old Feedback Analysis")
+        report.append("-" * 20)
+        for feedback_type in ['feedback_notes', 'feedback']:
+            report.append(f"{feedback_type.replace('_', ' ').title()}:")
+            for feedback, count in analysis['feedback_counts']['old'][feedback_type].items():
+                report.append(f"  - {feedback}: {count} occurrences")
+            report.append("")
+
+        # New feedback section
+        report.append("New Feedback Analysis")
+        report.append("-" * 20)
+        for feedback_type in ['query', 'response', 'endpoint']:
+            report.append(f"{feedback_type.title()} Feedback:")
+            for feedback, count in analysis['feedback_counts']['new'][feedback_type].items():
+                report.append(f"  - {feedback}: {count} occurrences")
+            report.append("")
+
+        return "\n".join(report)
+
+    def save_report(self, report: str, filename: str = "training_data_analysis_report.txt"):
+        """Save the analysis report to a file."""
+        try:
+            with open(filename, 'w') as f:
+                f.write(report)
+            logger.info(f"Report saved to {filename}")
+        except Exception as e:
+            logger.error(f"Error saving report: {str(e)}")
 
 def get_unanalyzed_training_data(limit: int = 10) -> List[Dict[str, Any]]:
     """Get training data entries that have either a rating or feedback."""
