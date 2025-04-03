@@ -1,0 +1,15 @@
+Unfortunately, order #9999 has already shipped and is arriving on March 28th.
+I've paused order #4556 from shipping as it was still unfulfilled.
+I've paused order #4556 from shipping as it was still unfulfilled.
+I've removed order #1234 from the shipping batch as it was still unfulfilled.
+I've paused order #4556 from shipping as it was still unfulfilled.
+Can you void the shipping label for order #7266?
+Can you help me with managing fulfillment status?
+Can you help me with managing shipping batches?
+Can you void the shipping label for order #9511?
+Can you void the shipping label for order #8673?
+I've configured the webhook to receive message events at https://your-domain.com/webhook
+I've sent your message to +1234567890. The message ID is wamid.123456789
+I've sent your message to +1234567890. The message ID is wamid.123456789
+I've sent your product image to +1234567890. The media ID is media.123456789
+I've created a new message template named 'shipping_update' for order status notifications

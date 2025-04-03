@@ -1,0 +1,109 @@
+{
+    "version": "1.0",
+    "last_updated": "2024-04-03",
+    "guidelines": {
+        "message_operations": {
+            "rule": "Use WhatsApp endpoints for all messaging and communication operations",
+            "allowed_operations": [
+                "Sending text messages",
+                "Sending template messages",
+                "Sending media messages",
+                "Managing message templates",
+                "Configuring webhooks",
+                "Managing business profile"
+            ],
+            "response_format": {
+                "send_text": "I've sent your message to [recipient]. The message ID is [message_id]",
+                "send_template": "I've sent the [template_name] template to [recipient] with the provided variables",
+                "send_media": "I've sent your [media_type] to [recipient]. The media ID is [media_id]",
+                "template_created": "I've created a new message template named [template_name]",
+                "webhook_configured": "I've configured the webhook to receive [event_type] events at [webhook_url]"
+            },
+            "examples": {
+                "good": [
+                    "I've sent your message to +1234567890. The message ID is wamid.123456789",
+                    "I've sent the order_confirmation template to +1234567890 with the order details",
+                    "I've sent your product image to +1234567890. The media ID is media.123456789",
+                    "I've created a new message template named 'shipping_update' for order status notifications",
+                    "I've configured the webhook to receive message events at https://your-domain.com/webhook"
+                ],
+                "bad": [
+                    "Let me check if the recipient is valid first",
+                    "I'll verify the template variables before sending",
+                    "I need to check if the media file exists"
+                ]
+            }
+        },
+        "workflow": {
+            "send_message": [
+                "1. Validate recipient phone number",
+                "2. Check message content against guidelines",
+                "3. Send message through WhatsApp API",
+                "4. Return message ID and status"
+            ],
+            "send_template": [
+                "1. Validate recipient phone number",
+                "2. Verify template exists and is approved",
+                "3. Validate template variables",
+                "4. Send template message",
+                "5. Return message ID and status"
+            ],
+            "send_media": [
+                "1. Validate recipient phone number",
+                "2. Upload media file to WhatsApp",
+                "3. Get media ID",
+                "4. Send media message",
+                "5. Return message ID and status"
+            ],
+            "manage_templates": [
+                "1. Validate template content",
+                "2. Check template against guidelines",
+                "3. Create/update template",
+                "4. Return template status"
+            ],
+            "configure_webhook": [
+                "1. Validate webhook URL",
+                "2. Verify SSL certificate",
+                "3. Configure event subscriptions",
+                "4. Test webhook connection",
+                "5. Return webhook status"
+            ]
+        },
+        "restricted_operations": {
+            "shopify_only": [
+                "Order status queries",
+                "Customer information lookups",
+                "Order history checks",
+                "Product information queries"
+            ],
+            "explanation": "These operations should be handled through Shopify endpoints only, not WhatsApp endpoints"
+        }
+    },
+    "response_rules": {
+        "always_include": [
+            "Recipient phone number (if applicable)",
+            "Message/template ID",
+            "Specific action taken",
+            "Clear explanation of outcome"
+        ],
+        "never_include": [
+            "Technical API details unless necessary",
+            "Internal process steps",
+            "Ambiguous or incomplete information",
+            "Raw API responses"
+        ],
+        "format_guidelines": {
+            "phone_numbers": "Use international format with country code",
+            "message_ids": "Include full message ID for tracking",
+            "templates": "Use template name and language code",
+            "actions": "Use past tense for completed actions"
+        }
+    },
+    "error_handling": {
+        "invalid_phone": "The phone number appears to be invalid. Please provide a valid international phone number.",
+        "template_not_found": "The specified template does not exist or is not approved. Please check the template name.",
+        "media_upload_failed": "I couldn't upload the media file. Please ensure it meets WhatsApp's requirements.",
+        "webhook_config_failed": "I couldn't configure the webhook. Please verify the URL and SSL certificate.",
+        "rate_limit_exceeded": "The message couldn't be sent due to rate limiting. Please try again in a few minutes."
+    }
+} 

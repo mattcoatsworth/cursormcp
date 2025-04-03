@@ -1,0 +1,1306 @@
+[
+  {
+    "tool": "whatsapp",
+    "intent": "Send Message",
+    "query": "How do I send a text message to a customer?",
+    "response": "I'll help you send a WhatsApp message. How do I send a text message to a customer?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_message_content",
+      "check_recipient",
+      "send_whatsapp_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639087"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Send Message",
+    "query": "Can you help me send a WhatsApp message?",
+    "response": "I'll help you send a WhatsApp message. Can you help me send a WhatsApp message?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_message_content",
+      "check_recipient",
+      "send_whatsapp_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639117"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Send Message",
+    "query": "I need to send a message to multiple customers",
+    "response": "I'll help you send a WhatsApp message. I need to send a message to multiple customers",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_message_content",
+      "check_recipient",
+      "send_whatsapp_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639125"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Send Message",
+    "query": "What's the best way to send a bulk message?",
+    "response": "I'll help you send a WhatsApp message. What's the best way to send a bulk message?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_message_content",
+      "check_recipient",
+      "send_whatsapp_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639132"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Template Messages",
+    "query": "How do I send a template message?",
+    "response": "I'll help you work with WhatsApp templates. How do I send a template message?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_template",
+      "check_variables",
+      "send_template_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639139"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Template Messages",
+    "query": "Can you show me how to use message templates?",
+    "response": "I'll help you work with WhatsApp templates. Can you show me how to use message templates?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_template",
+      "check_variables",
+      "send_template_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639146"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Template Messages",
+    "query": "I need to send a template with variables",
+    "response": "I'll help you work with WhatsApp templates. I need to send a template with variables",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_template",
+      "check_variables",
+      "send_template_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639161"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Template Messages",
+    "query": "What templates are available for sending?",
+    "response": "I'll help you work with WhatsApp templates. What templates are available for sending?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_template",
+      "check_variables",
+      "send_template_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639179"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Media Messages",
+    "query": "How do I send an image in WhatsApp?",
+    "response": "I'll help you handle WhatsApp media. How do I send an image in WhatsApp?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_media",
+      "upload_media",
+      "send_media_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639192"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Media Messages",
+    "query": "Can you help me send a document?",
+    "response": "I'll help you handle WhatsApp media. Can you help me send a document?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_media",
+      "upload_media",
+      "send_media_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639199"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Media Messages",
+    "query": "I need to send a video message",
+    "response": "I'll help you handle WhatsApp media. I need to send a video message",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_media",
+      "upload_media",
+      "send_media_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639213"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Media Messages",
+    "query": "What types of media can I send?",
+    "response": "I'll help you handle WhatsApp media. What types of media can I send?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_media",
+      "upload_media",
+      "send_media_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639225"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Business Profile",
+    "query": "How do I update my business profile?",
+    "response": "I'll help you with your WhatsApp request. How do I update my business profile?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "get_business_profile",
+      "update_profile_info",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639246"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Business Profile",
+    "query": "Can you show me my current business profile?",
+    "response": "I'll help you with your WhatsApp request. Can you show me my current business profile?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "get_business_profile",
+      "update_profile_info",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639258"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Business Profile",
+    "query": "I need to change my business description",
+    "response": "I'll help you with your WhatsApp request. I need to change my business description",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "get_business_profile",
+      "update_profile_info",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639271"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Business Profile",
+    "query": "What information can I update in my profile?",
+    "response": "I'll help you with your WhatsApp request. What information can I update in my profile?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "get_business_profile",
+      "update_profile_info",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639278"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Phone Numbers",
+    "query": "How do I verify my phone number?",
+    "response": "I'll help you with your WhatsApp request. How do I verify my phone number?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_phone_number",
+      "verify_number",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639287"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Phone Numbers",
+    "query": "Can you help me add a new phone number?",
+    "response": "I'll help you with your WhatsApp request. Can you help me add a new phone number?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_phone_number",
+      "verify_number",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639877"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Phone Numbers",
+    "query": "I need to check my verified numbers",
+    "response": "I'll help you with your WhatsApp request. I need to check my verified numbers",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_phone_number",
+      "verify_number",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639901"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Phone Numbers",
+    "query": "What's the process for number verification?",
+    "response": "I'll help you with your WhatsApp request. What's the process for number verification?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_phone_number",
+      "verify_number",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639909"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Webhooks",
+    "query": "How do I set up a webhook?",
+    "response": "I'll help you with your WhatsApp request. How do I set up a webhook?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_webhook_url",
+      "configure_webhook",
+      "test_webhook",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639919"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Webhooks",
+    "query": "Can you help me configure webhook notifications?",
+    "response": "I'll help you with your WhatsApp request. Can you help me configure webhook notifications?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_webhook_url",
+      "configure_webhook",
+      "test_webhook",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639925"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Webhooks",
+    "query": "I need to test my webhook",
+    "response": "I'll help you with your WhatsApp request. I need to test my webhook",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_webhook_url",
+      "configure_webhook",
+      "test_webhook",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639932"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Webhooks",
+    "query": "What events can I subscribe to?",
+    "response": "I'll help you with your WhatsApp request. What events can I subscribe to?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_webhook_url",
+      "configure_webhook",
+      "test_webhook",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639940"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Media Management",
+    "query": "How do I upload media files?",
+    "response": "I'll help you handle WhatsApp media. How do I upload media files?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_media",
+      "upload_media",
+      "send_media_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639947"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Media Management",
+    "query": "Can you help me manage my media library?",
+    "response": "I'll help you handle WhatsApp media. Can you help me manage my media library?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_media",
+      "upload_media",
+      "send_media_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639953"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Media Management",
+    "query": "I need to delete old media files",
+    "response": "I'll help you handle WhatsApp media. I need to delete old media files",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_media",
+      "upload_media",
+      "send_media_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639958"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Media Management",
+    "query": "What's the media storage limit?",
+    "response": "I'll help you handle WhatsApp media. What's the media storage limit?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_media",
+      "upload_media",
+      "send_media_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639964"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Templates",
+    "query": "How do I create a new template?",
+    "response": "I'll help you work with WhatsApp templates. How do I create a new template?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_template",
+      "check_variables",
+      "send_template_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639974"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Templates",
+    "query": "Can you show me my existing templates?",
+    "response": "I'll help you work with WhatsApp templates. Can you show me my existing templates?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_template",
+      "check_variables",
+      "send_template_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639979"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Templates",
+    "query": "I need to modify a template",
+    "response": "I'll help you work with WhatsApp templates. I need to modify a template",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_template",
+      "check_variables",
+      "send_template_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639986"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  },
+  {
+    "tool": "whatsapp",
+    "intent": "Templates",
+    "query": "What are the template guidelines?",
+    "response": "I'll help you work with WhatsApp templates. What are the template guidelines?",
+    "systems": [
+      "whatsapp"
+    ],
+    "workflow": [
+      "identify_intent",
+      "validate_request",
+      "validate_template",
+      "check_variables",
+      "send_template_message",
+      "log_action",
+      "return_response"
+    ],
+    "execution_details": {
+      "estimated_time": "2s",
+      "required_permissions": [
+        "whatsapp.send_message"
+      ]
+    },
+    "metadata": {
+      "category": "whatsapp_api",
+      "version": "1.0",
+      "last_updated": "2025-04-03T14:38:56.639992"
+    },
+    "applied_guidelines": [
+      "use_clear_language",
+      "maintain_professional_tone",
+      "include_relevant_context"
+    ],
+    "is_active": true,
+    "source": [
+      "manual_training"
+    ],
+    "follow_up_queries": [],
+    "follow_up_responses": [],
+    "follow_up_context": []
+  }
+]

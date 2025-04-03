@@ -1,0 +1,47 @@
+# Send Text Message
+- Send a text message to +1234567890 with the content "Your order #12345 has been shipped and will arrive on April 5th"
+- Send a message to +1987654321 saying "Thank you for your recent purchase. Your order #67890 is being processed"
+- Send a bulk message to all VIP customers about our upcoming flash sale
+- Send a message to +1122334455 with tracking information for order #54321
+
+# Template Messages
+- Send the order_confirmation template to +1234567890 with variables: order_number=12345, total=99.99, items=3
+- Send the shipping_update template to +1987654321 with variables: order_number=67890, carrier=UPS, tracking=1Z999AA1234567890
+- Send the delivery_confirmation template to +1122334455 with variables: order_number=54321, delivery_date=2024-04-05
+- Send the back_in_stock template to +1445566778 for product SKU ABC123
+
+# Media Messages
+- Send a product image (media_id: media.123456789) to +1234567890 with caption "Check out our new product!"
+- Send a PDF document (media_id: media.987654321) to +1987654321 with caption "Your invoice for order #12345"
+- Send a video (media_id: media.456789123) to +1122334455 showcasing our new collection
+- Send a product catalog (media_id: media.789123456) to +1445566778 with caption "Spring Collection 2024"
+
+# Business Profile
+- Update the business profile description to "Your trusted source for premium products with fast shipping and excellent customer service"
+- Change the business profile category to "Retail"
+- Update the business profile address to "123 Main St, Suite 100, New York, NY 10001"
+- Set the business profile website to "https://www.example.com"
+
+# Phone Numbers
+- Verify the phone number +1234567890 for WhatsApp Business API
+- Add a new phone number +1987654321 to our WhatsApp Business account
+- Check the verification status of phone number +1122334455
+- Request verification code for phone number +1445566778
+
+# Webhooks
+- Configure a webhook at https://api.example.com/webhook to receive message events
+- Set up a webhook at https://api.example.com/status to receive message status updates
+- Test the webhook connection for https://api.example.com/webhook
+- Update the webhook URL to https://api.example.com/new-webhook
+
+# Media Management
+- Upload a new product image (file_id: file_123456) to the WhatsApp media library
+- Delete the old product image with media_id media.987654321
+- Get the media URL for media_id media.456789123
+- Check the storage usage of our WhatsApp media library
+
+# Templates
+- Create a new template named "order_status" with variables: order_number, status, estimated_delivery
+- Update the "shipping_update" template to include a new variable: delivery_instructions
+- List all approved message templates in our WhatsApp Business account
+- Delete the unused template named "old_promotion" 
