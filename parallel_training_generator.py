@@ -585,6 +585,64 @@ class TrainingGenerator:
             print(f"Error storing training data: {str(e)}")
             print(f"Data that failed to store: {training_data}")
 
+    def generate_execution_details(self, tool: str, intent: str) -> Dict[str, Any]:
+        """Generate standardized execution details for the given tool and intent."""
+        # Get endpoints from api_endpoints table
+        endpoints = self.get_endpoints_for_tool_intent(tool, intent)
+        
+        if not endpoints:
+            # Fallback to basic execution details if no endpoints found
+            return {
+                "endpoints": [{
+                    "service": tool,
+                    "resource": intent.lower().replace(" ", "_"),
+                    "action": "execute",
+                    "method": "GET",
+                    "path": f"/api/{intent.lower().replace(' ', '_')}",
+                    "parameters": {},
+                    "auth_type": "api_key",
+                    "auth_key": "private_api_key",
+                    "rate_limit": "Not specified"
+                }]
+            }
+        
+        return {"endpoints": endpoints}
+
+    def get_endpoints_for_tool_intent(self, tool: str, intent: str) -> List[Dict[str, Any]]:
+        """Retrieve endpoints from api_endpoints table for the given tool and intent."""
+        try:
+            # Query the api_endpoints table
+            result = self.supabase.table('api_endpoints').select("*").eq('service', tool).execute()
+            
+            if result.data:
+                # Filter endpoints based on intent
+                intent_keywords = intent.lower().split()
+                matching_endpoints = []
+                
+                for endpoint in result.data:
+                    # Check if endpoint matches intent
+                    if any(keyword in endpoint['action'].lower() or 
+                          keyword in endpoint['resource'].lower() 
+                          for keyword in intent_keywords):
+                        matching_endpoints.append(endpoint)
+                
+                return matching_endpoints
+            
+            return []
+            
+        except Exception as e:
+            logging.error(f"Error retrieving endpoints for {tool}/{intent}: {str(e)}")
+            return []
+
+    def generate_example(self, tool: str, intent: str) -> Dict[str, Any]:
+        """Generate a single training example."""
+        example = super().generate_example(tool, intent)
+        
+        # Update execution details with standardized format
+        example["execution_details"] = self.generate_execution_details(tool, intent)
+        
+        return example
+
 def ensure_tables_exist():
     """Create necessary tables in Supabase if they don't exist."""
     try:
