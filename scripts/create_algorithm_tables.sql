@@ -27,6 +27,21 @@ CREATE TABLE IF NOT EXISTS public.training_data_algorithm (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Create external_llm_algorithm table
+CREATE TABLE IF NOT EXISTS public.external_llm_algorithm (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name TEXT NOT NULL,
+    description TEXT,
+    version TEXT NOT NULL,
+    llm_provider TEXT NOT NULL,
+    llm_model TEXT NOT NULL,
+    prompt_template TEXT NOT NULL,
+    parameters JSONB DEFAULT '{}'::jsonb,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Create old_training_data_algorithms table
 CREATE TABLE IF NOT EXISTS public.old_training_data_algorithms (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -51,13 +66,18 @@ BEGIN
                   WHERE table_name = 'training_data' AND column_name = 'feedback') THEN
         ALTER TABLE public.training_data ADD COLUMN feedback TEXT;
     END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns 
+                  WHERE table_name = 'training_data' AND column_name = 'source_type') THEN
+        ALTER TABLE public.training_data ADD COLUMN source_type TEXT DEFAULT 'internal';
+    END IF;
 END $$;
 
 -- Create system_training table if it doesn't exist
 CREATE TABLE IF NOT EXISTS public.system_training (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     category TEXT NOT NULL,
-    guidelines JSONB NOT NULL DEFAULT '{}'::jsonb,
+    guidelines JSONB NOT NULL,
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
