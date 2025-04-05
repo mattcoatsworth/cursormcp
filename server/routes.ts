@@ -169,43 +169,109 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertChatMessageSchema.parse(req.body);
       const message = await storage.createChatMessage(validatedData);
 
-      // If it's a user message, process it as a command
+      // Log user message to user_data using the Python script
       if (validatedData.role === "user") {
-        // Create command history entry
+        try {
+          const { spawn } = require('child_process');
+          const userId = req.session?.user?.id || "anonymous-user";
+          
+          // Execute the Python script to log the message
+          const logProcess = spawn('python', [
+            'scripts/log_chat_to_user_data.py',
+            '--user_id', userId,
+            '--content', validatedData.content,
+            '--role', validatedData.role,
+            '--metadata', JSON.stringify(validatedData.metadata || {})
+          ]);
+          
+          // Handle script output for debugging
+          logProcess.stdout.on('data', (data) => {
+            console.log(`log_chat_to_user_data output: ${data}`);
+          });
+          
+          logProcess.stderr.on('data', (data) => {
+            console.error(`log_chat_to_user_data error: ${data}`);
+          });
+          
+          // Store the user_id in the message metadata for response updating
+          message.metadata = {
+            ...message.metadata,
+            user_data_logged: true,
+            user_id: userId,
+            query: validatedData.content
+          };
+          await storage.updateChatMessage(message.id, message);
+        } catch (loggingError) {
+          console.error('Error logging chat to user_data:', loggingError);
+        }
+      }
+
+      // Process commands
+      if (validatedData.role === "user") {
         const commandEntry = await storage.createCommandHistoryEntry({
           command: validatedData.content,
           result: {},
           status: "pending"
         });
 
-        // Check if it's a slash command - these get special processing
         const isCommand = validatedData.content.trim().startsWith('/');
         
-        // Create a message that will show the thinking stage - preserve the original command
-        const commandResult = await storage.createChatMessage({
+        // Create a message for the response
+        const assistantMessage = await storage.createChatMessage({
           role: "assistant",
           content: isCommand 
-            ? `Processing command: ${validatedData.content}` // Include the command in the content for context
-            : "Thinking...", // Standard thinking message for non-commands
+            ? `Processing command: ${validatedData.content}` 
+            : "Thinking...",
           metadata: { 
             isProcessing: true,
-            originalCommand: validatedData.content, // Store the original command 
+            originalCommand: validatedData.content,
             steps: [],
             currentStep: isCommand 
               ? `Analyzing command: ${validatedData.content.split(' ')[0]}` 
-              : "Starting to process your request...",
-            showStepProgress: true,
-            progressPercentage: 10
+              : "Starting to process your request..."
           }
         });
-        
-        // Process the command with the "quiet" flag set to false to show processing updates
-        processCommand(validatedData.content, commandResult.id, commandEntry.id, false)
+
+        // Process the command
+        processCommand(validatedData.content, assistantMessage.id, commandEntry.id, false)
+          .then(async (llmResponse) => {
+            // Update user_data with the response
+            if (message.metadata?.user_data_logged) {
+              try {
+                const { spawn } = require('child_process');
+                const userId = message.metadata.user_id || "anonymous-user";
+                const query = message.metadata.query || validatedData.content;
+                
+                // Prepare execution details
+                const executionDetails = llmResponse.execution_details || [];
+                const systems = llmResponse.systems || [];
+                
+                // Execute the Python script to update with response
+                const updateProcess = spawn('python', [
+                  'scripts/update_user_data_response.py',
+                  '--user_id', userId,
+                  '--query', query,
+                  '--response', llmResponse.content || "",
+                  '--execution_details', JSON.stringify(executionDetails),
+                  '--systems', JSON.stringify(systems)
+                ]);
+                
+                updateProcess.stdout.on('data', (data) => {
+                  console.log(`update_user_data_response output: ${data}`);
+                });
+                
+                updateProcess.stderr.on('data', (data) => {
+                  console.error(`update_user_data_response error: ${data}`);
+                });
+              } catch (updateError) {
+                console.error('Error updating user_data with response:', updateError);
+              }
+            }
+          })
           .catch(error => {
             console.error("Error processing command:", error);
             
-            // Update the message to show the error instead of leaving it in processing state
-            storage.updateChatMessage(commandResult.id, {
+            storage.updateChatMessage(assistantMessage.id, {
               content: `Error processing command: ${error.message}`,
               metadata: {
                 isProcessing: false,
@@ -220,17 +286,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       res.status(201).json(message);
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        res.status(400).json({ 
-          message: "Invalid message data", 
-          errors: error.errors 
-        });
-      } else {
-        res.status(500).json({ 
-          message: "Failed to create message", 
-          error: handleError(error) 
-        });
-      }
+      res.status(400).json({ message: "Failed to create message", error: handleError(error) });
     }
   });
   
