@@ -10,7 +10,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -37,9 +36,6 @@ ENV/
 *.db
 
 # Environment variables and secrets
-.env
-.env.local
-*.env
 config.ini
 secrets.json
 

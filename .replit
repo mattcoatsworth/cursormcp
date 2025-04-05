@@ -1,5 +1,5 @@
-modules = ["nodejs-20", "web", "postgresql-16", "python-3.11", "python3"]
-run = "npm run dev"
+modules = ["nodejs-20", "web", "postgresql-16"]
+run = "npm run dev:client -- --host"
 hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
@@ -10,33 +10,10 @@ deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
 run = ["npm", "run", "start"]
 
-[workflows]
-runButton = "Project"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
+[env]
+VITE_SUPABASE_URL = "$VITE_SUPABASE_URL"
+VITE_SUPABASE_ANON_KEY = "$VITE_SUPABASE_ANON_KEY"
 
 [[ports]]
-localPort = 5000
+localPort = 5173
 externalPort = 80

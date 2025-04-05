@@ -1,0 +1,28 @@
+modules = ["nodejs-20", "web", "postgresql-16"]
+run = "npm run dev:client -- --host"
+hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["npm", "run", "build"]
+run = ["npm", "run", "start"]
+
+[env]
+VITE_SUPABASE_URL = "$VITE_SUPABASE_URL"
+VITE_SUPABASE_ANON_KEY = "$VITE_SUPABASE_ANON_KEY"
+
+[[ports]]
+localPort = 5173
+externalPort = 80
+
+[languages.javascript]
+pattern = "**/{*.js,*.jsx,*.ts,*.tsx,*.json}"
+
+[languages.javascript.languageServer]
+start = ["typescript-language-server", "--stdio"]
+
+[auth]
+authorizedUsers = ["*"]
