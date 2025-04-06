@@ -1,4 +1,4 @@
-modules = ["nodejs-20:v8-20230920-bd784b9", "web", "postgresql-16"]
+modules = ["nodejs-20:v8-20230920-bd784b9", "web"]
 run = "npm install && npm run dev"
 hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
@@ -11,9 +11,9 @@ run = ["npm", "run", "start"]
 buildCommand = ["npm", "install", "&&", "npm", "run", "build"]
 
 [env]
-VITE_SUPABASE_URL = "$VITE_SUPABASE_URL"
-VITE_SUPABASE_ANON_KEY = "$VITE_SUPABASE_ANON_KEY"
 NODE_ENV = "production"
+SUPABASE_URL = "https://jmpxvzuxbyfjrttxwtnn.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptcHh2enV4YnlmanJ0dHh3dG5uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMyOTA0NjQsImV4cCI6MjA1ODg2NjQ2NH0.jVIQ4iTAYHXRwKSs5i4qjxVVo3sAc6rVY-Zpj2F2u4E"
 
 [[ports]]
 localPort = 5000

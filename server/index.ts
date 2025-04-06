@@ -42,15 +42,12 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
-
     res.status(status).json({ message });
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
+  // Setup Vite or serve static files based on environment
+  if (process.env.NODE_ENV === 'development') {
     await setupVite(app, server);
   } else {
     serveStatic(app);
@@ -58,8 +55,8 @@ app.use((req, res, next) => {
 
   // ALWAYS serve the app on port 5000
   // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
+  // This port is configured in .replit file
+  const port = process.env.PORT || 5000;
   server.listen({
     port,
     host: "0.0.0.0",

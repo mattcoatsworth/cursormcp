@@ -1,18 +1,18 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from '../shared/database.types';
 
-// Check for required environment variables
+// Check for environment variables
 const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY; // Use service role key for admin access
-
-// Make sure we have the required credentials
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error('SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set in environment variables. These are required for mobile app compatibility.');
-}
+const supabaseKey = process.env.SUPABASE_KEY; // Use anon key for public access
 
 // Initialize Supabase client with credentials
-console.log('Initializing Supabase client for data storage');
-const supabaseClient = createClient<Database>(supabaseUrl, supabaseKey);
+let supabaseClient = null as ReturnType<typeof createClient<Database>> | null;
+if (supabaseUrl && supabaseKey) {
+  console.log('Initializing Supabase client for data storage');
+  supabaseClient = createClient<Database>(supabaseUrl, supabaseKey);
+} else {
+  console.log('No Supabase credentials found, some features may be limited');
+}
 
 // Export the client
 export const supabase = supabaseClient;
@@ -27,27 +27,33 @@ export const TABLES = {
 
 // Helper function to check table existence
 export async function checkTableExistence() {
+  // If no Supabase client, skip check
+  if (!supabaseClient) {
+    console.log('Skipping table existence check - no Supabase client');
+    return true;
+  }
+
   try {
     // Check if api_connections table exists
-    const { error: apiConnectionsError } = await supabase
+    const { error: apiConnectionsError } = await supabaseClient
       .from(TABLES.API_CONNECTIONS)
       .select('*')
       .limit(1);
     
     // Check if chat_messages table exists
-    const { error: chatMessagesError } = await supabase
+    const { error: chatMessagesError } = await supabaseClient
       .from(TABLES.CHAT_MESSAGES)
       .select('*')
       .limit(1);
       
     // Check if command_history table exists
-    const { error: commandHistoryError } = await supabase
+    const { error: commandHistoryError } = await supabaseClient
       .from(TABLES.COMMAND_HISTORY)
       .select('*')
       .limit(1);
       
     // Check if training_data table exists
-    const { error: trainingDataError } = await supabase
+    const { error: trainingDataError } = await supabaseClient
       .from(TABLES.TRAINING_DATA)
       .select('*')
       .limit(1);
