@@ -26,7 +26,6 @@ console.log('Vite config debug info:', {
 
 export default defineConfig({
   envDir: './client',
-
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -42,12 +41,13 @@ export default defineConfig({
   ],
   server: {
     host: '0.0.0.0',
-    port: 5174,
+    port: 5000,
     strictPort: true,
     hmr: {
-      clientPort: 5174,
-      host: 'localhost'
-    }
+      clientPort: 443,
+      port: 443
+    },
+    allowedHosts: ['*.replit.dev']
   },
   root: path.resolve(__dirname, 'client'),
   resolve: {

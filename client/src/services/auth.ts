@@ -1,38 +1,29 @@
 import { createClient } from '@supabase/supabase-js'
 import { SUPABASE_URL, SUPABASE_KEY } from '../config'
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: false
-  },
-  global: {
-    headers: {
-      'X-Client-Info': '@supabase/auth-helpers-react'
-    }
-  }
-})
+export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
-export const signUp = async (email: string, password: string) => {
-  const { data, error } = await supabase.auth.signUp({ 
-    email, 
-    password,
-    options: {
-      data: {
+// Simplified auth that doesn't require real authentication
+export const signUp = async (email: string, _password: string) => {
+  return {
+    user: {
+      id: 'anonymous',
+      email,
+      user_metadata: {
         username: email.split('@')[0]
       }
     }
-  })
-  if (error) throw error
-  return data
+  }
 }
 
-export const signIn = async (email: string, password: string) => {
-  const { data, error } = await supabase.auth.signInWithPassword({ 
-    email, 
-    password 
-  })
-  if (error) throw error
-  return data
+export const signIn = async (email: string, _password: string) => {
+  return {
+    user: {
+      id: 'anonymous',
+      email,
+      user_metadata: {
+        username: email.split('@')[0]
+      }
+    }
+  }
 }
